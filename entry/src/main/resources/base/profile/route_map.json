@@ -1,0 +1,17 @@
+{
+  "routerMap": [
+    {
+      "name": "FlutterTestPage1",
+      "pageSourceFile": "src/main/ets/pages/FlutterTestPage1.ets",
+      "buildFunction": "SubPageBuilder"
+    },
+    {
+      "name": "pageTwo",
+      "pageSourceFile": "src/main/ets/pages/PageTwo.ets",
+      "buildFunction": "PageTwoBuilder",
+      "data": {
+        "description": "this is pageTwo"
+      }
+    }
+  ]
+}
