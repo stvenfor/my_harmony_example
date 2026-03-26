@@ -19,8 +19,7 @@
       {
         "name": "default",
         "signingConfig": "default",
-        "targetSdkVersion": "5.0.0(12)",
-        "compatibleSdkVersion": "5.0.0(12)",
+        "compatibleSdkVersion": "5.0.4(16)",
         "runtimeOS": "HarmonyOS",
         "buildOption": {
           "strictMode": {
@@ -51,6 +50,10 @@
           ]
         }
       ]
-    }
+    },
+//    {
+//      "name": "flutter_module",
+//       "srcPath": "./flutter_module"
+//    }
   ]
 }
