@@ -97,11 +97,11 @@ class LoginInfoApi {
     wrapped.set("uid", "32343");
     wrapped.set("nickname", "asijh");
     wrapped.set("avatar", "https://avatars.githubusercontent.com/u/1020407?v=4");
-    wrapped.set("study_stage_grade", "1");
+    wrapped.set("study_stage_grade", "123456");
     wrapped.set("dif_level", "1");
     wrapped.set("station", "1");
     wrapped.set("sex", "1");
-    wrapped.set("group_white", "1")
+    wrapped.set("user_number", "123456-----22333333434")    
     result.success(wrapped);
   }
 }

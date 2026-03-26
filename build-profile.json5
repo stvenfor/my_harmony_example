@@ -51,9 +51,9 @@
         }
       ]
     },
-//    {
-//      "name": "flutter_module",
-//       "srcPath": "./flutter_module"
-//    }
+    {
+      "name": "flutter_module",
+       "srcPath": "./flutter_module"
+    }
   ]
 }
