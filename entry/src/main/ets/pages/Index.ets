@@ -1,8 +1,9 @@
 import { pagesMapBuilder } from './pagesMap'
-
 @Entry
 @Component
 struct Index {
+
+
   @State message: string = 'Hello World---0000000';
   @Provide("pathStack") pathStack: NavPathStack = new NavPathStack()
 

@@ -32,7 +32,6 @@ export default class EntryAbility extends UIAbility {
       hilog.info(DOMAIN, 'testTag', 'Succeeded in loading the content.');
     });
 
-    // FlutterManager.getInstance().pushWindowStage(this,windowStage)
     FlutterManager.getInstance().pushWindowStage(this, windowStage)
   }
 
