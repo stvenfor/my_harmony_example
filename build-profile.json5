@@ -58,6 +58,22 @@
     {
       "name": "common",
       "srcPath": "./common",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "home",
+      "srcPath": "./feature/home",
+    },
+    {
+      "name": "mine",
+      "srcPath": "./feature/mine",
     }
   ]
 }

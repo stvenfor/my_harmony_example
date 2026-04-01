@@ -2,17 +2,28 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import  { FlutterManager } from '@ohos/flutter_ohos'
+import {  BreakpointSystem } from '@ohos/common';
+
+
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {
+  private breakpointSystem: BreakpointSystem = new BreakpointSystem()
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+
     try {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
     } catch (err) {
       hilog.error(DOMAIN, 'testTag', 'Failed to set colorMode. Cause: %{public}s', JSON.stringify(err));
     }
     hilog.info(DOMAIN, 'testTag', '%{public}s', 'Ability onCreate');
+    this.init()
+  }
+
+  init() {
     FlutterManager.getInstance().pushUIAbility(this)
+    this.breakpointSystem.register()
   }
 
   onDestroy(): void {

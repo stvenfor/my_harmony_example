@@ -1,48 +1,53 @@
+// import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
+import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
 import { pagesMapBuilder } from './pagesMap'
+
 @Entry
 @Component
 struct Index {
-
-
-  @State message: string = 'Hello World---0000000';
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_MD
   @Provide("pathStack") pathStack: NavPathStack = new NavPathStack()
-
   // 列表数据
-  private listData: Array<string> = ['FlutterTestPage', 'PageTwo', '测试页面 1', '测试页面 2', '测试页面 3']
-
+  private listData: Array<string> = ['混合页面', '测试页面', '首页', '我的']
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
 
 
+  aboutToAppear(): void {
+
+  }
+
   build() {
     Navigation(this.pathStack) {
       Column() {
-        // 上半部分：ListView
-        List({ space: 10 }) {
+        Grid() {
           ForEach(this.listData, (item: string, index: number) => {
-            ListItem() {
+            GridItem() {
               Text(item)
                 .fontSize($r('app.float.page_text_font_size'))
                 .fontWeight(FontWeight.Medium)
                 .padding(20)
                 .backgroundColor('#f5f5f5')
                 .borderRadius(8)
-                .margin({ left: 16, right: 16 })
+                .margin({ left: 8, right: 8, top: 8, bottom: 8 })
                 .onClick(() => {
                   if (item === 'FlutterTestPage') {
-                    let params : Record<string, Object> = { "route": "/EvaluateEntry"}
+                    let params : Record<string, Object> = { "route": "/EvaluateEntry" }
                     this.pathStack.pushPathByName('FlutterTestPage', params)
                   } else if (item === 'PageTwo') {
                     this.pathStack.pushPathByName('PageTwo', null)
-                  } else {
-                    // 其他页面可以根据需要添加
+                  } else if (item === 'MainPage'){
+                    this.pathStack.pushPathByName('MainPage', null)
                     console.info(`Clicked: ${item}`)
                   }
                 })
             }
           }, (item: string, index: number) => `${item}_${index}`)
         }
-        .layoutWeight(1) // 占据剩余空间
+        .columnsTemplate(this.getColumnsTemplate())
+        .rowsGap(10)
+        .columnsGap(10)
+        .layoutWeight(1)
         .width('100%')
         .padding({ top: 16, bottom: 16 })
 
@@ -75,4 +80,24 @@ struct Index {
     .mode(NavigationMode.Stack)
     .title('Home')
   }
+
+  // 获取断点信息
+  getColumnsTemplate(): string {
+    // 根据断点返回列数模板字符串
+    switch (this.breakPoint) {
+
+      case BreakpointConstants.BREAKPOINT_SM:
+        return '1fr 1fr' // 手机：2 列
+      case BreakpointConstants.BREAKPOINT_MD:
+        return '1fr 1fr 1fr' // 平板竖屏：3 列
+      case BreakpointConstants.BREAKPOINT_LG:
+      case BreakpointConstants.BREAKPOINT_XL:
+        return '1fr 1fr 1fr 1fr' // 平板横屏：4 列
+      default:
+        return '1fr 1fr'
+    }
+  }
+
+
+
 }

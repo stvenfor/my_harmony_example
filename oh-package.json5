@@ -3,7 +3,8 @@
   "description": "Please describe the basic information.",
   "dependencies": {
     "@ohos/common": "file:./common",
-//        "@ohos/flutter_module": "file:./flutter_module/har/flutter_module.har",
+    "@ohos/home": "file:./feature/home",
+    "@ohos/mine": "file:./feature/mine",
     "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har"
   },
   "devDependencies": {
