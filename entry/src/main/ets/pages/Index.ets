@@ -1,5 +1,4 @@
-// import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
-import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
+import { BreakpointConstants, RouteConstants} from '@ohos/common';
 import { pagesMapBuilder } from './pagesMap'
 
 @Entry
@@ -12,92 +11,89 @@ struct Index {
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
 
+  // Tab 相关配置
+  @State currentIndex: number = 0
+  private tabItems: Array<TabContentItem> = [
+    { title: '首页', icon: '🏠' },
+    { title: '我的', icon: '👤' }
+  ]
 
   aboutToAppear(): void {
 
   }
 
   build() {
-    Navigation(this.pathStack) {
-      Column() {
-        Grid() {
-          ForEach(this.listData, (item: string, index: number) => {
-            GridItem() {
-              Text(item)
-                .fontSize($r('app.float.page_text_font_size'))
-                .fontWeight(FontWeight.Medium)
-                .padding(20)
-                .backgroundColor('#f5f5f5')
-                .borderRadius(8)
-                .margin({ left: 8, right: 8, top: 8, bottom: 8 })
-                .onClick(() => {
-                  if (item === 'FlutterTestPage') {
-                    let params : Record<string, Object> = { "route": "/EvaluateEntry" }
-                    this.pathStack.pushPathByName('FlutterTestPage', params)
-                  } else if (item === 'PageTwo') {
-                    this.pathStack.pushPathByName('PageTwo', null)
-                  } else if (item === 'MainPage'){
-                    this.pathStack.pushPathByName('MainPage', null)
-                    console.info(`Clicked: ${item}`)
-                  }
-                })
-            }
-          }, (item: string, index: number) => `${item}_${index}`)
-        }
-        .columnsTemplate(this.getColumnsTemplate())
-        .rowsGap(10)
-        .columnsGap(10)
-        .layoutWeight(1)
-        .width('100%')
-        .padding({ top: 16, bottom: 16 })
-
-        // 分隔线
-        Divider()
-          .color('#e0e0e0')
-          .strokeWidth(1)
-
-        // 下半部分：数据展示区域
+    Stack() {
+      Navigation(this.pathStack) {
         Column() {
-          Text('应用信息')
-            .fontSize(20)
-            .fontWeight(FontWeight.Bold)
-            .margin({ bottom: 16 })
+          Text(`跳过`)
 
-          Text(this.bottomData)
-            .fontSize(14)
-            .lineHeight(24)
-            .fontColor('#666666')
-            .width('90%')
-        }
-        .width('100%')
-        .padding(20)
-        .backgroundColor('#fafafa')
+            .width(144)
+            .height(72)
+            .backgroundColor('rgba(0,0,0,0.5)')
+            .borderRadius(12)
+            .fontColor('#fff')
+            .textAlign(TextAlign.Center)
+            .lineHeight(36)
+            .fontSize(24)
+            .position({ top: 100, right: 24 })
+            .onClick(() => {
+              this.jumpPage()
+            })
+            .zIndex(1)
+          Column() {
+            // Image($r('app.media.launch'))
+            //   .width(this.breakPoint === BreakpointConstants.BREAKPOINT_MD ? '100%' : '50%')
+          }
+          .width('100%')
+          .justifyContent(FlexAlign.Center)
+          .alignItems(HorizontalAlign.Center)
+          .height(this.breakPoint === BreakpointConstants.BREAKPOINT_MD ? 'calc(100% - 290lpx)' :
+            'calc(100% - 145lpx)')
+          .backgroundColor('#ffffff')
+
+          // Image($r('app.media.logo'))
+          //   .width('100%')
+          //   .padding({ bottom: 68 })
+          //   .position({ bottom: '0lpx' })
+          //   .backgroundColor("#ffffff")
+        }.width('100%').height('100%')
       }
-      .width('100%')
-      .height('100%')
+      .navDestination(pagesMapBuilder.builder)
+      .mode(NavigationMode.Stack)
     }
-    .navDestination(pagesMapBuilder.builder)
-    .mode(NavigationMode.Stack)
-    .title('Home')
+
   }
 
-  // 获取断点信息
-  getColumnsTemplate(): string {
-    // 根据断点返回列数模板字符串
-    switch (this.breakPoint) {
+  jumpPage() {
+    this.pathStack.replacePath({ name: RouteConstants.MAIN_PAGE })
+  }
 
-      case BreakpointConstants.BREAKPOINT_SM:
-        return '1fr 1fr' // 手机：2 列
-      case BreakpointConstants.BREAKPOINT_MD:
-        return '1fr 1fr 1fr' // 平板竖屏：3 列
-      case BreakpointConstants.BREAKPOINT_LG:
-      case BreakpointConstants.BREAKPOINT_XL:
-        return '1fr 1fr 1fr 1fr' // 平板横屏：4 列
-      default:
-        return '1fr 1fr'
+  // 自定义 TabBar 构建方法
+  @Builder
+  buildTabBar(title: string, index: number) {
+    Column() {
+      Text(this.tabItems[index].icon)
+        .fontSize(20)
+        .fontColor(this.currentIndex === index ? '#007DFF' : '#666666')
+        .margin({ bottom: 4 })
+
+      Text(title)
+        .fontSize(12)
+        .fontColor(this.currentIndex === index ? '#007DFF' : '#666666')
+        .fontWeight(this.currentIndex === index ? FontWeight.Bold : FontWeight.Normal)
     }
+    .justifyContent(FlexAlign.Center)
+    .alignItems(HorizontalAlign.Center)
+    .width('100%')
+    .height('100%')
   }
 
 
+}
 
+// Tab 内容项接口
+interface TabContentItem {
+  title: string
+  icon: string
 }

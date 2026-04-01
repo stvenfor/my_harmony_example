@@ -1,6 +1,7 @@
 import { FlutterEntry, FlutterPage, FlutterPlugin, FlutterView } from '@ohos/flutter_ohos';
 import TestPlugin from '../entryability/TestPlugin';
 import { common } from '@kit.AbilityKit';
+import { RouteConstants } from '@ohos/common';
 
 @Component
 export struct  FlutterTestPage{
@@ -68,8 +69,9 @@ export struct  FlutterTestPage{
   }
 
   init(context: NavDestinationContext) {
-    let array = this.pathStack.getParamByName('FlutterTestPage') as Array<Record<string, Object>>;
+    let array = this.pathStack.getParamByName(RouteConstants.FLUTTER_TEST_PAGE) as Array<Record<string, Object>>;
     let params: Record<string, Object> = array.length > 0 ? array[0] : {};
+    console.log('params: ' + this.context);
     this.flutterEntry = new NavFlutterEntry(getContext(this), params, this.pathStack)
     this.flutterEntry.aboutToAppear()
     this.flutterView = this.flutterEntry.getFlutterView()
