@@ -31,7 +31,7 @@
     ],
     "buildModeSet": [
       {
-        "name": "debug",
+        "name": "debug"
       },
       {
         "name": "release"
@@ -69,11 +69,11 @@
     },
     {
       "name": "home",
-      "srcPath": "./feature/home",
+      "srcPath": "./feature/home"
     },
     {
       "name": "mine",
-      "srcPath": "./feature/mine",
+      "srcPath": "./feature/mine"
     }
   ]
 }

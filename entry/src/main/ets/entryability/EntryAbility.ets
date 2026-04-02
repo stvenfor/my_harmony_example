@@ -1,10 +1,8 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import  { FlutterManager } from '@ohos/flutter_ohos'
-import {  BreakpointSystem } from '@ohos/common';
-
-
+import { FlutterManager } from '@ohos/flutter_ohos';
+import { BreakpointSystem } from '@ohos/common';
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility {

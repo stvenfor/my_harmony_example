@@ -4,15 +4,13 @@ import { common } from '@kit.AbilityKit';
 import { RouteConstants } from '@ohos/common';
 
 @Component
-export struct  FlutterTestPage{
+export struct FlutterTestPage {
   @State message: string | Resource | undefined = 'dj';
+  @Consume("pathStack") pathStack: NavPathStack
   private context = getContext(this) as common.UIAbilityContext
   private flutterEntry: FlutterEntry | null = null;
   private flutterView?: FlutterView
-  @Consume("pathStack") pathStack: NavPathStack
   private flutterPlugin?: FlutterPlugin
-
-
 
   aboutToAppear() {
     // 先初始化FlutterEntry
@@ -35,6 +33,7 @@ export struct  FlutterTestPage{
     this.flutterPlugin = new TestPlugin()
     this.flutterEntry?.getFlutterEngine()?.getPlugins()?.add(this.flutterPlugin)
   }
+
   //
   // onPageShow() {
   //   this.flutterEntry?.onPageShow()
@@ -46,7 +45,7 @@ export struct  FlutterTestPage{
 
   build() {
     NavDestination() {
-        FlutterPage({ viewId: this.flutterView?.getId() })
+      FlutterPage({ viewId: this.flutterView?.getId() })
     }
     // .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
@@ -64,7 +63,8 @@ export struct  FlutterTestPage{
     .onBackPressed(() => {
       this.context.eventHub.emit('EVENT_BACK_PRESS')
       return true
-    }).title('flutter 页面')
+    })
+    .title('flutter 页面')
 
   }
 

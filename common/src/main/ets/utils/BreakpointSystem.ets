@@ -1,14 +1,16 @@
 import mediaQuery from '@ohos.mediaquery';
-import  {BreakpointConstants} from '../constants/BreakpointConstants'
-declare  interface BreakPointTypeOption<T>{
-  sm?:T
-  md?:T
-  lg?:T
-  xl?:T
-  xxl?:T
+import { BreakpointConstants } from '../constants/BreakpointConstants';
+
+
+declare interface BreakPointTypeOption<T> {
+  sm?: T
+  md?: T
+  lg?: T
+  xl?: T
+  xxl?: T
 }
 
-export  class BreakPointType<T>{
+export class BreakPointType<T> {
   options: BreakPointTypeOption<T>
 
   constructor(option: BreakPointTypeOption<T>) {
@@ -16,62 +18,31 @@ export  class BreakPointType<T>{
   }
 
   getValue(currentBreakPoint: string): T {
-    if (currentBreakPoint == 'sm'){
+    if (currentBreakPoint == 'sm') {
       return this.options.sm as T
-    }else if (currentBreakPoint == 'md'){
+    } else if (currentBreakPoint == 'md') {
       return this.options.md as T
-    }else if (currentBreakPoint == 'lg'){
+    } else if (currentBreakPoint == 'lg') {
       return this.options.lg as T
-    }else if (currentBreakPoint == 'xl'){
+    } else if (currentBreakPoint == 'xl') {
       return this.options.xl as T
     }
     return this.options.xxl as T
   }
 }
 
-export class BreakpointSystem{
+export class BreakpointSystem {
   private currentBreakpoint: string = ''
   private smListener?: mediaQuery.MediaQueryListener
   private mdListener?: mediaQuery.MediaQueryListener
   private lgListener?: mediaQuery.MediaQueryListener
   private xlListener?: mediaQuery.MediaQueryListener
 
-  private updateCurrentBreakpoint(breakpoint: string){
-    if (this.currentBreakpoint !== breakpoint) {
-      this.currentBreakpoint = breakpoint
-      AppStorage.set<string>(BreakpointConstants.CURRENT_BREAKPOINT, this.currentBreakpoint)
-    }
-  }
-
-  private isBreakpointSM = (mediaQueryResult: mediaQuery.MediaQueryResult) =>{
-    if (mediaQueryResult.matches) {
-      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_SM)
-    }
-  }
-
-  private isBreakpointMD = (mediaQueryResult: mediaQuery.MediaQueryResult) =>{
-    if (mediaQueryResult.matches) {
-      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_MD)
-    }
-  }
-
-  private isBreakpointLG = (mediaQueryResult: mediaQuery.MediaQueryResult) =>{
-    if (mediaQueryResult.matches) {
-      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_LG)
-    }
-  }
-
-  private isBreakpointXL = (mediaQueryResult: mediaQuery.MediaQueryResult) =>{
-    if (mediaQueryResult.matches) {
-      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_XL)
-    }
-  }
-
   public register() {
     this.smListener = mediaQuery.matchMediaSync(BreakpointConstants.RANGE_SM)
-    this.smListener.on('change',this.isBreakpointSM)
+    this.smListener.on('change', this.isBreakpointSM)
     this.mdListener = mediaQuery.matchMediaSync(BreakpointConstants.RANGE_MD)
-    this.mdListener.on('change',this.isBreakpointMD)
+    this.mdListener.on('change', this.isBreakpointMD)
     this.lgListener = mediaQuery.matchMediaSync(BreakpointConstants.RANGE_LG)
     this.lgListener.on('change', this.isBreakpointLG)
     this.xlListener = mediaQuery.matchMediaSync(BreakpointConstants.RANGE_XL)
@@ -85,4 +56,34 @@ export class BreakpointSystem{
     this.xlListener?.off('change', this.isBreakpointXL)
   }
 
+  private updateCurrentBreakpoint(breakpoint: string) {
+    if (this.currentBreakpoint !== breakpoint) {
+      this.currentBreakpoint = breakpoint
+      AppStorage.set<string>(BreakpointConstants.CURRENT_BREAKPOINT, this.currentBreakpoint)
+    }
+  }
+
+  private isBreakpointSM = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
+    if (mediaQueryResult.matches) {
+      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_SM)
+    }
+  }
+
+  private isBreakpointMD = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
+    if (mediaQueryResult.matches) {
+      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_MD)
+    }
+  }
+
+  private isBreakpointLG = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
+    if (mediaQueryResult.matches) {
+      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_LG)
+    }
+  }
+
+  private isBreakpointXL = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
+    if (mediaQueryResult.matches) {
+      this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_XL)
+    }
+  }
 }

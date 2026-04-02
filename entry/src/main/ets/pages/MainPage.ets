@@ -1,22 +1,18 @@
-
-
 // import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
-import { BreakpointConstants, BreakpointSystem } from '@ohos/common';
+import { BreakpointConstants } from '@ohos/common';
 import { Home } from '@ohos/home';
 import { Mine } from '@ohos/mine';
-import { pagesMapBuilder } from './pagesMap'
 
 @Component
-export  struct MainPage {
+export struct MainPage {
   @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_MD
   @Consume("pathStack") pathStack: NavPathStack
-  // 列表数据
-  private listData: Array<string> = ['混合页面', '测试页面', '首页', '我的']
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
-
   // Tab 相关配置
   @State currentIndex: number = 0
+  // 列表数据
+  private listData: Array<string> = ['混合页面', '测试页面', '首页', '我的']
   private tabItems: Array<TabContentItem> = [
     { title: '首页', icon: '🏠' },
     { title: '我的', icon: '👤' }
@@ -72,8 +68,6 @@ export  struct MainPage {
     .width('100%')
     .height('100%')
   }
-
-
 }
 
 // Tab 内容项接口

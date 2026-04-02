@@ -1,0 +1,132 @@
+[
+  {
+    "module_kangaroo": "home_16",
+    "title": "幻灯片",
+    "sub_title": "精彩瞬间定格，记录生活中的每一个美好时刻",
+    "module": "slider",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "白银",
+      "金卡",
+      "荣耀",
+      "钻石"
+    ]
+  },
+  {
+    "module_kangaroo": "home_17",
+    "title": "音乐",
+    "sub_title": "海量音乐随心听，流行摇滚古典爵士应有尽有",
+    "module": "music",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "流行",
+      "摇滚",
+      "古典",
+      "爵士"
+    ]
+  },
+  {
+    "module_kangaroo": "home_18",
+    "title": "视频",
+    "sub_title": "高清流畅播放，电影电视剧综艺动漫一网打尽，让你追剧更过瘾",
+    "module": "video",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "电影",
+      "电视剧",
+      "综艺",
+      "动漫"
+    ]
+  },
+  {
+    "module_kangaroo": "home_19",
+    "title": "阅读",
+    "sub_title": "掌上图书馆，小说历史科学文学任你畅游书海",
+    "module": "reading",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "小说",
+      "历史",
+      "科学",
+      "文学"
+    ]
+  },
+  {
+    "module_kangaroo": "home_20",
+    "title": "游戏",
+    "sub_title": "休闲益智动作策略，多种类型满足你的娱乐需求，随时随地畅玩",
+    "module": "game",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "动作",
+      "益智",
+      "策略",
+      "冒险"
+    ]
+  },
+  {
+    "module_kangaroo": "home_21",
+    "title": "购物",
+    "sub_title": "精选优质商品，服饰数码家居美食，品质生活从这里开始",
+    "module": "shopping",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "服饰",
+      "数码",
+      "家居",
+      "美食"
+    ]
+  },
+  {
+    "module_kangaroo": "home_22",
+    "title": "旅行",
+    "sub_title": "探索未知风景，国内国际海岛登山，让心灵在路上自由飞翔",
+    "module": "travel",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "国内",
+      "国际",
+      "海岛",
+      "登山"
+    ]
+  },
+  {
+    "module_kangaroo": "home_23",
+    "title": "运动",
+    "sub_title": "跑步健身瑜伽游泳，科学锻炼保持健康活力每一天",
+    "module": "sports",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "跑步",
+      "健身",
+      "瑜伽",
+      "游泳"
+    ]
+  },
+  {
+    "module_kangaroo": "home_24",
+    "title": "教育",
+    "sub_title": "英语编程数学艺术，专业课程体系助你快速提升技能实现梦想",
+    "module": "education",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "英语",
+      "编程",
+      "数学",
+      "艺术"
+    ]
+  },
+  {
+    "module_kangaroo": "home_25",
+    "title": "社交",
+    "sub_title": "连接你我他，聊天论坛直播短视频，分享生活发现有趣的新朋友",
+    "module": "social",
+    "img": "https://picsum.photos/200/300?timestamp=",
+    "tips": [
+      "聊天",
+      "论坛",
+      "直播",
+      "短视频"
+    ]
+  }
+]

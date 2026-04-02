@@ -101,7 +101,7 @@ class LoginInfoApi {
     wrapped.set("dif_level", "1");
     wrapped.set("station", "1");
     wrapped.set("sex", "1");
-    wrapped.set("user_number", "123456-----22333333434")    
+    wrapped.set("user_number", "123456-----22333333434")
     result.success(wrapped);
   }
 }

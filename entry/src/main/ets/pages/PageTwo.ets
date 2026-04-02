@@ -1,4 +1,3 @@
-
 @Component
 export struct PageTwo {
   @State message: string = '第二页------';
@@ -14,8 +13,7 @@ export struct PageTwo {
     NavDestination() {
 
 
-
-      }
+    }
     .onReady((context: NavDestinationContext) => {
       this.pathStack = context.pathStack;
     })

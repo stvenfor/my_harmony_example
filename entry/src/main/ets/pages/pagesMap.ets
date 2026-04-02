@@ -1,10 +1,8 @@
-
-import {FlutterTestPage} from './FlutterTestPage'
-import { PageTwo } from './PageTwo';
-import { Home } from  '@ohos/home'
-import { Mine } from  '@ohos/mine'
-import { MainPage } from  './MainPage'
-import {  RouteConstants} from '@ohos/common';
+import { FlutterTestPage } from './FlutterTestPage';
+import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
+import { Mine } from '@ohos/mine';
+import { MainPage } from './MainPage';
+import { RouteConstants } from '@ohos/common';
 
 
 @Builder
@@ -13,15 +11,19 @@ function pagesMap(name: string) {
     FlutterTestPage()
   } else if (name === RouteConstants.MAIN_PAGE) {
     MainPage()
-  }else if (name === RouteConstants.HOME) {
+  } else if (name === RouteConstants.HOME) {
     Home()
-  }else if (name === RouteConstants.MINE) {
+  } else if (name === RouteConstants.MINE) {
     Mine()
-  }else if (name === RouteConstants.EVALUATE_ENTRY) {
+  } else if (name === RouteConstants.EVALUATE_ENTRY) {
     Mine()
+  } else if (name === RouteConstants.GRAPHICS) {
+    Graphics()
+  } else if (name === RouteConstants.RICH_TEXT_EXPAND) {
+    RichTextExpand()
+  } else if (name === RouteConstants.TEXT_EXPAND) {
+    TextExpand()
   }
-
-
 }
 
 export const pagesMapBuilder: WrappedBuilder<[string]> = wrapBuilder(pagesMap);
