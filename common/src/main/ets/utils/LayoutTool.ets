@@ -50,7 +50,7 @@ export const replaceLpx2Vp = (lpxEl: number) => {
 }
 
 // 监听折叠状态来更改当前布局
-export const SetBreakPoint = () => {
+export const setBreakPoint = () => {
   let type = deviceInfo.deviceType
   let winWidth = AppStorage.get<string>('windowWidth') as string
   let winHeight = AppStorage.get<string>('winHeight') as string
@@ -112,7 +112,9 @@ export const updateBreakPoint = (windowWidth: number, windowHeight: number): str
   if (type == 'tablet') {
     curBp = 'xl'
     // curBp = 'md'
+    AppStorage.setOrCreate('padPortrait', windowWidth<1920 ? true : false) // 判断平板是否在竖屏状态
     AppStorage.setOrCreate('breakPoint', curBp)
+
   } else {
     console.log('windowHeight/windowWidth', windowWidth, windowHeight, windowHeight / windowWidth > 1.5)
     if (type == '2in1') {

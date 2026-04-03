@@ -1,5 +1,6 @@
 import { BreakpointConstants, RouteConstants } from '@ohos/common';
 import { pagesMapBuilder } from './pagesMap';
+import { setBreakPoint } from '@ohos/common';
 
 @Entry
 @Component
@@ -53,6 +54,9 @@ struct Index {
       }
       .navDestination(pagesMapBuilder.builder)
       .mode(NavigationMode.Stack)
+      .onSizeChange(() => {
+        setBreakPoint()
+      })
     }
 
   }

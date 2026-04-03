@@ -3,6 +3,7 @@ import { BreakpointConstants, CommonGrid, CommonImageText, GridModel, RawfileUti
 @Component
 export struct Mine {
   @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_MD
+  @StorageLink('padPortrait') padPortrait: boolean = false
   @Consume("pathStack") pathStack: NavPathStack
   @State gridData: Array<GridModel> = []
   @State message: string = 'Hello World';
@@ -44,7 +45,7 @@ export struct Mine {
           isLazy: false,
           data: this.gridData,
           renderCardItem: this.renderCardItem,
-          gridColumn: this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 2 : 4
+          gridColumn: this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 2 : this.padPortrait ? 3 : 4
         })
 
       }

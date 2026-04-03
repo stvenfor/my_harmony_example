@@ -1,3 +1,5 @@
+import { FrameCallback } from '@kit.ArkUI';
+
 export { StyleConstants } from './src/main/ets/constants/StyleConstants';
 
 export { BreakpointConstants } from './src/main/ets/constants/BreakpointConstants'
@@ -15,3 +17,5 @@ export { CommonImageText } from './src/main/ets/components/CommonImageText'
 export { RawfileUtil } from './src/main/ets/utils/RawfileUtil'
 
 export { GridModel } from './src/main/ets/model/GridModel'
+
+export { setBreakPoint,updateBreakPoint } from  './src/main/ets/utils/LayoutTool'

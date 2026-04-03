@@ -6,7 +6,6 @@ export struct CommonImageText {
 
   build() {
     Column() {
-
       Stack() {
         Image(`${this.item.img}${new Date().getTime()}`)
           .width('100%')
@@ -58,7 +57,7 @@ export struct CommonImageText {
           .margin({ top: 10 })
           .maxLines(2)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
-      }
+      }.justifyContent(FlexAlign.Start).alignItems(VerticalAlign.Center)
     }
   }
 }
