@@ -71,4 +71,9 @@ export class RouteConstants {
    * Spine特殊动画
    */
   static readonly SPECIAL_ANIMATION: string = 'SpecialAnimation';
+  /**
+   * GridRowDemo
+   */
+
+  static readonly GIRD_ROW_DEMO: string = 'GridRowDemo';
 }

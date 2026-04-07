@@ -3,6 +3,8 @@ import { GridModel } from '@ohos/common'
 @Component
 export struct CommonImageText {
   @Prop item: GridModel
+  onItemClick?: Function = (_: GridModel) => {
+  }
 
   build() {
     Column() {
@@ -58,6 +60,10 @@ export struct CommonImageText {
           .maxLines(2)
           .textOverflow({ overflow: TextOverflow.Ellipsis })
       }.justifyContent(FlexAlign.Start).alignItems(VerticalAlign.Center)
-    }
+    }.onClick(() => {
+      if (this.onItemClick) {
+        this.onItemClick(this.item);
+      }
+    })
   }
 }

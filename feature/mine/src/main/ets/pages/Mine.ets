@@ -1,4 +1,4 @@
-import { BreakpointConstants, CommonGrid, CommonImageText, GridModel, RawfileUtil } from '@ohos/common';
+import { BreakpointConstants, CommonGrid, CommonImageText, GridModel, RawfileUtil, RouteConstants } from '@ohos/common';
 
 @Component
 export struct Mine {
@@ -27,8 +27,11 @@ export struct Mine {
 
   @Builder
   renderCardItem(item: ESObject) {
-
-    CommonImageText({ item })
+    CommonImageText({
+      item: item, onItemClick: () => {
+        this.pathStack.pushPath({ name: RouteConstants.GIRD_ROW_DEMO });
+      }
+    })
 
   }
 

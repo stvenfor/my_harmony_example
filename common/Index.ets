@@ -35,3 +35,5 @@ export { SpineAnimationManager } from './src/main/ets/utils/SpineAnimationManage
 export { SpineResourceConfig } from './src/main/ets/utils/SpineAnimationManager'
 
 export { ResourceSourceType } from './src/main/ets/utils/SpineAnimationManager'
+
+export { CommonGridRow } from './src/main/ets/components/CommonGridRow'

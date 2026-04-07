@@ -1,6 +1,6 @@
 import { FlutterTestPage } from './FlutterTestPage';
 import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
-import { Mine } from '@ohos/mine';
+import { GridRowDemo, Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
 import {
@@ -52,7 +52,11 @@ function pagesMap(name: string) {
     BasicExample()
   } else if (name === RouteConstants.SPECIAL_ANIMATION) {
     SpecialAnimation()
+  } else if (name === RouteConstants.GIRD_ROW_DEMO) {
+    GridRowDemo()
   }
+
+
 
 
 }
