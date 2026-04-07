@@ -7,7 +7,6 @@
     "@ohos/mine": "file:./feature/mine",
     "@ohos/spine_animation": "file:./feature/spine",
     "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har",
-
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.25",

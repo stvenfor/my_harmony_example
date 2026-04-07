@@ -3,11 +3,17 @@ import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
 import { Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
-import { SpinePage,Example1,Example2,Example3,Example4, NetWorkExample,SingleExample,
+import {
   BasicExample,
-  SpecialAnimation} from '@ohos/spine_animation';
-
-
+  Example1,
+  Example2,
+  Example3,
+  Example4,
+  NetWorkExample,
+  SingleExample,
+  SpecialAnimation,
+  SpinePage
+} from '@ohos/spine_animation';
 
 
 @Builder
@@ -44,7 +50,7 @@ function pagesMap(name: string) {
     Example4()
   } else if (name === RouteConstants.BASIC_EXAMPLE4) {
     BasicExample()
-  } else if(name === RouteConstants.SPECIAL_ANIMATION){
+  } else if (name === RouteConstants.SPECIAL_ANIMATION) {
     SpecialAnimation()
   }
 

@@ -21,15 +21,17 @@ import { CommonConstants } from '../constants/CommonConstants';
 export struct NavItem {
   @Prop itemData: NavInfo;
   @State curFile: string = '';
-
-  @Builder customBuilder() {}
   // 使用父组件@Builder装饰的方法初始化子组件@BuilderParam
   @BuilderParam customBuilderParam: () => void = this.customBuilder;
 
+  @Builder
+  customBuilder() {
+  }
+
   build() {
-    Row({ space:10 }){
-      Row({ space:17 }){
-        if(this.itemData.icon) {
+    Row({ space: 10 }) {
+      Row({ space: 17 }) {
+        if (this.itemData.icon) {
           Image(this.itemData.icon)
             .width(NavConstants.F_PIC_WIDTH)
             .height(NavConstants.F_PIC_HEIGHT)
@@ -38,6 +40,7 @@ export struct NavItem {
           .fontWeight(500)
           .fontSize(14)
       }
+
       Blank()
       this.customBuilderParam()
       Image(this.itemData.action)
@@ -45,9 +48,9 @@ export struct NavItem {
         .height(NavConstants.S_PIC_HEIGHT)
     }
     .justifyContent(FlexAlign.SpaceBetween)
-    .padding({top:NavConstants.PADDING,bottom:NavConstants.PADDING})
+    .padding({ top: NavConstants.PADDING, bottom: NavConstants.PADDING })
     .width(CommonConstants.COLUMN_WIDTH)
-    .onClick(()=>{
+    .onClick(() => {
       this.itemData.clickAction()
     })
   }

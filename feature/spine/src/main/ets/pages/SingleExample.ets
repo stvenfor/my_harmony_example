@@ -17,26 +17,29 @@
  */
 
 import {
-  AssetManager,
-  AtlasAttachmentLoader,
   AnimationState,
   AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  Skeleton,
-  TextureAtlas,
-  Physics,
+  AssetManager,
+  AtlasAttachmentLoader,
+  Bound,
   Delay,
-  Bound
-} from '@ohos/spine'
+  Physics,
+  Skeleton,
+  SkeletonJson,
+  SkeletonRenderer,
+  TextureAtlas
+} from '@ohos/spine';
 
-import { PageHeaderComp, StringConstants } from '@ohos/common'
+import { PageHeaderComp, StringConstants } from '@ohos/common';
 
-import { Animator as animator, AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
+import { AnimatorOptions, AnimatorResult } from '@kit.ArkUI';
 
 @Entry
 @Component
-export  struct SingleExample {
+export struct SingleExample {
+  @Consume('pathStack') pathStack: NavPathStack;
+  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
+  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
   // 渲染构建上下文
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
@@ -47,9 +50,7 @@ export  struct SingleExample {
   private sourcesData: SourcesData = { json: 'spineboy-ess.json', atlas: 'spineboy.atlas' };
   private currentIndex: number = 0;
   private animationName: string = '';
-  @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
-  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
+
   aboutToDisappear() {
     this._animator?.finish();
     this.canvasRenderingContext.clearRect(0, 0, this.canvasRenderingContext.width, this.canvasRenderingContext.height);
@@ -185,8 +186,8 @@ export  struct SingleExample {
       }
       .width('100%')
       .height('100%')
-      .padding({ top: this.topArea, bottom: this.bottomArea})
-    }.hideBackButton( true).hideTitleBar( true)
+      .padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideBackButton(true).hideTitleBar(true)
   }
 
   loadAnimation() {

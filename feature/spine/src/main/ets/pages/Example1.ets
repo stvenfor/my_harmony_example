@@ -17,25 +17,28 @@
  */
 
 import {
-  AssetManager,
-  AtlasAttachmentLoader,
   AnimationState,
   AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  Skeleton,
-  TextureAtlas,
-  Physics,
+  AssetManager,
+  AtlasAttachmentLoader,
+  Bound,
   Delay,
-  Bound
-} from '@ohos/spine'
+  Physics,
+  Skeleton,
+  SkeletonJson,
+  SkeletonRenderer,
+  TextureAtlas
+} from '@ohos/spine';
 
-import { Animator as animator, AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
+import { AnimatorOptions, AnimatorResult } from '@kit.ArkUI';
 import { PageHeaderComp, StringConstants } from '@ohos/common';
 
 @Entry
 @Component
-export  struct Example1 {
+export struct Example1 {
+  @Consume('pathStack') pathStack: NavPathStack;
+  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
+  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
   // 渲染构建上下文
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
@@ -44,9 +47,7 @@ export  struct Example1 {
   private animations: Array<string> = ['death', 'aim', 'idle', 'jump', 'run', 'shoot', 'walk'];
   private currentIndex: number = 0;
   private animationName: string = '';
-  @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
-  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
+
   aboutToDisappear() {
     this._animator?.finish();
     this.canvasRenderingContext.clearRect(0, 0, this.canvasRenderingContext.width, this.canvasRenderingContext.height);
@@ -91,13 +92,14 @@ export  struct Example1 {
       }
       .width('100%')
       .height('100%')
-      .padding({top: this.topArea, bottom: this.bottomArea})
-    }.hideBackButton( true).hideTitleBar( true)
+      .padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideBackButton(true).hideTitleBar(true)
   }
 
   async loadAnimation() {
     // 1. 初始化 SkeletonRenderer
-    let skeletonRenderer = new SkeletonRenderer(this.canvasRenderingContext); // 创建一个 SkeletonRenderer 实例，用于在画布上渲染骨骼动画 传入当前类的 canvasRenderingContext 作为渲染上下文
+    let skeletonRenderer =
+      new SkeletonRenderer(this.canvasRenderingContext); // 创建一个 SkeletonRenderer 实例，用于在画布上渲染骨骼动画 传入当前类的 canvasRenderingContext 作为渲染上下文
     skeletonRenderer.triangleRendering = true; // true是使用drawTriangle方式渲染 false是使用drawImages方式渲染
 
     // 2. 创建资源管理器并加载资源
@@ -110,7 +112,8 @@ export  struct Example1 {
     let atlas: TextureAtlas = assetManager.require("spineboy.atlas"); // 从资源管理器获取纹理图集
     let atlasLoader = new AtlasAttachmentLoader(atlas); // 创建 AtlasAttachmentLoader 用于加载附件
     let skeletonJson = new SkeletonJson(atlasLoader); // 创建 SkeletonJson 解析器
-    let skeletonData = skeletonJson.readSkeletonData(assetManager.require("spineboy-ess.json")); // 读取并解析骨骼动画数据文件，生成 skeletonData
+    let skeletonData =
+      skeletonJson.readSkeletonData(assetManager.require("spineboy-ess.json")); // 读取并解析骨骼动画数据文件，生成 skeletonData
 
     // 4. 创建骨骼实例
     let skeleton = new Skeleton(skeletonData); // 基于骨骼数据创建新的骨骼实例
@@ -132,13 +135,13 @@ export  struct Example1 {
 
     // 设置动画选项
     let options: AnimatorOptions = {
-      duration: 20000,       // 动画持续时间 20 秒
-      easing: 'linear',      // 线性缓动
-      delay: 0,              // 无延迟
-      fill: 'forwards',      // 动画完成后保持最后一帧状态
-      direction: 'normal',   // 正常方向播放
-      iterations: -1,        // 无限循环
-      begin: 0,              // 从第 0 帧开始
+      duration: 20000, // 动画持续时间 20 秒
+      easing: 'linear', // 线性缓动
+      delay: 0, // 无延迟
+      fill: 'forwards', // 动画完成后保持最后一帧状态
+      direction: 'normal', // 正常方向播放
+      iterations: -1, // 无限循环
+      begin: 0, // 从第 0 帧开始
       end: 1                 // 到第 1 帧结束
     };
 

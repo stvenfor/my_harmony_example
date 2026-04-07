@@ -1,25 +1,21 @@
-
-
 import {
-  AssetManager,
-  AtlasAttachmentLoader,
-  AnimationState,
-  AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  SkeletonBinary,
-  Skeleton,
-  TextureAtlas,
-  Physics,
-  Delay,
-  Bound,
-  SkeletonData,
-  Animation
-} from '@ohos/spine'
-
+    AssetManager,
+    AtlasAttachmentLoader,
+    AnimationState,
+    AnimationStateData,
+    SkeletonRenderer,
+    SkeletonJson,
+    SkeletonBinary,
+    Skeleton,
+    TextureAtlas,
+    Physics,
+    Delay,
+    Bound,
+    SkeletonData,
+    Animation
+} from '@ohos/spine';
 import { AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
 import { Logger } from './LoggerUtil';
-
 export enum ResourceSourceType {
   LOCAL = 'local',
   NETWORK = 'network',
@@ -70,7 +66,6 @@ export class SpineAnimationManager {
   private animationState: AnimationState | null = null;
   private animator: AnimatorResult | null = null;
   private bounds: Bound | null = null;
-
   private lastFrameTime: number = 0;
   private isLoaded: boolean = false;
   private isLoading: boolean = false;
@@ -112,6 +107,150 @@ export class SpineAnimationManager {
       }
 
     }
+  }
+
+  startAnimation(
+    createAnimatorFn: (options: AnimatorOptions) => AnimatorResult,
+    config?: SpineAnimatorConfig
+  ): void {
+    if (!this.validateState()) {
+      return;
+    }
+
+    this.lastFrameTime = Date.now() / 1000;
+
+    if (this.animator) {
+      this.animator.finish();
+    }
+
+    const animatorOptions: AnimatorOptions = {
+      duration: config?.duration ?? 20000,
+      easing: 'linear',
+      delay: 0,
+      fill: 'forwards',
+      direction: 'normal',
+      iterations: -1,
+      begin: 0,
+      end: 1
+    };
+
+    const expectedFrameRate: ExpectedFrameRateRange = config?.expectedFrameRate ?? {
+      min: 0,
+      max: 120,
+      expected: 60
+    };
+
+    this.animator = createAnimatorFn(animatorOptions);
+    this.animator.setExpectedFrameRateRange(expectedFrameRate);
+
+    const result: Delay = { time: this.lastFrameTime, isFinish: true };
+
+    this.animator.onFrame = (value: number) => {
+      if (result.isFinish) {
+        result.isFinish = false;
+        this.renderFrame(result);
+      }
+    };
+
+    if (config?.autoPlay !== false) {
+      this.animator.play();
+    }
+
+    Logger.info('SpineAnimation', '动画器启动');
+  }
+
+  setAnimation(trackIndex: number, animationName: string, loop: boolean = true): void {
+    if (!this.animationState) {
+      Logger.warn('SpineAnimation', '动画状态未初始化');
+      return;
+    }
+    this.animationState.setAnimation(trackIndex, animationName, loop);
+  }
+
+  addAnimation(trackIndex: number, animationName: string, loop: boolean = false): void {
+    if (!this.animationState) {
+      Logger.warn('SpineAnimation', '动画状态未初始化');
+      return;
+    }
+    this.animationState.addAnimation(trackIndex, animationName, loop);
+  }
+
+  play(): void {
+    this.animator?.play();
+  }
+
+  pause(): void {
+    this.animator?.pause();
+  }
+
+  stop(): void {
+    this.animator?.finish();
+  }
+
+  clearCanvas(): void {
+    if (this.currentContext) {
+      this.currentContext.clearRect(0, 0, this.currentContext.width, this.currentContext.height);
+    }
+  }
+
+  clearAnimations(): void {
+    this.animationState?.setEmptyAnimations(0);
+    this.clearCanvas();
+  }
+
+  setRenderCallback(callback: SpineRenderCallback): void {
+    this.renderCallback = callback;
+  }
+
+  getAnimationState(): AnimationState | null {
+    return this.animationState;
+  }
+
+  getSkeleton(): Skeleton | null {
+    return this.skeleton;
+  }
+
+  getAvailableAnimations(): Array<string> {
+    if (!this.skeleton) {
+      return [];
+    }
+    const animations: Array<string> = [];
+    this.skeleton.data.animations.forEach((anim: Animation) => {
+      animations.push(anim.name);
+    });
+    return animations;
+  }
+
+  isAnimationLoaded(): boolean {
+    return this.isLoaded;
+  }
+
+  isAnimationLoading(): boolean {
+    return this.isLoading;
+  }
+
+  getCurrentConfig(): SpineResourceConfig | null {
+    return this.currentConfig;
+  }
+
+  dispose(): void {
+    Logger.info('SpineAnimation', '销毁资源');
+
+    if (this.animator) {
+      this.animator.finish();
+      this.animator = null;
+    }
+
+    this.clearCanvas();
+    this.skeleton = null;
+    this.animationState = null;
+    this.skeletonRenderer = null;
+    this.assetManager = null;
+    this.bounds = null;
+    this.currentContext = null;
+    this.currentConfig = null;
+    this.isLoaded = false;
+    this.isLoading = false;
   }
 
   private async loadFromLocal(
@@ -245,56 +384,6 @@ export class SpineAnimationManager {
     }
   }
 
-  startAnimation(
-    createAnimatorFn: (options: AnimatorOptions) => AnimatorResult,
-    config?: SpineAnimatorConfig
-  ): void {
-    if (!this.validateState()) {
-      return;
-    }
-
-    this.lastFrameTime = Date.now() / 1000;
-
-    if (this.animator) {
-      this.animator.finish();
-    }
-
-    const animatorOptions: AnimatorOptions = {
-      duration: config?.duration ?? 20000,
-      easing: 'linear',
-      delay: 0,
-      fill: 'forwards',
-      direction: 'normal',
-      iterations: -1,
-      begin: 0,
-      end: 1
-    };
-
-    const expectedFrameRate: ExpectedFrameRateRange = config?.expectedFrameRate ?? {
-      min: 0,
-      max: 120,
-      expected: 60
-    };
-
-    this.animator = createAnimatorFn(animatorOptions);
-    this.animator.setExpectedFrameRateRange(expectedFrameRate);
-
-    const result: Delay = { time: this.lastFrameTime, isFinish: true };
-
-    this.animator.onFrame = (value: number) => {
-      if (result.isFinish) {
-        result.isFinish = false;
-        this.renderFrame(result);
-      }
-    };
-
-    if (config?.autoPlay !== false) {
-      this.animator.play();
-    }
-
-    Logger.info('SpineAnimation', '动画器启动');
-  }
-
   private renderFrame(result: Delay): Delay {
     if (!this.skeleton || !this.animationState || !this.skeletonRenderer || !this.bounds || !this.currentContext) {
       return result;
@@ -327,100 +416,6 @@ export class SpineAnimationManager {
 
     result.isFinish = true;
     return result;
-  }
-
-  setAnimation(trackIndex: number, animationName: string, loop: boolean = true): void {
-    if (!this.animationState) {
-      Logger.warn('SpineAnimation', '动画状态未初始化');
-      return;
-    }
-    this.animationState.setAnimation(trackIndex, animationName, loop);
-  }
-
-  addAnimation(trackIndex: number, animationName: string, loop: boolean = false): void {
-    if (!this.animationState) {
-      Logger.warn('SpineAnimation', '动画状态未初始化');
-      return;
-    }
-    this.animationState.addAnimation(trackIndex, animationName, loop);
-  }
-
-  play(): void {
-    this.animator?.play();
-  }
-
-  pause(): void {
-    this.animator?.pause();
-  }
-
-  stop(): void {
-    this.animator?.finish();
-  }
-
-  clearCanvas(): void {
-    if (this.currentContext) {
-      this.currentContext.clearRect(0, 0, this.currentContext.width, this.currentContext.height);
-    }
-  }
-
-  clearAnimations(): void {
-    this.animationState?.setEmptyAnimations(0);
-    this.clearCanvas();
-  }
-
-  setRenderCallback(callback: SpineRenderCallback): void {
-    this.renderCallback = callback;
-  }
-
-  getAnimationState(): AnimationState | null {
-    return this.animationState;
-  }
-
-  getSkeleton(): Skeleton | null {
-    return this.skeleton;
-  }
-
-  getAvailableAnimations(): Array<string> {
-    if (!this.skeleton) {
-      return [];
-    }
-    const animations: Array<string> = [];
-    this.skeleton.data.animations.forEach((anim: Animation) => {
-      animations.push(anim.name);
-    });
-    return animations;
-  }
-
-  isAnimationLoaded(): boolean {
-    return this.isLoaded;
-  }
-
-  isAnimationLoading(): boolean {
-    return this.isLoading;
-  }
-
-  getCurrentConfig(): SpineResourceConfig | null {
-    return this.currentConfig;
-  }
-
-  dispose(): void {
-    Logger.info('SpineAnimation', '销毁资源');
-
-    if (this.animator) {
-      this.animator.finish();
-      this.animator = null;
-    }
-
-    this.clearCanvas();
-    this.skeleton = null;
-    this.animationState = null;
-    this.skeletonRenderer = null;
-    this.assetManager = null;
-    this.bounds = null;
-    this.currentContext = null;
-    this.currentConfig = null;
-    this.isLoaded = false;
-    this.isLoading = false;
   }
 
   private validateState(): boolean {

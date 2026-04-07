@@ -1,4 +1,3 @@
-
 /**
  * Apache License
  *
@@ -17,18 +16,17 @@
  * limitations under the License.
  */
 
-import { PageHeaderComp, RouteConstants,StringConstants } from '@ohos/common';
+import { PageHeaderComp, RouteConstants, StringConstants } from '@ohos/common';
 
 @Entry
 @Component
-
 export struct SpinePage {
   @Consume('pathStack') pathStack: NavPathStack;
   @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
   @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
 
   build() {
-    NavDestination(){
+    NavDestination() {
       Column() {
         PageHeaderComp({
           title: 'Spine动画',
@@ -86,9 +84,8 @@ export struct SpinePage {
       }
       .height('100%')
       .width('100%')
-      .padding({ top: this.topArea, bottom: this.bottomArea})
+      .padding({ top: this.topArea, bottom: this.bottomArea })
     }.hideTitleBar(true)
 
   }
-
 }

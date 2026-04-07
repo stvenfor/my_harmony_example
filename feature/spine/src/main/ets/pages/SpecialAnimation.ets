@@ -1,5 +1,10 @@
-import { SpineAnimationManager, SpineResourceConfig, ResourceSourceType, StringConstants,
-  PageHeaderComp} from '@ohos/common';
+import {
+  PageHeaderComp,
+  ResourceSourceType,
+  SpineAnimationManager,
+  SpineResourceConfig,
+  StringConstants
+} from '@ohos/common';
 import { AnimatorOptions } from '@kit.ArkUI';
 
 enum LoadMode {
@@ -11,11 +16,6 @@ enum LoadMode {
 @Entry
 @Component
 export struct SpecialAnimation {
-  private canvasContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(
-    new RenderingContextSettings(true)
-  );
-  private spineManager: SpineAnimationManager = new SpineAnimationManager();
-
   @State currentMode: LoadMode = LoadMode.JSON;
   @State isLoading: boolean = false;
   @State statusText: string = '';
@@ -24,13 +24,17 @@ export struct SpecialAnimation {
   @Consume('pathStack') pathStack: NavPathStack;
   @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
   @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
+  private canvasContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(
+    new RenderingContextSettings(true)
+  );
+  private spineManager: SpineAnimationManager = new SpineAnimationManager();
 
   aboutToDisappear() {
     this.spineManager.dispose();
   }
 
   build() {
-    NavDestination(){
+    NavDestination() {
       Column() {
         PageHeaderComp({
           title: '基础示例',
@@ -74,7 +78,12 @@ export struct SpecialAnimation {
             })
         }
         .width('100%')
-        .padding({ left: 10, right: 10, top: 5, bottom: 5 })
+        .padding({
+          left: 10,
+          right: 10,
+          top: 5,
+          bottom: 5
+        })
 
         if (this.statusText) {
           Text(this.statusText)
@@ -137,8 +146,8 @@ export struct SpecialAnimation {
         .padding(10)
       }
       .width('100%')
-      .height('100%').padding({ top: this.topArea, bottom: this.bottomArea})
-    }.hideTitleBar( true).hideBackButton( true)
+      .height('100%').padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideTitleBar(true).hideBackButton(true)
 
   }
 

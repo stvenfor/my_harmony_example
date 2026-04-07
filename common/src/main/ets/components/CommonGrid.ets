@@ -27,22 +27,11 @@ export struct CommonGrid {
   // grid 的列数
   @Prop gridColumn: number = 2
   @Prop columnGap: number = 10 // 列间距（可选，不传则根据断点自动计算）
-  @Prop rowGap: number  = 10 // 行间距（可选，不传则根据断点自动计算）
+  @Prop rowGap: number = 10 // 行间距（可选，不传则根据断点自动计算）
 
   @Builder
   defaultBuilder() {
 
-  }
-
-  /**
-   * 获取 Grid 列数（根据断点适配）
-   */
-  private getColumnGap(): number {
-    return this.columnGap ?? (this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 6 : 16)
-  }
-
-  private getRowGap(): number {
-    return this.rowGap ?? (this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 6 : 16)
   }
 
   build() {
@@ -82,5 +71,16 @@ export struct CommonGrid {
       bottom: paintByPoint(16, this.breakPoint) // 底部内边距，避免贴底
     })
     .width('100%')
+  }
+
+  /**
+   * 获取 Grid 列数（根据断点适配）
+   */
+  private getColumnGap(): number {
+    return this.columnGap ?? (this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 6 : 16)
+  }
+
+  private getRowGap(): number {
+    return this.rowGap ?? (this.breakPoint == BreakpointConstants.BREAKPOINT_MD ? 6 : 16)
   }
 }

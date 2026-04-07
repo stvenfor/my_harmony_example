@@ -68,19 +68,16 @@ export class BreakpointSystem {
       this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_SM)
     }
   }
-
   private isBreakpointMD = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
     if (mediaQueryResult.matches) {
       this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_MD)
     }
   }
-
   private isBreakpointLG = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
     if (mediaQueryResult.matches) {
       this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_LG)
     }
   }
-
   private isBreakpointXL = (mediaQueryResult: mediaQuery.MediaQueryResult) => {
     if (mediaQueryResult.matches) {
       this.updateCurrentBreakpoint(BreakpointConstants.BREAKPOINT_XL)

@@ -17,20 +17,20 @@
  */
 
 import {
-  AssetManager,
-  AtlasAttachmentLoader,
   AnimationState,
   AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  Skeleton,
-  TextureAtlas,
-  Physics,
+  AssetManager,
+  AtlasAttachmentLoader,
+  Bound,
   Delay,
-  Bound
-} from '@ohos/spine'
+  Physics,
+  Skeleton,
+  SkeletonJson,
+  SkeletonRenderer,
+  TextureAtlas
+} from '@ohos/spine';
 
-import { Animator as animator, AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
+import { AnimatorOptions, AnimatorResult } from '@kit.ArkUI';
 import { common } from '@kit.AbilityKit';
 import { resourceManager } from '@kit.LocalizationKit';
 import fs from '@ohos.file.fs';
@@ -40,7 +40,10 @@ import { PageHeaderComp, StringConstants } from '@ohos/common';
 @Entry
 @Component
 export struct Example3 {
-
+  @Consume('pathStack') pathStack: NavPathStack;
+  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
+  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
+  context = this.getUIContext()?.getHostContext() as common.UIAbilityContext;
   // 渲染构建上下文
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
@@ -49,10 +52,6 @@ export struct Example3 {
   private animations: Array<string> = ['death', 'aim', 'idle', 'jump', 'run', 'shoot', 'walk'];
   private currentIndex: number = 0;
   private animationName: string = '';
-  @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
-  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
-  context = this.getUIContext()?.getHostContext() as common.UIAbilityContext;
 
   aboutToDisappear() {
     this._animator?.finish();
@@ -118,13 +117,14 @@ export struct Example3 {
       }
       .width('100%')
       .height('100%')
-      .padding({ top: this.topArea, bottom: this.bottomArea})
-    }.hideBackButton( true).hideTitleBar( true)
+      .padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideBackButton(true).hideTitleBar(true)
   }
 
   async loadAnimation() {
     // 1. 初始化 SkeletonRenderer
-    let skeletonRenderer = new SkeletonRenderer(this.canvasRenderingContext); // 创建一个 SkeletonRenderer 实例，用于在画布上渲染骨骼动画 传入当前类的 canvasRenderingContext 作为渲染上下文
+    let skeletonRenderer =
+      new SkeletonRenderer(this.canvasRenderingContext); // 创建一个 SkeletonRenderer 实例，用于在画布上渲染骨骼动画 传入当前类的 canvasRenderingContext 作为渲染上下文
     skeletonRenderer.triangleRendering = true; // true是使用drawTriangle方式渲染 false是使用drawImages方式渲染
 
     // 2. 创建资源管理器并加载资源
@@ -137,7 +137,8 @@ export struct Example3 {
     let atlas: TextureAtlas = assetManager.require("sspineboy.atlas"); // 从资源管理器获取纹理图集
     let atlasLoader = new AtlasAttachmentLoader(atlas); // 创建 AtlasAttachmentLoader 用于加载附件
     let skeletonJson = new SkeletonJson(atlasLoader); // 创建 SkeletonJson 解析器
-    let skeletonData = skeletonJson.readSkeletonData(assetManager.require("sspineboy-ess.json")); // 读取并解析骨骼动画数据文件，生成 skeletonData
+    let skeletonData =
+      skeletonJson.readSkeletonData(assetManager.require("sspineboy-ess.json")); // 读取并解析骨骼动画数据文件，生成 skeletonData
 
     // 4. 创建骨骼实例
     let skeleton = new Skeleton(skeletonData); // 基于骨骼数据创建新的骨骼实例
@@ -159,13 +160,13 @@ export struct Example3 {
 
     // 设置动画选项
     let options: AnimatorOptions = {
-      duration: 20000,       // 动画持续时间 20 秒
-      easing: 'linear',      // 线性缓动
-      delay: 0,              // 无延迟
-      fill: 'forwards',      // 动画完成后保持最后一帧状态
-      direction: 'normal',   // 正常方向播放
-      iterations: -1,        // 无限循环
-      begin: 0,              // 从第 0 帧开始
+      duration: 20000, // 动画持续时间 20 秒
+      easing: 'linear', // 线性缓动
+      delay: 0, // 无延迟
+      fill: 'forwards', // 动画完成后保持最后一帧状态
+      direction: 'normal', // 正常方向播放
+      iterations: -1, // 无限循环
+      begin: 0, // 从第 0 帧开始
       end: 1                 // 到第 1 帧结束
     };
 
@@ -241,8 +242,21 @@ export struct Example3 {
     }
   }
 
+  onBackPress(): boolean | void {
+    return false;
+  }
+
+  getResourceString(res: Resource) {
+    try {
+      return this.getUIContext()?.getHostContext()?.resourceManager.getStringSync(res.id) || '';
+    } catch (e) {
+      console.error(`getResourceString error, message: ${e}`);
+      return '';
+    }
+  }
+
   private isFile(path: string): boolean {
-    const resourceMgr : resourceManager.ResourceManager = this.context.resourceManager;
+    const resourceMgr: resourceManager.ResourceManager = this.context.resourceManager;
     try {
       resourceMgr.getRawFileContentSync(path);
       return true;
@@ -252,7 +266,7 @@ export struct Example3 {
   }
 
   private isDirectory(path: string): boolean {
-    const resourceMgr : resourceManager.ResourceManager = this.context.resourceManager;
+    const resourceMgr: resourceManager.ResourceManager = this.context.resourceManager;
     try {
       let files: Array<string> = resourceMgr.getRawFileListSync(path);
       return files && files.length > 0;
@@ -261,20 +275,20 @@ export struct Example3 {
     }
   }
 
-  private copyFile(resourceMgr : resourceManager.ResourceManager, name: string, destFileName: string) {
+  private copyFile(resourceMgr: resourceManager.ResourceManager, name: string, destFileName: string) {
     // let dest_filename = defaultRealmDirectory + '/' + name;
     if (!fs.accessSync(destFileName, 0)) {
       // let out: fs.File = fs.openSync(dest_filename, fs.AccessModeType.READ_WRITE);
       let out: fs.File = fs.openSync(destFileName, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-      resourceMgr.getRawFileContent(name).then((fileData : Uint8Array) => {
+      resourceMgr.getRawFileContent(name).then((fileData: Uint8Array) => {
         const buffer = fileData.buffer.slice(0);
         let n = fs.writeSync(out.fd, buffer);
-      }).catch((err : BusinessError) => {
+      }).catch((err: BusinessError) => {
       });
     }
   }
 
-  private mkDirAndCopy(resourceMgr : resourceManager.ResourceManager, name: string, destFileName: string){
+  private mkDirAndCopy(resourceMgr: resourceManager.ResourceManager, name: string, destFileName: string) {
     try {
       fs.mkdirSync(destFileName);
     } catch (e) {
@@ -282,8 +296,8 @@ export struct Example3 {
     let arr: Array<string> = resourceMgr.getRawFileListSync(name);
     if (arr && arr.length > 0) {
       for (let name1 of arr) {
-        let childDestFileName = destFileName +'/s' +name1;
-        let childPath = name +'/' + name1;
+        let childDestFileName = destFileName + '/s' + name1;
+        let childPath = name + '/' + name1;
         let isFile = this.isFile(childPath);
         if (isFile) {
           this.copyFile(resourceMgr, childPath, childDestFileName);
@@ -291,18 +305,6 @@ export struct Example3 {
           this.mkDirAndCopy(resourceMgr, childPath, childDestFileName);
         }
       }
-    }
-  }
-
-  onBackPress(): boolean | void {
-    return false;
-  }
-  getResourceString(res: Resource) {
-    try {
-      return this.getUIContext()?.getHostContext()?.resourceManager.getStringSync(res.id) || '';
-    } catch (e) {
-      console.error(`getResourceString error, message: ${e}`);
-      return '';
     }
   }
 }

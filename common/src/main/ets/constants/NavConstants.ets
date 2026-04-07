@@ -13,32 +13,27 @@
  * limitations under the License.
  */
 
-export class NavConstants{
+export class NavConstants {
   /**
    * F_PIC_WIDTH
    */
   static readonly F_PIC_WIDTH: number = 18;
-
   /**
    * F_PIC_HEIGHT
    */
   static readonly F_PIC_HEIGHT: number = 18;
-
   /**
    * PADDING
    */
   static readonly PADDING: number = 16;
-
   /**
    * FONT_WEIGHT
    */
   static readonly FONT_WEIGHT: number = 600;
-
   /**
    * S_PIC_WIDTH
    */
   static readonly S_PIC_WIDTH: number = 10;
-
   /**
    * S_PIC_HEIGHT
    */

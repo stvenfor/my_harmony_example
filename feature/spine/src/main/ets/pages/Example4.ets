@@ -18,30 +18,33 @@
 
 
 import {
+  AnimationState,
+  AnimationStateAdapter,
+  AnimationStateData,
+  AnimationStateListener,
   AssetManager,
   AtlasAttachmentLoader,
-  AnimationState,
-  AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  Skeleton,
-  TextureAtlas,
-  Physics,
-  Delay,
   Bound,
-  AnimationStateListener,
-  AnimationStateAdapter,
-  TrackEntry,
+  Delay,
   Event,
-  SkeletonData
-} from '@ohos/spine'
+  Physics,
+  Skeleton,
+  SkeletonData,
+  SkeletonJson,
+  SkeletonRenderer,
+  TextureAtlas,
+  TrackEntry
+} from '@ohos/spine';
 
-import { Animator as animator, AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
+import { AnimatorOptions, AnimatorResult } from '@kit.ArkUI';
 import { PageHeaderComp, StringConstants } from '@ohos/common';
 
 @Entry
 @Component
 export struct Example4 {
+  @Consume('pathStack') pathStack: NavPathStack;
+  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
+  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
   // 渲染构建上下文
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
@@ -55,9 +58,6 @@ export struct Example4 {
   private listener1: MyAnimationStateListener | null = null;
   private skeletonData: SkeletonData | null = null;
   private assetManager: AssetManager | null = null;
-  @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
-  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
 
   async load() {
     this.rawfilePath = 'animation/';
@@ -76,190 +76,190 @@ export struct Example4 {
   }
 
   build() {
-    NavDestination(){
-    Column() {
-      PageHeaderComp({
-        title: 'Spine动画',
-        backAction: () => {
-          this.pathStack.pop();
-        }
-      })
-      Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
-        Row({ space: 10 }) {
-          // 关联画布
-          Canvas(this.canvasRenderingContext)
-            .width('100%')
-            .height('100%')
-            .onVisibleAreaChange([0], (isVisible: boolean) => {
-              if (isVisible) {
-                this._animator?.play();
-              } else {
+    NavDestination() {
+      Column() {
+        PageHeaderComp({
+          title: 'Spine动画',
+          backAction: () => {
+            this.pathStack.pop();
+          }
+        })
+        Flex({ direction: FlexDirection.Column, alignItems: ItemAlign.Center, justifyContent: FlexAlign.Center }) {
+          Row({ space: 10 }) {
+            // 关联画布
+            Canvas(this.canvasRenderingContext)
+              .width('100%')
+              .height('100%')
+              .onVisibleAreaChange([0], (isVisible: boolean) => {
+                if (isVisible) {
+                  this._animator?.play();
+                } else {
+                  this._animator?.pause();
+                }
+              })
+          }
+
+          // 加载网络Img
+          Row() {
+            Button($r('app.string.Load_animation'))
+              .onClick(async () => {
+                await this.load();
+              });
+            Button($r('app.string.Pause_animation'))
+              .onClick(() => {
                 this._animator?.pause();
-              }
-            })
-        }
+              });
+            Button($r('app.string.Play_animation'))
+              .onClick(() => {
+                this._animator?.play();
+              });
+            Button($r('app.string.Clear_canvas'))
+              .onClick(() => {
+                this._animator?.finish();
+                this.animationState?.setEmptyAnimations(0);
+                this.canvasRenderingContext.clearRect(0, 0, this.canvasRenderingContext.width,
+                  this.canvasRenderingContext.height);
+              });
+          }.margin({ top: 5 })
 
-        // 加载网络Img
-        Row() {
-          Button($r('app.string.Load_animation'))
-            .onClick(async () => {
-              await this.load();
-            });
-          Button($r('app.string.Pause_animation'))
-            .onClick(() => {
-              this._animator?.pause();
-            });
-          Button($r('app.string.Play_animation'))
-            .onClick(() => {
-              this._animator?.play();
-            });
-          Button($r('app.string.Clear_canvas'))
-            .onClick(() => {
-              this._animator?.finish();
-              this.animationState?.setEmptyAnimations(0);
-              this.canvasRenderingContext.clearRect(0, 0, this.canvasRenderingContext.width,
-                this.canvasRenderingContext.height);
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button($r('app.string.Add_listener'))
+              .onClick(() => {
+                // 监听添加方式一
+                this.animationState?.addListener({
+                  // 当此条目被设置为当前条目时调用。
+                  start(entry: TrackEntry) {
+                    console.info('spine listener loadAnimation start entry:', entry)
+                  },
 
-        Row() {
-          Button($r('app.string.Add_listener'))
-            .onClick(() => {
-              // 监听添加方式一
-              this.animationState?.addListener({
-                // 当此条目被设置为当前条目时调用。
-                start(entry: TrackEntry) {
-                  console.info('spine listener loadAnimation start entry:', entry)
-                },
+                  // 当另一个条目将此条目替换为当前条目时调用。此条目可继续用于混合。
+                  interrupt(entry: TrackEntry) {
+                    console.info('spine listener loadAnimation interrupt entry:', entry)
+                  },
 
-                // 当另一个条目将此条目替换为当前条目时调用。此条目可继续用于混合。
-                interrupt(entry: TrackEntry) {
-                  console.info('spine listener loadAnimation interrupt entry:', entry)
-                },
+                  // 当此条目不再是当前条目并且永远不会再次应用时调用
+                  end(entry: TrackEntry) {
+                    console.info('spine listener loadAnimation end entry:', entry)
+                  },
 
-                // 当此条目不再是当前条目并且永远不会再次应用时调用
-                end(entry: TrackEntry) {
-                  console.info('spine listener loadAnimation end entry:', entry)
-                },
+                  // 当此条目即将被处理时触发。这有可能在条目从未被设为当前条目的情况下发生。 在调用处理函数后，不应再保留对该条目的引用，因为它可能会被销毁或重新分配。
+                  dispose(entry: TrackEntry) {
+                    console.info('spine listener loadAnimation dispose entry:', entry)
+                  },
 
-                // 当此条目即将被处理时触发。这有可能在条目从未被设为当前条目的情况下发生。 在调用处理函数后，不应再保留对该条目的引用，因为它可能会被销毁或重新分配。
-                dispose(entry: TrackEntry) {
-                  console.info('spine listener loadAnimation dispose entry:', entry)
-                },
+                  // 每次此条目的动画完成循环时调用
+                  complete(entry: TrackEntry) {
+                    console.info('spine listener loadAnimation complete entry:', entry)
+                  },
 
-                // 每次此条目的动画完成循环时调用
-                complete(entry: TrackEntry) {
-                  console.info('spine listener loadAnimation complete entry:', entry)
-                },
+                  // 当此条目的动画触发事件时调用
+                  event(entry: TrackEntry, event: Event) {
+                    console.info(`spine listener loadAnimation event entry: ${entry} ,event: ${event}`);
+                  }
+                });
+                // 监听添加方式二
+                this.listener1 = new MyAnimationStateListener();
+                this.animationState?.addListener(this.listener1);
+                // 监听添加方式三
+                this.animationState?.addListener(new MyAnimationStateListener1());
+              });
 
-                // 当此条目的动画触发事件时调用
-                event(entry: TrackEntry, event: Event) {
-                  console.info(`spine listener loadAnimation event entry: ${entry} ,event: ${event}`);
+            Button($r('app.string.Remove_the_listener'))
+              .onClick(() => {
+                if (this.listener1) {
+                  this.animationState?.removeListener(this.listener1);
                 }
               });
-              // 监听添加方式二
-              this.listener1 = new MyAnimationStateListener();
-              this.animationState?.addListener(this.listener1);
-              // 监听添加方式三
-              this.animationState?.addListener(new MyAnimationStateListener1());
-            });
 
-          Button($r('app.string.Remove_the_listener'))
-            .onClick(() => {
-              if (this.listener1) {
-                this.animationState?.removeListener(this.listener1);
-              }
-            });
+            Button($r('app.string.Remove_all_listeners'))
+              .onClick(() => {
+                this.animationState?.clearListeners();
+              });
+          }.margin({ top: 5 })
 
-          Button($r('app.string.Remove_all_listeners'))
-            .onClick(() => {
-              this.animationState?.clearListeners();
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button('getCurrent')
+              .onClick(() => {
+                let obj = this.animationState?.getCurrent(0);
+                console.info('spine demo getCurrent :' + JSON.stringify(obj));
+              });
 
-        Row() {
-          Button('getCurrent')
-            .onClick(() => {
-              let obj = this.animationState?.getCurrent(0);
-              console.info('spine demo getCurrent :' + JSON.stringify(obj));
-            });
+            Button('setAnimationWith')
+              .onClick(async () => {
+                let animation = this.skeletonData?.findAnimation('aim');
+                this.animationState?.setAnimationWith(1, animation, false);
+              });
+          }.margin({ top: 5 })
 
-          Button('setAnimationWith')
-            .onClick(async () => {
-              let animation = this.skeletonData?.findAnimation('aim');
-              this.animationState?.setAnimationWith(1, animation, false);
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button('clearTrack')
+              .onClick(async () => {
+                this.animationState?.clearTrack(0);
+              });
+            Button('addAnimation')
+              .onClick(() => {
+                this.animationState?.addAnimation(2, 'shoot');
+              });
+          }.margin({ top: 5 })
 
-        Row() {
-          Button('clearTrack')
-            .onClick(async () => {
-              this.animationState?.clearTrack(0);
-            });
-          Button('addAnimation')
-            .onClick(() => {
-              this.animationState?.addAnimation(2, 'shoot');
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button('addAnimationWith')
+              .onClick(() => {
+                let animation = this.skeletonData?.findAnimation('run');
+                this.animationState?.addAnimationWith(3, animation, true);
+              });
 
-        Row() {
-          Button('addAnimationWith')
-            .onClick(() => {
-              let animation = this.skeletonData?.findAnimation('run');
-              this.animationState?.addAnimationWith(3, animation, true);
-            });
+            Button('clearTracks')
+              .onClick(() => {
+                this.animationState?.clearTracks();
+              });
 
-          Button('clearTracks')
-            .onClick(() => {
-              this.animationState?.clearTracks();
-            });
+            Button('clearNext')
+              .onClick(async () => {
+                const obj = this.animationState?.setAnimation(0, "death", true);
+                this.animationState?.clearNext(obj);
+              });
+          }.margin({ top: 5 })
 
-          Button('clearNext')
-            .onClick(async () => {
-              const obj = this.animationState?.setAnimation(0, "death", true);
-              this.animationState?.clearNext(obj);
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button('setEmptyAnimation')
+              .onClick(async () => {
+                this.animationState?.setEmptyAnimation(0, 0.5)
+              });
 
-        Row() {
-          Button('setEmptyAnimation')
-            .onClick(async () => {
-              this.animationState?.setEmptyAnimation(0, 0.5)
-            });
+            Button('addEmptyAnimation')
+              .onClick(async () => {
+                const obj = this.animationState?.setAnimation(1, "run", true);
+                this.animationState?.clearNext(obj);
+                this.animationState?.addEmptyAnimation(1, 0.3, 1.0);
+              });
+          }.margin({ top: 5 })
 
-          Button('addEmptyAnimation')
-            .onClick(async () => {
-              const obj = this.animationState?.setAnimation(1, "run", true);
-              this.animationState?.clearNext(obj);
-              this.animationState?.addEmptyAnimation(1, 0.3, 1.0);
-            });
-        }.margin({ top: 5 })
+          Row() {
+            Button('remove')
+              .onClick(() => {
+                console.info('spine demo remove obj:' + JSON.stringify(this.assetManager?.get("spineboy.png")));
+                this.assetManager?.remove("spineboy.png");
+                console.info('spine demo remove after obj:' + JSON.stringify(this.assetManager?.get("spineboy.png")));
+              });
 
-        Row() {
-          Button('remove')
-            .onClick(() => {
-              console.info('spine demo remove obj:' + JSON.stringify(this.assetManager?.get("spineboy.png")));
-              this.assetManager?.remove("spineboy.png");
-              console.info('spine demo remove after obj:' + JSON.stringify(this.assetManager?.get("spineboy.png")));
-            });
+            Button('removeAll')
+              .onClick(() => {
+                console.info('spine demo removeAll obj:' + JSON.stringify(this.assetManager?.get("spineboy-ess.json")));
+                this.assetManager?.removeAll()
+                console.info('spine demo removeAll after obj:' +
+                JSON.stringify(this.assetManager?.get("spineboy-ess.json")));
+              });
 
-          Button('removeAll')
-            .onClick(() => {
-              console.info('spine demo removeAll obj:' + JSON.stringify(this.assetManager?.get("spineboy-ess.json")));
-              this.assetManager?.removeAll()
-              console.info('spine demo removeAll after obj:' +
-              JSON.stringify(this.assetManager?.get("spineboy-ess.json")));
-            });
-
-        }.margin({ top: 5 })
+          }.margin({ top: 5 })
+        }
+        .width('100%')
+        .height('100%')
       }
       .width('100%')
       .height('100%')
-    }
-    .width('100%')
-    .height('100%')
-      .padding({ top: this.topArea, bottom: this.bottomArea})
-  }.hideBackButton( true).hideTitleBar( true)
+      .padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideBackButton(true).hideTitleBar(true)
   }
 
   async loadAnimation() {

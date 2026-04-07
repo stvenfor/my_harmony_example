@@ -18,8 +18,6 @@ export class NavInfo {
   icon: ResourceStr
   title: string
   action: ResourceStr
-  clickAction: Function = () => {
-  }
 
   constructor(icon: ResourceStr, title: string, action: ResourceStr, clickAction?: Function) {
     this.icon = icon;
@@ -28,6 +26,9 @@ export class NavInfo {
     if (clickAction) {
       this.clickAction = clickAction;
     }
+  }
+
+  clickAction: Function = () => {
   }
 }
 

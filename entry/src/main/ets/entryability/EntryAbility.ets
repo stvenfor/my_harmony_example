@@ -2,9 +2,8 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
 import { FlutterManager } from '@ohos/flutter_ohos';
-import { BreakpointSystem } from '@ohos/common';
+import { BreakpointSystem, updateBreakPoint } from '@ohos/common';
 import { deviceInfo } from '@kit.BasicServicesKit';
-import {  updateBreakPoint } from '@ohos/common';
 
 const DOMAIN = 0x0000;
 
@@ -33,7 +32,6 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
-
 
 
     windowStage.getMainWindow().then((windowClass) => {

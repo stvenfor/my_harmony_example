@@ -112,7 +112,7 @@ export const updateBreakPoint = (windowWidth: number, windowHeight: number): str
   if (type == 'tablet') {
     curBp = 'xl'
     // curBp = 'md'
-    AppStorage.setOrCreate('padPortrait', windowWidth<1920 ? true : false) // 判断平板是否在竖屏状态
+    AppStorage.setOrCreate('padPortrait', windowWidth < 1920 ? true : false) // 判断平板是否在竖屏状态
     AppStorage.setOrCreate('breakPoint', curBp)
 
   } else {

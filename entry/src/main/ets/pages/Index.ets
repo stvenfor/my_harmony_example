@@ -1,6 +1,5 @@
-import { BreakpointConstants, RouteConstants } from '@ohos/common';
+import { BreakpointConstants, RouteConstants, setBreakPoint } from '@ohos/common';
 import { pagesMapBuilder } from './pagesMap';
-import { setBreakPoint } from '@ohos/common';
 
 @Entry
 @Component

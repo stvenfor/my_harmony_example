@@ -17,25 +17,28 @@
  */
 
 import {
-  AssetManager,
-  AtlasAttachmentLoader,
   AnimationState,
   AnimationStateData,
-  SkeletonRenderer,
-  SkeletonJson,
-  Skeleton,
-  TextureAtlas,
-  Physics,
+  AssetManager,
+  AtlasAttachmentLoader,
+  Bound,
   Delay,
-  Bound
-} from '@ohos/spine'
+  Physics,
+  Skeleton,
+  SkeletonJson,
+  SkeletonRenderer,
+  TextureAtlas
+} from '@ohos/spine';
 
-import { Animator as animator, AnimatorResult, AnimatorOptions } from '@kit.ArkUI';
+import { AnimatorOptions, AnimatorResult } from '@kit.ArkUI';
 import { PageHeaderComp, StringConstants } from '@ohos/common';
 
 @Entry
 @Component
 export struct NetWorkExample {
+  @Consume('pathStack') pathStack: NavPathStack;
+  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
+  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
   // 渲染构建上下文
   private renderingSettings: RenderingContextSettings = new RenderingContextSettings(true);
   private canvasRenderingContext: CanvasRenderingContext2D = new CanvasRenderingContext2D(this.renderingSettings);
@@ -44,9 +47,7 @@ export struct NetWorkExample {
   private animations: Array<string> = ['death', 'aim', 'idle', 'jump', 'run', 'shoot', 'walk'];
   private currentIndex: number = 0;
   private animationName: string = '';
-  @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink(StringConstants.TOP_AREA) topArea: number = 0
-  @StorageLink(StringConstants.BOTTOM_AREA) bottomArea: number = 0
+
   aboutToDisappear() {
     this._animator?.finish();
     this.canvasRenderingContext.clearRect(0, 0, this.canvasRenderingContext.width, this.canvasRenderingContext.height);
@@ -145,8 +146,8 @@ export struct NetWorkExample {
       }
       .width('100%')
       .height('100%')
-      .padding({ top: this.topArea, bottom: this.bottomArea})
-    }.hideBackButton( true).hideTitleBar( true)
+      .padding({ top: this.topArea, bottom: this.bottomArea })
+    }.hideBackButton(true).hideTitleBar(true)
   }
 
   async loadAnimation() {

@@ -1,3 +1,3 @@
-export  interface ConfigParams {
-  [key:string] : any
+export interface ConfigParams {
+  [key: string]: any
 }
