@@ -33,6 +33,9 @@ export default class EntryAbility extends UIAbility {
   }
 
   onWindowStageCreate(windowStage: window.WindowStage): void {
+
+
+
     windowStage.getMainWindow().then((windowClass) => {
       try {
         //判断是否是pad,强制竖屏

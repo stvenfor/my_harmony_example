@@ -35,4 +35,40 @@ export class RouteConstants {
    */
 
   static readonly TEXT_EXPAND: string = 'TextExpand';
+  /**
+   * Spine动画页面
+   */
+  static readonly SPINE_ANIMATION: string = 'SpineAnimation';
+  /**
+   * Spine示例1 - 加载动画
+   */
+  static readonly SPINE_EXAMPLE1: string = 'SpineExample1';
+  /**
+   * Spine示例2 - 加载网络动画
+   */
+  static readonly SPINE_NETWORK_EXAMPLE: string = 'SpineNetworkExample';
+  /**
+   * Spine示例3 - 加载JSON动画
+   */
+  static readonly SPINE_SINGLE_EXAMPLE: string = 'SpineSingleExample';
+  /**
+   * Spine示例4 - 加载骨骼动画
+   */
+  static readonly SPINE_EXAMPLE2: string = 'SpineExample2';
+  /**
+   * Spine示例5 - 加载沙盒动画
+   */
+  static readonly SPINE_EXAMPLE3: string = 'SpineExample3';
+  /**
+   * Spine示例6 - 其他
+   */
+  static readonly SPINE_EXAMPLE4: string = 'SpineExample4';
+  /**
+   * Spine示例6 - 基础示例
+   */
+  static readonly BASIC_EXAMPLE4: string = 'BasicExample';
+  /**
+   * Spine特殊动画
+   */
+  static readonly SPECIAL_ANIMATION: string = 'SpecialAnimation';
 }

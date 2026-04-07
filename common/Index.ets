@@ -1,4 +1,3 @@
-import { FrameCallback } from '@kit.ArkUI';
 
 export { StyleConstants } from './src/main/ets/constants/StyleConstants';
 
@@ -18,4 +17,22 @@ export { RawfileUtil } from './src/main/ets/utils/RawfileUtil'
 
 export { GridModel } from './src/main/ets/model/GridModel'
 
-export { setBreakPoint,updateBreakPoint } from  './src/main/ets/utils/LayoutTool'
+export { setBreakPoint, updateBreakPoint } from './src/main/ets/utils/LayoutTool'
+
+export { NavItem } from './src/main/ets/components/NavItem'
+
+export { PageHeaderComp } from './src/main/ets/components/PageHeaderComp'
+
+export { NavConstants } from './src/main/ets/constants/NavConstants'
+
+export { NavInfo } from './src/main/ets/model/NavModel'
+
+export { StringConstants } from './src/main/ets/constants/StringConstants'
+
+export { ConfigParams } from './src/main/ets/constants/ConfigParams'
+
+export { SpineAnimationManager } from './src/main/ets/utils/SpineAnimationManager'
+
+export { SpineResourceConfig } from './src/main/ets/utils/SpineAnimationManager'
+
+export { ResourceSourceType } from './src/main/ets/utils/SpineAnimationManager'

@@ -1,0 +1,11 @@
+{
+  "module": {
+    "name": "spine",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet",
+      "2in1"
+    ]
+  }
+}

@@ -7,7 +7,7 @@ export struct Home {
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
   // 列表数据
-  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', '1']
+  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation']
 
   aboutToAppear(): void {
 
@@ -41,6 +41,9 @@ export struct Home {
                   console.info(`Clicked: ${item}`)
                 } else if (item === '收起展开') {
                   this.pathStack.pushPathByName(RouteConstants.GRAPHICS, null)
+                  console.info(`Clicked: ${item}`)
+                } else if (item === 'SpineAnimation') {
+                  this.pathStack.pushPathByName(RouteConstants.SPINE_ANIMATION, null)
                   console.info(`Clicked: ${item}`)
                 }
               })
