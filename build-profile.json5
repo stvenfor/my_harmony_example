@@ -77,7 +77,7 @@
     },
     {
       "name": "spine",
-      "srcPath": "./feature/spine",
+      "srcPath": "./feature/spine"
     }
   ]
 }

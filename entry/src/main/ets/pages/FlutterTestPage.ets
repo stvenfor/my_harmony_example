@@ -1,8 +1,8 @@
-import { FlutterEntry, FlutterPage, FlutterPlugin, FlutterView } from '@ohos/flutter_ohos';
+import { FlutterEngine, FlutterEntry, FlutterPage, FlutterPlugin, FlutterView } from '@ohos/flutter_ohos';
 import TestPlugin from '../entryability/TestPlugin';
 import { common } from '@kit.AbilityKit';
 import { RouteConstants } from '@ohos/common';
-
+import { GeneratedPluginRegistrant } from '@ohos/flutter_module';
 @Component
 export struct FlutterTestPage {
   @State message: string | Resource | undefined = 'dj';
@@ -87,6 +87,12 @@ class NavFlutterEntry extends FlutterEntry {
   constructor(context: Context, params: Record<string, Object> = {}, pathStack?: NavPathStack) {
     super(context, params)
     this.pathStack = pathStack;
+  }
+
+  configureFlutterEngine(flutterEngine: FlutterEngine): void {
+    super.configureFlutterEngine(flutterEngine);
+    GeneratedPluginRegistrant.registerWith(flutterEngine);
+
   }
 
   popSystemNavigator(): boolean {

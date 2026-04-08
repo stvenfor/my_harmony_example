@@ -1,14 +1,22 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { window } from '@kit.ArkUI';
-import { FlutterManager } from '@ohos/flutter_ohos';
+import { ExclusiveAppComponent, FlutterManager } from '@ohos/flutter_ohos';
 import { BreakpointSystem, updateBreakPoint } from '@ohos/common';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
 const DOMAIN = 0x0000;
 
-export default class EntryAbility extends UIAbility {
+export default class EntryAbility extends UIAbility implements ExclusiveAppComponent<UIAbility>{
   private breakpointSystem: BreakpointSystem = new BreakpointSystem()
+
+  detachFromFlutterEngine(): void {
+    // throw new Error('Method not implemented.');
+  }
+
+  getAppComponent(): UIAbility {
+    return this;
+  }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
 
