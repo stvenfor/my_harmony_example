@@ -44,7 +44,7 @@ export struct MainPage {
         .onChange((index: number) => {
           this.currentIndex = index
         })
-      }
+      }.hideTitleBar(true).hideBackButton( true)
     }
 
   }

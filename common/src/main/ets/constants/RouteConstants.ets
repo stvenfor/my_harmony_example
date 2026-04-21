@@ -76,4 +76,12 @@ export class RouteConstants {
    */
 
   static readonly GIRD_ROW_DEMO: string = 'GridRowDemo';
+  /**
+   * 引用资源页面
+   */
+  static readonly REFERENCE_RES_PAGE: string = 'ReferenceResPage';
+  /**
+   * 食物订单页面
+   */
+  static readonly FOOD_PAGE: string = 'FoodPage';
 }

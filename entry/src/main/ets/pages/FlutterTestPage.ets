@@ -92,7 +92,6 @@ class NavFlutterEntry extends FlutterEntry {
   configureFlutterEngine(flutterEngine: FlutterEngine): void {
     super.configureFlutterEngine(flutterEngine);
     GeneratedPluginRegistrant.registerWith(flutterEngine);
-
   }
 
   popSystemNavigator(): boolean {

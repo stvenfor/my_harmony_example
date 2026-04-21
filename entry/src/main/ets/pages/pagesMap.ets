@@ -3,6 +3,8 @@ import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
 import { GridRowDemo, Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
+import { ReferenceResPage,FoodPage } from '@ohos/home'
+
 import {
   BasicExample,
   Example1,
@@ -54,14 +56,15 @@ function pagesMap(name: string) {
     SpecialAnimation()
   } else if (name === RouteConstants.GIRD_ROW_DEMO) {
     GridRowDemo()
+  }  else if (name === RouteConstants.REFERENCE_RES_PAGE) {
+     ReferenceResPage()
+  }else if (name === RouteConstants.FOOD_PAGE) {
+    FoodPage()
   }
-
-
 
 
 }
 
 export const pagesMapBuilder: WrappedBuilder<[string]> = wrapBuilder(pagesMap);
-
 
 

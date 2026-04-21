@@ -7,7 +7,7 @@ export struct Home {
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
   // 列表数据
-  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation']
+  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation', 'FoodPage']
 
   aboutToAppear(): void {
 
@@ -34,8 +34,8 @@ export struct Home {
                 if (item === '混合页面') {
                   let params: Record<string, Object> = { "route": "/EvaluateEntry" }
                   this.pathStack.pushPathByName(RouteConstants.FLUTTER_TEST_PAGE, params)
-                } else if (item === 'PageTwo') {
-                  this.pathStack.pushPathByName('PageTwo', null)
+                } else if (item === '测试页面') {
+                  this.pathStack.pushPathByName(RouteConstants.REFERENCE_RES_PAGE, null)
                 } else if (item === 'MainPage') {
                   this.pathStack.pushPathByName('MainPage', null)
                   console.info(`Clicked: ${item}`)
@@ -45,7 +45,11 @@ export struct Home {
                 } else if (item === 'SpineAnimation') {
                   this.pathStack.pushPathByName(RouteConstants.SPINE_ANIMATION, null)
                   console.info(`Clicked: ${item}`)
+                }else if (item === 'FoodPage') {
+                  this.pathStack.pushPathByName(RouteConstants.FOOD_PAGE, null)
+                  console.info(`Clicked: ${item}`)
                 }
+
               })
           }
         }, (item: string, index: number) => `${item}_${index}`)

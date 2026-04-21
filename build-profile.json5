@@ -7,11 +7,11 @@
         "material": {
           "certpath": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B6DB2C08BBCB8D3FB62FDF91FF145B78DD07E7A257407587CDA6D967DA6B41FD3C994487CAB2925",
+          "keyPassword": "000000192D0B535D35E8FCFA7173239BB94FB3F65FAAB52936C63E863FA3E5F926D0BB25C032B103F3",
           "profile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p12",
-          "storePassword": "0000001B0CC93F1BE495E0BE18A0CB0A93E89E1A1562137FBDDE6F2FC78644936A488082D399EC8A8416A1"
+          "storePassword": "00000019BF42BCC932462CC136BFA4AB3F3FD2CE5EDE6A26BF8CB2983735696CFE8E1017114BA5B9F7"
         }
       }
     ],
@@ -78,6 +78,42 @@
     {
       "name": "spine",
       "srcPath": "./feature/spine"
+    },
+    {
+      "name": "shared_preferences_ohos",
+      "srcPath": "../../../.pub-cache/git/flutter_packages-a7dd1d3a77d66233629742a301eaf7ec32e50023/packages/shared_preferences/shared_preferences_ohos/ohos",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "path_provider_ohos",
+      "srcPath": "../../../.pub-cache/git/flutter_packages-4ef399d82d6a9800abaa2e5fc6a1da0db37388cc/packages/path_provider/path_provider_ohos/ohos",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "device_info_plus",
+      "srcPath": "../../../.pub-cache/git/flutter_plus_plugins-33d37b3ab716467ac77366c184b3a3c3650d9eff/packages/device_info_plus/device_info_plus/ohos",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
     }
   ]
 }
