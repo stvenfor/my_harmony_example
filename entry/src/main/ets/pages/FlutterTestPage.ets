@@ -1,4 +1,4 @@
-import { FlutterEntry, FlutterPage, FlutterPlugin, FlutterView } from '@ohos/flutter_ohos';
+import { FlutterEntry, FlutterPage, FlutterPlugin, FlutterView,FlutterEngine } from '@ohos/flutter_ohos';
 import TestPlugin from '../entryability/TestPlugin';
 import { common } from '@kit.AbilityKit';
 
@@ -10,6 +10,7 @@ export struct  FlutterTestPage{
   private flutterView?: FlutterView
   @Consume("pathStack") pathStack: NavPathStack
   private flutterPlugin?: FlutterPlugin
+  private flutterEngine?: FlutterEngine
 
 
 
@@ -45,7 +46,7 @@ export struct  FlutterTestPage{
 
   build() {
     NavDestination() {
-        FlutterPage({ viewId: this.flutterView?.getId() })
+        FlutterPage({ viewId: this.flutterView?.getId()  })
     }
     // .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {

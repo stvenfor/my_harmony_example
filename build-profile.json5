@@ -7,11 +7,11 @@
         "material": {
           "certpath": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "0000001B6DB2C08BBCB8D3FB62FDF91FF145B78DD07E7A257407587CDA6D967DA6B41FD3C994487CAB2925",
+          "keyPassword": "0000001BDF0EEB26F7D52862B2AD7CBC920D36C816CDD9B998843094A6AC809144449CE626CF7A5CF71765",
           "profile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p12",
-          "storePassword": "0000001B0CC93F1BE495E0BE18A0CB0A93E89E1A1562137FBDDE6F2FC78644936A488082D399EC8A8416A1"
+          "storePassword": "0000001B0623AE593AC05237F5FA44264DF09B491818FE95CD002A7A1C9061055BB4D8389237BA152B9444"
         }
       }
     ],
@@ -53,7 +53,7 @@
     },
     {
       "name": "flutter_module",
-       "srcPath": "./flutter_module"
+      "srcPath": "./flutter_module"
     }
   ]
 }

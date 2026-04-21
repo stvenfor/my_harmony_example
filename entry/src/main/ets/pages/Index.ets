@@ -1,5 +1,6 @@
 import { pagesMapBuilder } from './pagesMap'
 
+
 @Entry
 @Component
 struct Index {
@@ -29,7 +30,7 @@ struct Index {
                 .margin({ left: 16, right: 16 })
                 .onClick(() => {
                   if (item === 'FlutterTestPage') {
-                    let params : Record<string, Object> = { "route": "/EvaluateEntry"}
+                    let params : Record<string, Object> = { "route": "/home"}
                     this.pathStack.pushPathByName('FlutterTestPage', params)
                   } else if (item === 'PageTwo') {
                     this.pathStack.pushPathByName('PageTwo', null)

@@ -2,8 +2,8 @@
   "modelVersion": "6.0.2",
   "description": "Please describe the basic information.",
   "dependencies": {
-        "@ohos/flutter_module": "file:./har/flutter_module.har",
-        "@ohos/flutter_ohos": "file:./har/flutter.har"
+//        "@ohos/flutter_module": "file:./flutter_module/har/flutter_module.har",
+        "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.25",
