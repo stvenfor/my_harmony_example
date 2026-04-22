@@ -1,10 +1,9 @@
-import { PageMap } from './detail/SecondPageBuilder'
-import { BreakpointConstants } from './common/BreakpointConstants';
-import { CommonConstants } from './common/CommonConstants';
-import { HomePage } from './pages/HomePage';
-import { CoursePage } from './pages/CoursePage';
-import { PracticePage } from './pages/PracticePage';
-import { MyPage } from './pages/MyPage';
+import { BreakpointConstants } from "@ohos/common";
+import { CommonConstants } from "../common/CommonConstants";
+import { CoursePage } from "../pages/CoursePage";
+import { HomePage } from "../pages/HomePage";
+import { MyPage } from "../pages/MyPage";
+import { PracticePage } from "../pages/PracticePage";
 
 @Entry
 @Component
@@ -31,7 +30,7 @@ export  struct EducationPage {
         .lineHeight("14vp")
         .fontWeight(500)
     }
-    .height(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? "100vp" : CommonConstants.FULL_PERCENT)
+    .height(CommonConstants.FULL_PERCENT)
     .width('100%')
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
@@ -40,11 +39,10 @@ export  struct EducationPage {
       this.tabsController.changeIndex(targetIndex);
     })
   }
-
   build() {
     NavDestination() {
       Tabs({
-        barPosition: this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? BarPosition.Start :
+        barPosition:
           BarPosition.End,
         controller: this.tabsController
       }) {
@@ -64,19 +62,18 @@ export  struct EducationPage {
           MyPage()
         }.tabBar(this.tabBuilder('我的', 3, $r("app.media.lib_icon_9")))
       }
-      .barWidth(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? "96vp" :
+      .barWidth(
         CommonConstants.FULL_PERCENT)
-      .barHeight(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? CommonConstants.FULL_PERCENT :
+      .barHeight(
         "76vp")
-      .barMode(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? BarMode.Scrollable : BarMode.Fixed,
+      .barMode( BarMode.Fixed,
         { nonScrollableLayoutStyle: LayoutStyle.ALWAYS_CENTER })
-      .vertical(this.breakPoint === BreakpointConstants.BREAKPOINT_LG)
+      .vertical(false)
       .scrollable(false)
       .width('100%')
       .height('100%')
     }
     .backgroundColor($r('app.color.page_bg_color'))
     .hideTitleBar(true)
-
   }
 }

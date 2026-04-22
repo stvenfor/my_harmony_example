@@ -1,6 +1,6 @@
-import { PracticeModeSelectionModule } from '../view/PracticeModeSelectionModule';
-import { ActiveTabContentModule } from '../view/ActiveTabContentModule';
-import { RecommendationModule } from '../view/RecommendationModule';
+import { ActiveTabContentModule } from "../view/ActiveTabContentModule";
+import { PracticeModeSelectionModule } from "../view/PracticeModeSelectionModule";
+import { RecommendationModule } from "../view/RecommendationModule";
 
 @Component
 export struct PracticePage {

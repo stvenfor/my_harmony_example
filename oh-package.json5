@@ -6,6 +6,7 @@
     "@ohos/home": "file:./feature/home",
     "@ohos/mine": "file:./feature/mine",
     "@ohos/spine_animation": "file:./feature/spine",
+    "@ohos/education": "file:./feature/education",
     "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har",
     "@ohos/flutter_module": "file:./flutter_module"
   },

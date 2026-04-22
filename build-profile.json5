@@ -114,6 +114,10 @@
           ]
         }
       ]
+    },
+    {
+      "name": "education",
+      "srcPath": "./feature/education"
     }
   ]
 }

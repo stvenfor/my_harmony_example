@@ -3,7 +3,7 @@ import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
 import { GridRowDemo, Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
-import { ReferenceResPage,FoodPage,NewsPage,TravelPage,EducationPage,ShopPage } from '@ohos/home'
+import { ReferenceResPage,FoodPage,NewsPage,TravelPage,ShopPage } from '@ohos/home'
 
 import {
   BasicExample,
@@ -18,6 +18,7 @@ import {
 } from '@ohos/spine_animation';
 import { TreeView } from '@kit.ArkUI';
 import { Travel } from './Index';
+import { EducationPage } from '@ohos/education';
 
 
 @Builder
