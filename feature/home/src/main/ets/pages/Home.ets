@@ -7,7 +7,7 @@ export struct Home {
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
   // 列表数据
-  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation', 'FoodPage']
+  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation', 'Food','News','Education','Shop','Travel']
 
   aboutToAppear(): void {
 
@@ -45,8 +45,20 @@ export struct Home {
                 } else if (item === 'SpineAnimation') {
                   this.pathStack.pushPathByName(RouteConstants.SPINE_ANIMATION, null)
                   console.info(`Clicked: ${item}`)
-                }else if (item === 'FoodPage') {
+                }else if (item === 'Food') {
                   this.pathStack.pushPathByName(RouteConstants.FOOD_PAGE, null)
+                  console.info(`Clicked: ${item}`)
+                }else if (item === 'Shop') {
+                  this.pathStack.pushPathByName(RouteConstants.SHOP_PAGE, null)
+                  console.info(`Clicked: ${item}`)
+                }else if (item === 'News') {
+                  this.pathStack.pushPathByName(RouteConstants.NEWS_PAGE, null)
+                  console.info(`Clicked: ${item}`)
+                }else if (item === 'Travel') {
+                  this.pathStack.pushPathByName(RouteConstants.TRAVEL_PAGE, null)
+                  console.info(`Clicked: ${item}`)
+                }else if (item === 'Education') {
+                  this.pathStack.pushPathByName(RouteConstants.EDUCATION_PAGE, null)
                   console.info(`Clicked: ${item}`)
                 }
 

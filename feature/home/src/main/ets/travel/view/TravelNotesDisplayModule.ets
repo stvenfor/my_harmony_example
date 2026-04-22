@@ -32,7 +32,7 @@ export struct TravelNotesDisplayModule {
   @State moduleRedirectContent: string = "查看更多攻略";
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
   private columnNumberArray: number[] = [2, 4, 4];
 
   aboutToAppear() {
@@ -86,7 +86,7 @@ export struct TravelNotesDisplayModule {
         .nestedScroll({ scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.SELF_FIRST })
         .cachedCount(4)
         .columnsTemplate(("1fr ").repeat(new BreakpointType(this.columnNumberArray[0], this.columnNumberArray[1],
-          this.columnNumberArray[2]).getValue(this.currentWidthBreakpoint)).trim())
+          this.columnNumberArray[2]).getValue(this.breakPoint)).trim())
         .columnsGap(8)
         .rowsGap(8)
         .width('92%')
@@ -165,7 +165,7 @@ export struct VerticalGraphicTextShareItem {
 
 @Component
 export struct TravelNotesDisplayModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多攻略";
   @Consume('pathStack') pathStack: NavPathStack;

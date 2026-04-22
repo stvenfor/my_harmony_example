@@ -8,3 +8,7 @@ export { TextExpand } from './src/main/ets/pages/TextExpand';
 
 export { ReferenceResPage } from './src/main/ets/pages/ReferenceResPage'
 export { FoodPage } from './src/main/ets/food/FoodPage'
+export { NewsPage } from './src/main/ets/news/NewsPage'
+export { TravelPage } from './src/main/ets/travel/TravelPage'
+export { ShopPage } from './src/main/ets/shop/ShopPage'
+export { EducationPage } from './src/main/ets/education/EducationPage'

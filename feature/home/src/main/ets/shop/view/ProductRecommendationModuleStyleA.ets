@@ -30,7 +30,7 @@ export struct ProductRecommendationModuleStyleA {
     this.itemModel.lazyDataSource;
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
   private columnNumArray: number[] = [2, 4, 4];
 
   aboutToAppear() {
@@ -77,7 +77,7 @@ export struct ProductRecommendationModuleStyleA {
         .nestedScroll({ scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.SELF_FIRST })
         .cachedCount(4)
         .columnsTemplate(("1fr ").repeat(new BreakpointType(this.columnNumArray[0], this.columnNumArray[1],
-          this.columnNumArray[2]).getValue(this.currentWidthBreakpoint)).trim())
+          this.columnNumArray[2]).getValue(this.breakPoint)).trim())
         .columnsGap("8vp")
         .rowsGap("8vp")
         .width(CommonConstants.FULL_PERCENT)

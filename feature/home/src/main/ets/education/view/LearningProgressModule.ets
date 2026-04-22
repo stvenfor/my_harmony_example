@@ -119,7 +119,7 @@ struct VerticalStudyTaskProcessItem {
 
 @Component
 export struct LearningProgressModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = '';
   @Consume('pathStack') pathStack: NavPathStack;

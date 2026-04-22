@@ -82,7 +82,7 @@ export struct ActiveTabContentModule {
 
 @Component
 export struct ActiveTabContentModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = '';
   @Consume('pathStack') pathStack: NavPathStack;

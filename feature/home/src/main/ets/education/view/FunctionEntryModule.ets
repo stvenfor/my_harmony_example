@@ -37,7 +37,7 @@ export struct FunctionEntryModule {
   private rowNumberArray: number[] = [1, 1, 1];
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -86,16 +86,16 @@ export struct FunctionEntryModule {
               (item: DataSource, index: number) => index + JSON.stringify(item)) //ITEM_MODEL
           }
           .columnsTemplate(("1fr ").repeat(new BreakpointType(this.columnNumberArray[0], this.columnNumberArray[1],
-            this.columnNumberArray[2]).getValue(this.currentWidthBreakpoint)).trim())
+            this.columnNumberArray[2]).getValue(this.breakPoint)).trim())
           .rowsTemplate(("1fr ").repeat(new BreakpointType(this.rowNumberArray[0], this.rowNumberArray[1],
-            this.rowNumberArray[2]).getValue(this.currentWidthBreakpoint)).trim())
-          .height(this.currentWidthBreakpoint !== BreakpointConstants.BREAKPOINT_LG ?
+            this.rowNumberArray[2]).getValue(this.breakPoint)).trim())
+          .height(this.breakPoint !== BreakpointConstants.BREAKPOINT_LG ?
             (this.rowGap + this.rowHeight) * new BreakpointType(this.rowNumberArray[0], this.rowNumberArray[1],
-              this.rowNumberArray[2]).getValue(this.currentWidthBreakpoint) :
+              this.rowNumberArray[2]).getValue(this.breakPoint) :
             (this.rowGap + this.rowHeight + 30) * new BreakpointType(this.rowNumberArray[0], this.rowNumberArray[1],
-              this.rowNumberArray[2]).getValue(this.currentWidthBreakpoint))
+              this.rowNumberArray[2]).getValue(this.breakPoint))
           .columnsGap(new BreakpointType(this.columnGapArray[0], this.columnGapArray[1],
-            this.columnGapArray[2]).getValue(this.currentWidthBreakpoint))
+            this.columnGapArray[2]).getValue(this.breakPoint))
           .rowsGap(this.rowGap)
           .margin({ top: '12vp', bottom: '12vp' })
         }
@@ -135,7 +135,7 @@ export struct VerticalGraphicTextFunctionItem1 {
 
 @Component
 export struct FunctionEntryModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多";
   @Consume('pathStack') pathStack: NavPathStack;

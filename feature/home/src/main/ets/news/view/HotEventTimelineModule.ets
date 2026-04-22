@@ -34,7 +34,7 @@ export struct HotEventTimelineModule {
   private spaceArray: string[] = ['8vp', '6vp', '10vp'];
   private lanesArray: number[] = [1, 2, 3];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   aboutToAppear() {
     this.loadResources();
@@ -92,7 +92,7 @@ export struct HotEventTimelineModule {
 
                 Column({
                   space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-                    this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+                    this.spaceArray[2]).getValue(this.breakPoint)
                 }) {
                   Text(this.times[index])
                     .fontSize($r('app.integer.caption_text_M'))
@@ -123,7 +123,7 @@ export struct HotEventTimelineModule {
         .height('auto')
         .listDirection(this.listDirection)
         .lanes(new BreakpointType(this.lanesArray[0], this.lanesArray[1],
-          this.lanesArray[2]).getValue(this.currentWidthBreakpoint), "12vp")
+          this.lanesArray[2]).getValue(this.breakPoint), "12vp")
       }
     }
     .width('92%')
@@ -164,7 +164,7 @@ export struct HorizontalGraphicTextNewsItem {
 
 @Component
 export struct NewsHotEventTimelineModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多";
   @Consume('pathStack') pathStack: NavPathStack;

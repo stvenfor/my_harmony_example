@@ -33,7 +33,7 @@ export struct CoursePromotionCarouselModule {
   @State moduleRedirectContent: string = "查看更多课程";
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   aboutToAppear() {
     this.loadResources();
@@ -76,9 +76,9 @@ export struct CoursePromotionCarouselModule {
             })
           }, (item: DataSource) => JSON.stringify(item))
         }
-        .displayCount(new BreakpointType(1, 2, 4).getValue(this.currentWidthBreakpoint))
-        .indicator(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_SM ? true : false)
-        .autoPlay(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_SM ? true : false)
+        .displayCount(new BreakpointType(1, 2, 4).getValue(this.breakPoint))
+        .indicator(this.breakPoint === BreakpointConstants.BREAKPOINT_SM ? true : false)
+        .autoPlay(this.breakPoint === BreakpointConstants.BREAKPOINT_SM ? true : false)
         .itemSpace(4)
         .height("210vp")
         .width(CommonConstants.FULL_PERCENT)
@@ -150,7 +150,7 @@ export struct VerticalGraphicTextItem {
 
 @Component
 export struct CoursePromotionCarouselModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多课程";
   @Consume('pathStack') pathStack: NavPathStack;

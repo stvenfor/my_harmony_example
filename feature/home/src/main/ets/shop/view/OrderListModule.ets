@@ -31,7 +31,7 @@ export struct OrderListModule {
   @State moduleRedirectContent: string = "查看全部订单";
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -259,7 +259,7 @@ export struct VerticalGraphicOrderItem2 {
 
 @Component
 export struct OrderListModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看全部订单";
   @Consume('pathStack') pathStack: NavPathStack;

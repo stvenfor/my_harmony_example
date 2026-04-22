@@ -106,7 +106,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_1 {
     this.itemModel.lazyDataSource1;
   private spaceArray: string[] = ['12vp', '16vp', '20vp'];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -133,7 +133,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_1 {
       if (this.loadingStatus === LoadingStatus.SUCCESS) {
         List({
           space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-            this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+            this.spaceArray[2]).getValue(this.breakPoint)
         }) {
           LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
             ListItem() {
@@ -175,7 +175,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_2 {
     this.itemModel.lazyDataSource2;
   private spaceArray: string[] = ['12vp', '16vp', '20vp'];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -202,7 +202,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_2 {
       if (this.loadingStatus === LoadingStatus.SUCCESS) {
         List({
           space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-            this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+            this.spaceArray[2]).getValue(this.breakPoint)
         }) {
           LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
             ListItem() {
@@ -244,7 +244,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_3 {
     this.itemModel.lazyDataSource3;
   private spaceArray: string[] = ['12vp', '16vp', '20vp'];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -271,7 +271,7 @@ export struct List_HorizontalGraphicTextFunctionItem2_3 {
       if (this.loadingStatus === LoadingStatus.SUCCESS) {
         List({
           space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-            this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+            this.spaceArray[2]).getValue(this.breakPoint)
         }) {
           LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
             ListItem() {
@@ -347,7 +347,7 @@ export struct HorizontalGraphicTextFunctionItem2 {
 
 @Component
 export struct NewsCategoryModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多";
   @Consume('pathStack') pathStack: NavPathStack;

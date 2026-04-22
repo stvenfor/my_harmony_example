@@ -21,7 +21,7 @@ export struct NewsRecommendationModuleStyleA {
   private spaceArray: string[] = ['8vp', '6vp', '10vp'];
   private lanesArray: number[] = [1, 2, 3];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   aboutToAppear() {
     this.loadResources();
@@ -56,7 +56,7 @@ export struct NewsRecommendationModuleStyleA {
         if (this.loadingStatus === LoadingStatus.SUCCESS) {
           List({
             space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-              this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+              this.spaceArray[2]).getValue(this.breakPoint)
           }) {
             LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
               ListItem() {
@@ -82,7 +82,7 @@ export struct NewsRecommendationModuleStyleA {
           .edgeEffect(EdgeEffect.Spring, { alwaysEnabled: true })
           .listDirection(this.listDirection)
           .lanes(new BreakpointType(this.lanesArray[0], this.lanesArray[1],
-            this.lanesArray[2]).getValue(this.currentWidthBreakpoint), "12vp")
+            this.lanesArray[2]).getValue(this.breakPoint), "12vp")
         }
       }
       .borderRadius($r('sys.float.corner_radius_level8'))
@@ -102,7 +102,7 @@ export struct News_VerticalNovelInfoItem {
   @State descriptionText: string = '这是一个描述文本，用于展示一些详细信息。';
   @State tagTextList: string[] = ['标签1', '标签2', '标签3', "标签4"];
   @State tagTextColorList: Color[] = [Color.Brown, Color.Green, Color.Gray, Color.Blue];
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   build() {
     Column() {
@@ -196,7 +196,7 @@ export struct News_VerticalNovelInfoItem {
 
 @Component
 export struct NewsRecommendationModuleStyleATitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多";
   @Consume('pathStack') pathStack: NavPathStack;

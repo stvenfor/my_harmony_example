@@ -4,12 +4,12 @@ import { CommonConstants } from '../common/CommonConstants';
 @Component
 export struct LatestColumnUpdateModule {
   @State image: Resource = $r('app.media.noImage');
-  @State mainText: string = ['科技行业迎来新变革', '全球经济形势分析'];
-  @State subText: string = ['人工智能技术突破', '市场波动下的投资策略'];
+  @State mainText: string = '科技行业迎来新变革'
+  @State subText: string = '人工智能技术突破'
   @State commentCount: number = 42;
-  @State mediaSource: string = ['科技日报', '财经周刊'];
-  @State publishTime: string = ['2023-10-25 14:30', '2023-10-24 09:15'];
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @State mediaSource: string = '科技日报';
+  @State publishTime: string = '2023-10-25 14:30';
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   build() {
     Row() {

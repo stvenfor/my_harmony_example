@@ -84,4 +84,20 @@ export class RouteConstants {
    * 食物订单页面
    */
   static readonly FOOD_PAGE: string = 'FoodPage';
+  /**
+   * 新闻页面
+   */
+  static readonly NEWS_PAGE: string = 'NewsPage';
+  /**
+   * 教育页面
+   */
+  static readonly EDUCATION_PAGE: string = 'EducationPage';
+  /**
+   * 购物页面
+   */
+  static readonly SHOP_PAGE: string = 'ShopPage';
+  /**
+   * 旅游页面
+   */
+  static readonly TRAVEL_PAGE: string = 'TravelPage';
 }

@@ -32,7 +32,7 @@ export struct CourseListModule {
   @State moduleRedirectContent: string = "查看更多课程";
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
   private columnNumberArray: number[] = [2, 4, 4];
 
   aboutToAppear() {
@@ -82,7 +82,7 @@ export struct CourseListModule {
         .nestedScroll({ scrollForward: NestedScrollMode.PARENT_FIRST, scrollBackward: NestedScrollMode.SELF_FIRST })
         .cachedCount(4)
         .columnsTemplate(("1fr ").repeat(new BreakpointType(this.columnNumberArray[0], this.columnNumberArray[1],
-          this.columnNumberArray[2]).getValue(this.currentWidthBreakpoint)).trim())
+          this.columnNumberArray[2]).getValue(this.breakPoint)).trim())
         .columnsGap("8vp")
         .rowsGap("8vp")
         .width(CommonConstants.FULL_PERCENT)
@@ -133,7 +133,7 @@ export struct VerticalGraphicTextItem {
 
 @Component
 export struct CourseListModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多课程";
   @Consume('pathStack') pathStack: NavPathStack;

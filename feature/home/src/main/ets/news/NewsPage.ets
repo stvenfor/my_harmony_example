@@ -2,17 +2,16 @@ import { PageMap } from './detail/SecondPageBuilder'
 import { BreakpointConstants } from './common/BreakpointConstants';
 import { CommonConstants } from './common/CommonConstants';
 import { HomePage } from './pages/HomePage';
-import { ShoppingCartPage } from './pages/ShoppingCartPage';
-import { OrderPage } from './pages/OrderPage';
-import { MyPage } from './pages/MyPage';
+import { NewsListPage } from './pages/NewsListPage';
+import { ColumnPage } from './pages/ColumnPage';
 
 @Entry
 @Component
-struct Index {
+export struct NewsPage {
   @State currentIndex: number = 0;
   private tabsController: TabsController = new TabsController();
-  @Provide('pathStack') pathStack: NavPathStack = new NavPathStack();
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @Consume('pathStack') pathStack: NavPathStack
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   @Builder
   tabBuilder(title: string, targetIndex: number, icon: Resource) {
@@ -31,7 +30,7 @@ struct Index {
         .lineHeight("14vp")
         .fontWeight(500)
     }
-    .height(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG ? "100vp" : CommonConstants.FULL_PERCENT)
+    .height(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? "100vp" : CommonConstants.FULL_PERCENT)
     .width('100%')
     .justifyContent(FlexAlign.Center)
     .alignItems(HorizontalAlign.Center)
@@ -42,9 +41,9 @@ struct Index {
   }
 
   build() {
-    Navigation(this.pathStack) {
+    NavDestination() {
       Tabs({
-        barPosition: this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG ? BarPosition.Start :
+        barPosition: this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? BarPosition.Start :
           BarPosition.End,
         controller: this.tabsController
       }) {
@@ -53,31 +52,25 @@ struct Index {
         }.tabBar(this.tabBuilder('首页', 0, $r("app.media.lib_icon_8")))
 
         TabContent() {
-          ShoppingCartPage()
-        }.tabBar(this.tabBuilder('购物车', 1, $r("app.media.lib_icon_182")))
+          NewsListPage()
+        }.tabBar(this.tabBuilder('新闻列表', 1, $r("app.media.lib_icon_186")))
 
         TabContent() {
-          OrderPage()
-        }.tabBar(this.tabBuilder('订单', 2, $r("app.media.lib_icon_173")))
-
-        TabContent() {
-          MyPage()
-        }.tabBar(this.tabBuilder('我的', 3, $r("app.media.lib_icon_0")))
+          ColumnPage()
+        }.tabBar(this.tabBuilder('专栏', 2, $r("app.media.lib_icon_0")))
       }
-      .barWidth(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG ? "96vp" :
+      .barWidth(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? "96vp" :
         CommonConstants.FULL_PERCENT)
-      .barHeight(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG ? CommonConstants.FULL_PERCENT :
+      .barHeight(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? CommonConstants.FULL_PERCENT :
         "76vp")
-      .barMode(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG ? BarMode.Scrollable : BarMode.Fixed,
+      .barMode(this.breakPoint === BreakpointConstants.BREAKPOINT_LG ? BarMode.Scrollable : BarMode.Fixed,
         { nonScrollableLayoutStyle: LayoutStyle.ALWAYS_CENTER })
-      .vertical(this.currentWidthBreakpoint === BreakpointConstants.BREAKPOINT_LG)
+      .vertical(this.breakPoint === BreakpointConstants.BREAKPOINT_LG)
       .scrollable(false)
       .width('100%')
       .height('100%')
     }
     .backgroundColor($r('app.color.page_bg_color'))
-    .navDestination(PageMap)
     .hideTitleBar(true)
-    .mode(NavigationMode.Stack)
   }
 }

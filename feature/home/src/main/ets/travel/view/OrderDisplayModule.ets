@@ -103,7 +103,7 @@ export struct List_Orders {
   private spaceArray: string[] = ['0vp', '16vp', '20vp'];
   private lanesArray: number[] = [1, 3, 4];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   jump(pageName: string = 'EmptyPagePathStack'): void {
     this.pathStack.pushPathByName(pageName, null);
@@ -130,7 +130,7 @@ export struct List_Orders {
       if (this.loadingStatus === LoadingStatus.SUCCESS) {
         List({
           space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-            this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+            this.spaceArray[2]).getValue(this.breakPoint)
         }) {
           LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
             ListItem() {
@@ -154,7 +154,7 @@ export struct List_Orders {
         .margin({ top: 8 })
         .listDirection(this.listDirection)
         .lanes(new BreakpointType(this.lanesArray[0], this.lanesArray[1],
-          this.lanesArray[2]).getValue(this.currentWidthBreakpoint), "12vp")
+          this.lanesArray[2]).getValue(this.breakPoint), "12vp")
       }
     }
     .width('100%')

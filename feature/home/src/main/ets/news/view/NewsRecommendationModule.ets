@@ -101,7 +101,7 @@ export struct NewsRecommendationModule {
 
 @Component
 export struct NewsRecommendationModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = '';
   @Consume('pathStack') pathStack: NavPathStack;

@@ -29,7 +29,7 @@ export struct PromotionCarouselModule {
   @State loadingStatus: LoadingStatus = LoadingStatus.OFF;
   private displayCountArray: number[] = [1, 2, 3];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   aboutToAppear() {
     this.loadResources();
@@ -65,7 +65,7 @@ export struct PromotionCarouselModule {
             }, (item: DataSource) => JSON.stringify(item))
           }
           .displayCount(new BreakpointType(this.displayCountArray[0], this.displayCountArray[1],
-            this.displayCountArray[2]).getValue(this.currentWidthBreakpoint))
+            this.displayCountArray[2]).getValue(this.breakPoint))
           .indicator(false)
           .height("150vp")
           .width(CommonConstants.FULL_PERCENT)

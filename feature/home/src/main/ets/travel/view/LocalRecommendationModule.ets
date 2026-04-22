@@ -34,7 +34,7 @@ export struct LocalRecommendationModule {
     this.itemModel.lazyDataSource;
   private spaceArray: string[] = ['12vp', '16vp', '20vp'];
   @Consume('pathStack') pathStack: NavPathStack;
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_SM;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_SM;
 
   aboutToAppear() {
     this.loadResources();
@@ -69,7 +69,7 @@ export struct LocalRecommendationModule {
         if (this.loadingStatus === LoadingStatus.SUCCESS) {
           List({
             space: new BreakpointType(this.spaceArray[0], this.spaceArray[1],
-              this.spaceArray[2]).getValue(this.currentWidthBreakpoint)
+              this.spaceArray[2]).getValue(this.breakPoint)
           }) {
             LazyForEach(this.lazyDataSource, (item: DataSource, index: number) => {
               ListItem() {
@@ -228,7 +228,7 @@ export struct VerticalDoubleGraphicTextItem {
 
 @Component
 export struct LocalRecommendationModuleTitleInfo {
-  @StorageLink('currentWidthBreakpoint') currentWidthBreakpoint: string = BreakpointConstants.BREAKPOINT_LG;
+  @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_LG;
   public title: string = '';
   public moduleRedirectContent: string = "查看更多景点";
   @Consume('pathStack') pathStack: NavPathStack;
