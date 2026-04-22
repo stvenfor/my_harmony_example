@@ -1,5 +1,3 @@
 {
-  "src" : [
-    "food/FoodPage"
-  ]
+  "src" : [ "education/Index", "news/Index", "shop/Index", "travel/Travel", "food/FoodPage" ]
 }

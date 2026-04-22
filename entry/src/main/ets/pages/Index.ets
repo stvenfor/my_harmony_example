@@ -3,7 +3,7 @@ import { pagesMapBuilder } from './pagesMap';
 
 @Entry
 @Component
-struct Index {
+export struct Travel {
   @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_MD
   @Provide("pathStack") pathStack: NavPathStack = new NavPathStack()
   // 底部展示的数据
