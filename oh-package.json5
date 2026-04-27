@@ -3,12 +3,13 @@
   "description": "Please describe the basic information.",
   "dependencies": {
     "@ohos/common": "file:./common",
-    "@ohos/home": "file:./feature/home",
-    "@ohos/mine": "file:./feature/mine",
-    "@ohos/spine_animation": "file:./feature/spine",
-    "@ohos/education": "file:./feature/education",
+    "@ohos/home": "file:./features/home",
+    "@ohos/mine": "file:./features/mine",
+    "@ohos/spine_animation": "file:./features/spine",
+    "@ohos/education": "file:./features/education",
     "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har",
-    "@ohos/flutter_module": "file:./flutter_module"
+    "@ohos/flutter_module": "file:./flutter_module",
+    "@mcui/mccharts": "2.8.8"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.25",

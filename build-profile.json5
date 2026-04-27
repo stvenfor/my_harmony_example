@@ -69,15 +69,15 @@
     },
     {
       "name": "home",
-      "srcPath": "./feature/home"
+      "srcPath": "./features/home"
     },
     {
       "name": "mine",
-      "srcPath": "./feature/mine"
+      "srcPath": "./features/mine"
     },
     {
       "name": "spine",
-      "srcPath": "./feature/spine"
+      "srcPath": "./features/spine"
     },
     {
       "name": "shared_preferences_ohos",
@@ -117,7 +117,7 @@
     },
     {
       "name": "education",
-      "srcPath": "./feature/education"
+      "srcPath": "./features/education"
     }
   ]
 }
