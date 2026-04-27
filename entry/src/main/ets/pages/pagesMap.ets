@@ -13,7 +13,7 @@ import {
 import { GridRowDemo, Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
-import { ApiTestCommonPage, SamplesPage } from '@ohos/samples';
+import { ApiTestCommonPage, McChartsSamples, SamplesPage } from '@ohos/samples';
 
 import {
   BasicExample,
@@ -83,6 +83,8 @@ function pagesMap(name: string) {
     SamplesPage()
   } else if (name === RouteConstants.API_TEST_COMMON_PAGE) {
     ApiTestCommonPage()
+  } else if (name === RouteConstants.MC_CHARTS_SAMPLES_PAGE){
+    McChartsSamples()
   }
 }
 

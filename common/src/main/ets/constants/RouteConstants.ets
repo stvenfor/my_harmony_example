@@ -104,5 +104,12 @@ export class RouteConstants {
    * samples页面
    */
   static readonly SAMPLES_PAGE: string = 'SamplesPage';
-  static readonly API_TEST_COMMON_PAGE: string = 'ApiTestCommonPage';
+  /**
+   * Api测试页面
+   */
+  static readonly API_TEST_COMMON_PAGE: string = 'ApiTestCommonPage'
+  /**
+   * 测试页面
+   */
+  static readonly MC_CHARTS_SAMPLES_PAGE: string = 'McChartsSamples';
 }

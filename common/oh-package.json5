@@ -9,6 +9,7 @@
     "@ohos/spine": "^1.0.0",
     "@ohos/axios": "^2.2.8",
     "@pura/harmony-dialog": "^1.1.8",
-    "@pura/harmony-utils": "^1.4.0"
+    "@pura/harmony-utils": "^1.4.0",
+
   }
 }

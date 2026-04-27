@@ -10,7 +10,7 @@
     "@ohos/samples": "file:./features/samples",
     "@ohos/flutter_ohos": "file:./flutter_module/har/flutter.har",
     "@ohos/flutter_module": "file:./flutter_module",
-    "@mcui/mccharts": "2.8.8"
+
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.25",
