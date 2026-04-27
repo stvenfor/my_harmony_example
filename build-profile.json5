@@ -118,6 +118,10 @@
     {
       "name": "education",
       "srcPath": "./features/education"
+    },
+    {
+      "name": "samples",
+      "srcPath": "./features/samples",
     }
   ]
 }

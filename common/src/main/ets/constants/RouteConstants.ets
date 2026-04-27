@@ -100,4 +100,9 @@ export class RouteConstants {
    * 旅游页面
    */
   static readonly TRAVEL_PAGE: string = 'TravelPage';
+  /**
+   * samples页面
+   */
+  static readonly SAMPLES_PAGE: string = 'SamplesPage';
+  static readonly API_TEST_COMMON_PAGE: string = 'ApiTestCommonPage';
 }

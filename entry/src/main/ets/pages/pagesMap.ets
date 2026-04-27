@@ -1,9 +1,19 @@
 import { FlutterTestPage } from './FlutterTestPage';
-import { Graphics, Home, RichTextExpand, TextExpand } from '@ohos/home';
+import {
+  FoodPage,
+  Graphics,
+  Home,
+  NewsPage,
+  ReferenceResPage,
+  RichTextExpand,
+  ShopPage,
+  TextExpand,
+  TravelPage
+} from '@ohos/home';
 import { GridRowDemo, Mine } from '@ohos/mine';
 import { MainPage } from './MainPage';
 import { RouteConstants } from '@ohos/common';
-import { ReferenceResPage,FoodPage,NewsPage,TravelPage,ShopPage } from '@ohos/home'
+import { ApiTestCommonPage, SamplesPage } from '@ohos/samples';
 
 import {
   BasicExample,
@@ -16,8 +26,6 @@ import {
   SpecialAnimation,
   SpinePage
 } from '@ohos/spine_animation';
-import { TreeView } from '@kit.ArkUI';
-import { Travel } from './Index';
 import { EducationPage } from '@ohos/education';
 
 
@@ -59,19 +67,22 @@ function pagesMap(name: string) {
     SpecialAnimation()
   } else if (name === RouteConstants.GIRD_ROW_DEMO) {
     GridRowDemo()
-  }  else if (name === RouteConstants.REFERENCE_RES_PAGE) {
-     ReferenceResPage()
-  }else if (name === RouteConstants.FOOD_PAGE) {
+  } else if (name === RouteConstants.REFERENCE_RES_PAGE) {
+    ReferenceResPage()
+  } else if (name === RouteConstants.FOOD_PAGE) {
     FoodPage()
-  }
-  else if (name === RouteConstants.NEWS_PAGE) {
+  } else if (name === RouteConstants.NEWS_PAGE) {
     NewsPage()
-  }else if (name === RouteConstants.TRAVEL_PAGE) {
+  } else if (name === RouteConstants.TRAVEL_PAGE) {
     TravelPage()
-  }else if (name === RouteConstants.EDUCATION_PAGE) {
+  } else if (name === RouteConstants.EDUCATION_PAGE) {
     EducationPage()
-  }else if (name === RouteConstants.SHOP_PAGE) {
+  } else if (name === RouteConstants.SHOP_PAGE) {
     ShopPage()
+  } else if (name === RouteConstants.SAMPLES_PAGE) {
+    SamplesPage()
+  } else if (name === RouteConstants.API_TEST_COMMON_PAGE) {
+    ApiTestCommonPage()
   }
 }
 

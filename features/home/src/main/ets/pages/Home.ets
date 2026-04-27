@@ -7,7 +7,7 @@ export struct Home {
   // 底部展示的数据
   @State bottomData: string = '当前版本：1.0.0\n更新时间：2026-03-25\n开发者：开发团队'
   // 列表数据
-  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation', 'Food','News','Education','Shop','Travel']
+  private listData: Array<string> = ['混合页面', '测试页面', '收起展开', 'SpineAnimation', 'Food','News','Education','Shop','Travel','SAMPLES_PAGE']
 
   aboutToAppear(): void {
 
@@ -60,6 +60,8 @@ export struct Home {
                 }else if (item === 'Education') {
                   this.pathStack.pushPathByName(RouteConstants.EDUCATION_PAGE, null)
                   console.info(`Clicked: ${item}`)
+                }else if(item === 'SAMPLES_PAGE'){
+                  this.pathStack.pushPathByName(RouteConstants.SAMPLES_PAGE, null)
                 }
 
               })

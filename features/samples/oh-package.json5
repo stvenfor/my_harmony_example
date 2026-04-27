@@ -1,14 +1,11 @@
 {
-  "name": "@ohos/common",
+  "name": "@ohos/samples",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
   "main": "Index.ets",
   "author": "",
   "license": "Apache-2.0",
   "dependencies": {
-    "@ohos/spine": "^1.0.0",
-    "@ohos/axios": "^2.2.8",
-    "@pura/harmony-dialog": "^1.1.8",
-    "@pura/harmony-utils": "^1.4.0"
+    "@ohos/common": "file:../../common"
   }
 }

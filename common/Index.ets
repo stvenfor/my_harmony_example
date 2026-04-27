@@ -39,3 +39,17 @@ export { ResourceSourceType } from './src/main/ets/utils/SpineAnimationManager'
 export { CommonGridRow } from './src/main/ets/components/CommonGridRow'
 
 export { replaceLpx2Vp } from './src/main/ets/utils/LayoutTool'
+
+export { ResBasicModel } from './src/main/ets/model/ResBasicModel'
+
+export {
+  ApiResult,
+  HttpRequestOptions,
+  IsolatedHttpClient,
+  IsolatedHttpClientOptions,
+  WAN_ANDROID_BASE_URL,
+  getHttpClient,
+  httpGet,
+  httpPost,
+  resetHttpLoadingState
+} from './src/main/ets/utils/Request'
