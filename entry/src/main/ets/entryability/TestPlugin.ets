@@ -94,7 +94,7 @@ export default class TestPlugin implements FlutterPlugin {
 class LoginInfoApi {
   getLoginUserInfo(result: MethodResult) {
     let wrapped: Map<String, Any> = new Map<String, Any>();
-    wrapped.set("uid", "32343");
+    wrapped.set("uid", "32343-------");
     wrapped.set("nickname", "asijh");
     wrapped.set("avatar", "https://avatars.githubusercontent.com/u/1020407?v=4");
     wrapped.set("study_stage_grade", "123456");

@@ -142,10 +142,10 @@ struct ArticleItem {
       .layoutWeight(1)
 
       if (this.article.collect !== undefined) {
-        Image(this.article.collect ? $r('app.media.ic_public_comments') : $r('app.media.ic_public_comments'))
-          .width(20)
-          .height(20)
-          .fillColor(this.article.collect ? '#ff6b6b' : '#999999')
+        // Image(this.article.collect ? $r('app.media.ic_public_comments') : $r('app.media.ic_public_comments'))
+        //   .width(20)
+        //   .height(20)
+        //   .fillColor(this.article.collect ? '#ff6b6b' : '#999999')
       }
     }
     .width('100%')

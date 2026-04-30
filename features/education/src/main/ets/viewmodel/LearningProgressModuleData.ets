@@ -63,9 +63,9 @@ export class Data {
     3809
   ];
   static readonly SUBJECT_ICONS: Resource[] = [
-    $r('app.media.ca'),
-    $r('app.media.ca'),
-    $r('app.media.ca')];
+    $r('app.media.startIcon'),
+    $r('app.media.startIcon'),
+    $r('app.media.startIcon')];
 
   private constructor() {
     this.lazyDataSource = new LazyDataSource<DataSource>();
