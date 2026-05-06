@@ -49,59 +49,10 @@ export const replaceLpx2Vp = (lpxEl: number) => {
   }
 }
 
-// 监听折叠状态来更改当前布局
-export const setBreakPoint = () => {
-  let type = deviceInfo.deviceType
-  let winWidth = AppStorage.get<string>('windowWidth') as string
-  let winHeight = AppStorage.get<string>('winHeight') as string
-  let ret: boolean = false;
-  ret = display.isFoldable();
-  console.log('deviceInfo.deviceType', deviceInfo.deviceType, ret)
-  let data: display.FoldStatus = display.getFoldStatus(); // 1、3折叠打开，2折叠关闭
-  console.info('Succeeded in obtaining fold status. Data: ' + JSON.stringify(data));
-  let curBp: string = '';
-  if (type == '2in1') {
-    AppStorage.setOrCreate('breakPoint', 'xl')
-    return
-  }
-  if (type == 'tablet') {
-    console.log('winWidth--test', winWidth)
-    curBp = 'xl'
-    // curBp = 'md'
-    AppStorage.setOrCreate('breakPoint', curBp)
-  } else {
-
-    if (Number(data) == 2) {
-      curBp = 'md'
-    } else {
-      curBp = 'lg'
-    }
-    if (Number(winHeight) / Number(winWidth) > 1.5 == true) {
-      curBp = 'md'
-    } else {
-      if (Number(winHeight) < 1500) {
-        curBp = 'md'
-      } else {
-        curBp = 'lg'
-      }
-      // curBp = 'lg'
-    }
-    if (deviceInfo.deviceType == 'phone' && ret == false) {
-      AppStorage.setOrCreate('breakPoint', 'md')
-      // AppStorage.setOrCreate('breakPoint', curBp)
-    } else {
-      // 针对puraX
-      if ((Number(winWidth) == 2120 && Number(winHeight) == 1320)) {
-        AppStorage.setOrCreate('breakPoint', 'lg')
-      } else if (Number(winWidth) == 1320 && Number(winHeight) == 2120) {
-        AppStorage.setOrCreate('breakPoint', 'md')
-      } else {
-        AppStorage.setOrCreate('breakPoint', curBp)
-      }
-    }
-  }
-}
-
+/**
+ * 根据主窗口物理宽高计算断点并写入 AppStorage `breakPoint`。
+ * 与 EntryAbility 中 windowSizeChange / avoidAreaChange 联动，作为全局唯一断点来源。
+ */
 export const updateBreakPoint = (windowWidth: number, windowHeight: number): string => {
   let curBp: string = '';
   let type = deviceInfo.deviceType

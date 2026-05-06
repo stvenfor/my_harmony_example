@@ -16,9 +16,9 @@ export { RawfileUtil } from './src/main/ets/utils/RawfileUtil'
 
 export { GridModel } from './src/main/ets/model/GridModel'
 
-export { setBreakPoint, updateBreakPoint } from './src/main/ets/utils/LayoutTool'
+export { updateBreakPoint } from './src/main/ets/utils/LayoutTool'
 
-export { NavItem } from './src/main/ets/components/NavItem'
+export { NavItem, NAV_ITEM_BAR_HEIGHT } from './src/main/ets/components/NavItem'
 
 export { PageHeaderComp } from './src/main/ets/components/PageHeaderComp'
 

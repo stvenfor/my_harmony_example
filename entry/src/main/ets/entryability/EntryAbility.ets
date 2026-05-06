@@ -1,14 +1,33 @@
 import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.AbilityKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
-import { window } from '@kit.ArkUI';
+import { display, window } from '@kit.ArkUI';
 import { ExclusiveAppComponent, FlutterManager } from '@ohos/flutter_ohos';
-import { BreakpointSystem, updateBreakPoint } from '@ohos/common';
+import { BreakpointConstants, StringConstants, updateBreakPoint } from '@ohos/common';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
 const DOMAIN = 0x0000;
 
 export default class EntryAbility extends UIAbility implements ExclusiveAppComponent<UIAbility>{
-  private breakpointSystem: BreakpointSystem = new BreakpointSystem()
+  /**
+   * 根据当前窗口尺寸与安全区刷新断点（写入 AppStorage breakPoint）及顶/底占位高度。
+   * updateBreakPoint 内部已对 breakPoint 做 setOrCreate，子页 @StorageLink('breakPoint') 可实时联动。
+   * 顶栏占位仅取状态栏（TYPE_SYSTEM.topRect）与刘海（TYPE_CUTOUT.topRect），不包含底部导航栏；底栏为手势指示区。
+   */
+  private syncBreakpointAndSafeInsets(windowClass: window.Window, width: number, height: number): void {
+    const bottomPx: number =
+      windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect.height
+    AppStorage.setOrCreate(StringConstants.BOTTOM_AREA, px2vp(bottomPx))
+
+    const statusBarTopPx: number =
+      windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_SYSTEM).topRect.height
+    const cutoutTopPx: number =
+      windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_CUTOUT).topRect.height
+    const topInsetVp: number = Math.max(px2vp(statusBarTopPx), px2vp(cutoutTopPx))
+
+    const bp: string = updateBreakPoint(width, height)
+    const topExtraVp: number = bp === BreakpointConstants.BREAKPOINT_XL ? 20 : 0
+    AppStorage.setOrCreate(StringConstants.TOP_AREA, topInsetVp + topExtraVp)
+  }
 
   detachFromFlutterEngine(): void {
     // throw new Error('Method not implemented.');
@@ -19,6 +38,7 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
+    // AppUtil.init(this.context);
 
     try {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);
@@ -31,7 +51,6 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
 
   init() {
     FlutterManager.getInstance().pushUIAbility(this)
-    this.breakpointSystem.register()
   }
 
   onDestroy(): void {
@@ -98,20 +117,17 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
       // 设置窗口全屏
       windowClass.setWindowLayoutFullScreen(true)
 
-      let topRect = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_CUTOUT).topRect
-      let bottomRect = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect
-      // 缓存window窗口对象
-      AppStorage.setOrCreate('windowClass', windowClass);
-      AppStorage.setOrCreate('bottomAreaRectHeight', bottomRect.height);
-      let breakpoint: string = updateBreakPoint(windowClass.getWindowProperties().windowRect.width,
-        windowClass.getWindowProperties().windowRect.height);
+      const initRect = windowClass.getWindowProperties().windowRect
+      this.syncBreakpointAndSafeInsets(windowClass, initRect.width, initRect.height)
 
       windowClass.on('windowSizeChange', (windowSize: window.Size) => {
         console.log('windowSizeChange', windowSize.width, windowSize.height)
-        breakpoint = updateBreakPoint(windowSize.width, windowSize.height);
-        AppStorage.setOrCreate('topAreaRectHeight', topRect.height + (breakpoint == 'xl' ? 20 : 0));
+        this.syncBreakpointAndSafeInsets(windowClass, windowSize.width, windowSize.height)
       })
-      AppStorage.setOrCreate('topAreaRectHeight', topRect.height + (breakpoint == 'xl' ? 20 : 0));
+      windowClass.on('avoidAreaChange', () => {
+        const rect = windowClass.getWindowProperties().windowRect
+        this.syncBreakpointAndSafeInsets(windowClass, rect.width, rect.height)
+      })
     } catch (exception) {
 
     }
@@ -172,20 +188,17 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
       // 设置窗口全屏
       windowClass.setWindowLayoutFullScreen(true)
 
-      let topRect = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_CUTOUT).topRect
-      let bottomRect = windowClass.getWindowAvoidArea(window.AvoidAreaType.TYPE_NAVIGATION_INDICATOR).bottomRect
-      // 缓存window窗口对象
-      AppStorage.setOrCreate('windowClass', windowClass);
-      AppStorage.setOrCreate('bottomAreaRectHeight', bottomRect.height);
-      let breakpoint: string = updateBreakPoint(windowClass.getWindowProperties().windowRect.width,
-        windowClass.getWindowProperties().windowRect.height);
+      const initRectRestore = windowClass.getWindowProperties().windowRect
+      this.syncBreakpointAndSafeInsets(windowClass, initRectRestore.width, initRectRestore.height)
 
       windowClass.on('windowSizeChange', (windowSize: window.Size) => {
         console.log('windowSizeChange', windowSize.width, windowSize.height)
-        breakpoint = updateBreakPoint(windowSize.width, windowSize.height);
-        AppStorage.setOrCreate('topAreaRectHeight', topRect.height + (breakpoint == 'xl' ? 20 : 0));
+        this.syncBreakpointAndSafeInsets(windowClass, windowSize.width, windowSize.height)
       })
-      AppStorage.setOrCreate('topAreaRectHeight', topRect.height + (breakpoint == 'xl' ? 20 : 0));
+      windowClass.on('avoidAreaChange', () => {
+        const rect = windowClass.getWindowProperties().windowRect
+        this.syncBreakpointAndSafeInsets(windowClass, rect.width, rect.height)
+      })
     } catch (exception) {
       // Logger.error(`Failed to obtain the main window. Cause code: ${exception.code}, message: ${exception.message}`);
     }

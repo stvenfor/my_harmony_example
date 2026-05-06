@@ -8,6 +8,8 @@
   "dependencies": {
     "@ohos/flutter_ohos": "har/flutter.har",
     "shared_preferences_ohos": "file:../../../work/project/ability_assessment/.ohos/har/shared_preferences_ohos.har",
-    "package_info_plus": "file:../../../work/project/ability_assessment/.ohos/har/package_info_plus.har"
+    "package_info_plus": "file:../../../work/project/ability_assessment/.ohos/har/package_info_plus.har",
+    "path_provider_ohos": "file:../../../work/project/ability_assessment/.ohos/har/path_provider_ohos.har",
+    "audioplayers_ohos": "file:../../../work/project/ability_assessment/.ohos/har/audioplayers_ohos.har"
   }
 }
