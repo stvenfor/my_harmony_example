@@ -42,8 +42,8 @@ export default class TestPlugin implements FlutterPlugin {
           case "loginUserInfo":
             that.loginInfoApi.getLoginUserInfo(result);
             break;
-          case "callEvent":
-            that.eventSink?.success("Success at " + new Date());
+          case "isReleaseBuild":
+            that.loginInfoApi.getBuildVariant(result);
             break;
           default:
             result.notImplemented();
@@ -94,14 +94,24 @@ export default class TestPlugin implements FlutterPlugin {
 class LoginInfoApi {
   getLoginUserInfo(result: MethodResult) {
     let wrapped: Map<String, Any> = new Map<String, Any>();
-    wrapped.set("uid", "32343-------");
-    wrapped.set("nickname", "asijh");
+    wrapped.set("uid", "68770720");
+    wrapped.set("nickname", "小趣友_ohpuz2");
+    wrapped.set("auth_token", "MTc3OTg0NjIxNLGdyGWBsaaXr814cg");
     wrapped.set("avatar", "https://avatars.githubusercontent.com/u/1020407?v=4");
-    wrapped.set("study_stage_grade", "123456");
+    wrapped.set("study_stage_grade", "12");
     wrapped.set("dif_level", "1");
     wrapped.set("station", "1");
     wrapped.set("sex", "1");
-    wrapped.set("user_number", "123456-----22333333434")
+    wrapped.set("user_number", "69054013")
+    wrapped.set("refresh_token", "MTc3OTAxNzA4MrGdyGWBsaaXr7d8cg")
+    wrapped.set("auth_mobile", "14474631574")
+    result.success(wrapped);
+  }
+
+  getBuildVariant(result: MethodResult) {
+    let wrapped: Map<String, Any> = new Map<String, Any>();
+    wrapped.set("status", "1");
+    wrapped.set("isRelease", true);
     result.success(wrapped);
   }
 }
