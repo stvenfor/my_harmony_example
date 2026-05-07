@@ -40,6 +40,11 @@ export struct Home {
       routeId: '弹窗队列演示',
       subtitle: 'PopupDialogQueueManager',
       icon: $r('sys.symbol.star')
+    },
+    {
+      routeId: 'HarmonyUtils 说明',
+      subtitle: 'common 再导出工具示例',
+      icon: $r('sys.symbol.doc_text')
     }
   ]
 
@@ -91,6 +96,8 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.COMMON_VIDEO_PLAYER_DEMO, null)
     } else if (item === '弹窗队列演示') {
       this.pathStack.pushPathByName(RouteConstants.POPUP_DIALOG_QUEUE_DEMO, null)
+    } else if (item === 'HarmonyUtils 说明') {
+      this.pathStack.pushPathByName(RouteConstants.HARMONY_UTILS_REEXPORT_DOC, null)
     }
   }
 

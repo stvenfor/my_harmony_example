@@ -71,3 +71,13 @@ export {
   POPUP_SCOPE_APP,
   popupScopeForPage
 } from './src/main/ets/utils/PopupDialogQueueManager'
+
+export { AppUtil,
+  WindowUtil,
+  DeviceUtil,
+  ToastUtil,
+  DialogUtil,
+  LogUtil,
+  PreferencesUtil,
+  CacheUtil,
+  NetworkUtil } from '@pura/harmony-utils'

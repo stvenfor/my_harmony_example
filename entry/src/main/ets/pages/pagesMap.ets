@@ -3,6 +3,7 @@ import {
   CommonVideoPlayerDemoPage,
   FoodPage,
   Graphics,
+  HarmonyUtilsReExportDocPage,
   Home,
   NewsPage,
   PopupDialogQueueDemoPage,
@@ -91,6 +92,8 @@ function pagesMap(name: string) {
     CommonVideoPlayerDemoPage()
   } else if (name === RouteConstants.POPUP_DIALOG_QUEUE_DEMO) {
     PopupDialogQueueDemoPage()
+  } else if (name === RouteConstants.HARMONY_UTILS_REEXPORT_DOC) {
+    HarmonyUtilsReExportDocPage()
   }
 }
 

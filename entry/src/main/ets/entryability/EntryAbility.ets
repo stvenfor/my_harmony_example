@@ -2,7 +2,7 @@ import { AbilityConstant, ConfigurationConstant, UIAbility, Want } from '@kit.Ab
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { display, window } from '@kit.ArkUI';
 import { ExclusiveAppComponent, FlutterManager } from '@ohos/flutter_ohos';
-import { BreakpointConstants, StringConstants, updateBreakPoint } from '@ohos/common';
+import { BreakpointConstants, StringConstants, updateBreakPoint,AppUtil } from '@ohos/common';
 import { deviceInfo } from '@kit.BasicServicesKit';
 
 const DOMAIN = 0x0000;
@@ -37,7 +37,7 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
   }
 
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
-    // AppUtil.init(this.context);
+    AppUtil.init(this.context);
 
     try {
       this.context.getApplicationContext().setColorMode(ConfigurationConstant.ColorMode.COLOR_MODE_NOT_SET);

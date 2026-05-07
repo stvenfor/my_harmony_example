@@ -120,4 +120,8 @@ export class RouteConstants {
    * 弹窗队列（PopupDialogQueueManager）演示页
    */
   static readonly POPUP_DIALOG_QUEUE_DEMO: string = 'PopupDialogQueueDemoPage';
+  /**
+   * @pura/harmony-utils 再导出项说明页（与 common/Index 再导出列表对照）
+   */
+  static readonly HARMONY_UTILS_REEXPORT_DOC: string = 'HarmonyUtilsReExportDocPage';
 }
