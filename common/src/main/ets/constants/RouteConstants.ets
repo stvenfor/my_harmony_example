@@ -116,4 +116,8 @@ export class RouteConstants {
    * 通用视频播放器示例页（CommonVideoPlayer）
    */
   static readonly COMMON_VIDEO_PLAYER_DEMO: string = 'CommonVideoPlayerDemo';
+  /**
+   * 弹窗队列（PopupDialogQueueManager）演示页
+   */
+  static readonly POPUP_DIALOG_QUEUE_DEMO: string = 'PopupDialogQueueDemoPage';
 }

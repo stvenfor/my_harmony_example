@@ -35,6 +35,11 @@ export struct Home {
       routeId: '视频播放示例',
       subtitle: 'CommonVideoPlayer 演示',
       icon: $r('sys.symbol.play_arrow_triangle_2_circlepath')
+    },
+    {
+      routeId: '弹窗队列演示',
+      subtitle: 'PopupDialogQueueManager',
+      icon: $r('sys.symbol.star')
     }
   ]
 
@@ -84,6 +89,8 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.MC_CHARTS_SAMPLES_PAGE, null)
     } else if (item === '视频播放示例') {
       this.pathStack.pushPathByName(RouteConstants.COMMON_VIDEO_PLAYER_DEMO, null)
+    } else if (item === '弹窗队列演示') {
+      this.pathStack.pushPathByName(RouteConstants.POPUP_DIALOG_QUEUE_DEMO, null)
     }
   }
 

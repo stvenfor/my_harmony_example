@@ -63,3 +63,11 @@ export {
   UniversalVideoPlayerEngine,
   normalizeMediaUrl
 } from './src/main/ets/components/CommonVideoPlayer'
+
+
+export {
+  PopupDialogQueueManager,
+  PopupQueuePriority,
+  POPUP_SCOPE_APP,
+  popupScopeForPage
+} from './src/main/ets/utils/PopupDialogQueueManager'

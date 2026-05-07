@@ -5,6 +5,7 @@ import {
   Graphics,
   Home,
   NewsPage,
+  PopupDialogQueueDemoPage,
   ReferenceResPage,
   RichTextExpand,
   ShopPage,
@@ -88,6 +89,8 @@ function pagesMap(name: string) {
     McChartsSamples()
   } else if (name === RouteConstants.COMMON_VIDEO_PLAYER_DEMO) {
     CommonVideoPlayerDemoPage()
+  } else if (name === RouteConstants.POPUP_DIALOG_QUEUE_DEMO) {
+    PopupDialogQueueDemoPage()
   }
 }
 
