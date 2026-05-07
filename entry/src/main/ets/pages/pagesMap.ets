@@ -1,5 +1,6 @@
 import { FlutterTestPage } from './FlutterTestPage';
 import {
+  CommonVideoPlayerDemoPage,
   FoodPage,
   Graphics,
   Home,
@@ -85,6 +86,8 @@ function pagesMap(name: string) {
     ApiTestCommonPage()
   } else if (name === RouteConstants.MC_CHARTS_SAMPLES_PAGE){
     McChartsSamples()
+  } else if (name === RouteConstants.COMMON_VIDEO_PLAYER_DEMO) {
+    CommonVideoPlayerDemoPage()
   }
 }
 

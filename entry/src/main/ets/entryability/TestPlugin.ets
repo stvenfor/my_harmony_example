@@ -14,7 +14,8 @@ import { FlutterPluginBinding } from '@ohos/flutter_ohos/src/main/ets/embedding/
 import { MethodResult } from '@ohos/flutter_ohos/src/main/ets/plugin/common/MethodChannel';
 import { EventSink } from '@ohos/flutter_ohos/src/main/ets/plugin/common/EventChannel';
 import { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessageChannel';
-
+import { buildCommonQueryMapWithTimestamp } from '@ohos/common'
+import { HttpHeaderUtil } from '@ohos/home'
 const TAG = "TestPluginTag";
 
 
@@ -120,7 +121,14 @@ export default class TestPlugin implements FlutterPlugin {
 
 
 class LoginInfoApi {
-  getCommonNetConfig(result: MethodResult) {
+  async getCommonNetConfig(result: MethodResult) {
+
+    let wrapped: Map<String, Any> = new Map<String, Any>();
+    wrapped.set("status", "1");
+    wrapped.set("msg", "success");
+    wrapped.set("headerMap", await HttpHeaderUtil.getHttpHeaderDic());
+    wrapped.set("commonQueryMap", await buildCommonQueryMapWithTimestamp());
+    result.success(wrapped);
 
   }
   getLoginUserInfo(result: MethodResult) {

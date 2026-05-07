@@ -30,7 +30,12 @@ export struct Home {
     { routeId: 'Shop', subtitle: '电商场景', icon: $r('sys.symbol.ellipsis_message') },
     { routeId: 'Travel', subtitle: '出行内容', icon: $r('sys.symbol.arrow_down_circle_badge_vip_circle_filled') },
     { routeId: 'SAMPLES_PAGE', subtitle: '组件样例', icon: $r('sys.symbol.repeat') },
-    { routeId: 'McChartsSamples', subtitle: '图表 / 网络数据', icon: $r('sys.symbol.ohos_wifi') }
+    { routeId: 'McChartsSamples', subtitle: '图表 / 网络数据', icon: $r('sys.symbol.ohos_wifi') },
+    {
+      routeId: '视频播放示例',
+      subtitle: 'CommonVideoPlayer 演示',
+      icon: $r('sys.symbol.play_arrow_triangle_2_circlepath')
+    }
   ]
 
 
@@ -77,6 +82,8 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.SAMPLES_PAGE, null)
     } else if (item === 'McChartsSamples') {
       this.pathStack.pushPathByName(RouteConstants.MC_CHARTS_SAMPLES_PAGE, null)
+    } else if (item === '视频播放示例') {
+      this.pathStack.pushPathByName(RouteConstants.COMMON_VIDEO_PLAYER_DEMO, null)
     }
   }
 

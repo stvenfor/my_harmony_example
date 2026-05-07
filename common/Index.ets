@@ -30,6 +30,8 @@ export { StringConstants } from './src/main/ets/constants/StringConstants'
 
 export { ConfigParams } from './src/main/ets/constants/ConfigParams'
 
+export { buildCommonQueryMapWithTimestamp, KEY_SERVER_TIME_OFFSET } from './src/main/ets/utils/CommonQueryTimestamp'
+
 export { SpineAnimationManager } from './src/main/ets/utils/SpineAnimationManager'
 
 export { SpineResourceConfig } from './src/main/ets/utils/SpineAnimationManager'
@@ -53,3 +55,11 @@ export {
   httpPost,
   resetHttpLoadingState
 } from './src/main/ets/utils/Request'
+
+
+export {
+  CommonVideoPlayer,
+  UniversalVideoPlayerController,
+  UniversalVideoPlayerEngine,
+  normalizeMediaUrl
+} from './src/main/ets/components/CommonVideoPlayer'

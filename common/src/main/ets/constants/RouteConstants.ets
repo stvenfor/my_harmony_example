@@ -112,4 +112,8 @@ export class RouteConstants {
    * 测试页面
    */
   static readonly MC_CHARTS_SAMPLES_PAGE: string = 'McChartsSamples';
+  /**
+   * 通用视频播放器示例页（CommonVideoPlayer）
+   */
+  static readonly COMMON_VIDEO_PLAYER_DEMO: string = 'CommonVideoPlayerDemo';
 }
