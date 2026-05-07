@@ -7,11 +7,11 @@
         "material": {
           "certpath": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.cer",
           "keyAlias": "debugKey",
-          "keyPassword": "000000192D0B535D35E8FCFA7173239BB94FB3F65FAAB52936C63E863FA3E5F926D0BB25C032B103F3",
+          "keyPassword": "00000019EFACB6A662D3CC9CEEF5D84607C123427FB39C5C48F0D231DB9735BE51C23822FAD66849D8",
           "profile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p7b",
           "signAlg": "SHA256withECDSA",
           "storeFile": "/Users/qpy/.ohos/config/default_mixtrue_oh_3kGV6HW7FUVEqCoPJch1tjql2xsLZZkurQPnRNRKs2Y=.p12",
-          "storePassword": "00000019BF42BCC932462CC136BFA4AB3F3FD2CE5EDE6A26BF8CB2983735696CFE8E1017114BA5B9F7"
+          "storePassword": "00000019518DEE80BAB863F825FF0E077364161A30B423C696CAA2D2B9DE196042E4F3FC232CBAADAC"
         }
       }
     ],
@@ -86,42 +86,6 @@
     {
       "name": "samples",
       "srcPath": "./features/samples"
-    },
-    {
-      "name": "shared_preferences_ohos",
-      "srcPath": "../../../.pub-cache/git/flutter_packages-b1cc0b2afa70c9fe80f7218b5cf155535faebed4/packages/shared_preferences/shared_preferences_ohos/ohos",
-      "targets": [
-        {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "path_provider_ohos",
-      "srcPath": "../../../.pub-cache/git/flutter_packages-b1cc0b2afa70c9fe80f7218b5cf155535faebed4/packages/path_provider/path_provider_ohos/ohos",
-      "targets": [
-        {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
-    },
-    {
-      "name": "package_info_plus",
-      "srcPath": "../../../.pub-cache/git/flutter_plus_plugins-03507cc39ab148fe9f5827cd991b3e04aed2bcc3/packages/package_info_plus/package_info_plus/ohos",
-      "targets": [
-        {
-          "name": "default",
-          "applyToProducts": [
-            "default"
-          ]
-        }
-      ]
     },
     {
       "name": "audioplayers_ohos",

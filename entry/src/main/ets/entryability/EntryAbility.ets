@@ -25,8 +25,7 @@ export default class EntryAbility extends UIAbility implements ExclusiveAppCompo
     const topInsetVp: number = Math.max(px2vp(statusBarTopPx), px2vp(cutoutTopPx))
 
     const bp: string = updateBreakPoint(width, height)
-    const topExtraVp: number = bp === BreakpointConstants.BREAKPOINT_XL ? 20 : 0
-    AppStorage.setOrCreate(StringConstants.TOP_AREA, topInsetVp + topExtraVp)
+    AppStorage.setOrCreate(StringConstants.TOP_AREA, topInsetVp)
   }
 
   detachFromFlutterEngine(): void {

@@ -17,12 +17,38 @@ import { Reply } from '@ohos/flutter_ohos/src/main/ets/plugin/common/BasicMessag
 
 const TAG = "TestPluginTag";
 
+
+
+
+
+
 export default class TestPlugin implements FlutterPlugin {
   private channel?: MethodChannel;
   private basicChannel?: BasicMessageChannel<Any>;
   private eventChannel?: EventChannel;
   private eventSink?: EventSink;
   private loginInfoApi = new LoginInfoApi();
+
+
+  static readonly commonNetConfig: string = "commonNetConfig"; // 通用网络配置
+  static readonly finishActivity: string = "finishActivity"; // 关闭指定界面，兼容android-pop失效问题
+  static readonly NewbieGuideFlutterActivity: string = "NewbieGuideFlutterActivity"; // 新手引导页名称
+  static readonly handlerScheme: string = "handlerScheme"; // 处理scheme
+  static readonly getMasterUserInfo: string = "getMasterUserInfo"; // 获取宿主的用户信息
+  static readonly isReleaseBuild: string = "isReleaseBuild"; // 是否构建正式版本
+  static readonly share: string = "share"; // 分享事件
+  static readonly shareResult: string = "shareResult"; // 原生分享结果回调
+  static readonly response403: string = "response403"; // 403，被挤出登录
+  static readonly dubPracticeCompleted: string = "dubPracticeCompleted"; // 配音练习完成
+  static readonly isListeningPlaying: string = "isListeningPlaying"; // 停止听力
+  static readonly stopListening: string = "stopListening"; // 停止听力
+  static readonly alterUserinfo: string = "alterUserinfo"; // 修改用户信息
+  static readonly loginUserInfo: string = "loginUserInfo"; // 当前登录的用户的信息
+  static readonly toMiniProgram: string = "toMiniProgram"; // 跳转小程序
+  static readonly toAppStore: string = "toAppStore"; // 跳转appstore
+  static readonly showToast: string = "showToast"; // 调用源生toast
+
+  static readonly baseBack: string = "baseBack";
 
   onAttachedToAbility(binding: AbilityPluginBinding): void {
     Log.i(TAG, "onAttachedToAbility")
@@ -45,6 +71,8 @@ export default class TestPlugin implements FlutterPlugin {
           case "isReleaseBuild":
             that.loginInfoApi.getBuildVariant(result);
             break;
+            case TestPlugin.commonNetConfig:
+            that.loginInfoApi.getCommonNetConfig(result);
           default:
             result.notImplemented();
             break;
@@ -92,6 +120,9 @@ export default class TestPlugin implements FlutterPlugin {
 
 
 class LoginInfoApi {
+  getCommonNetConfig(result: MethodResult) {
+
+  }
   getLoginUserInfo(result: MethodResult) {
     let wrapped: Map<String, Any> = new Map<String, Any>();
     wrapped.set("uid", "68770720");
