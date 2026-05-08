@@ -1,15 +1,26 @@
+/**
+ * 业务侧 HTTP 头组装工具（home Feature）。
+ *
+ * 依赖 @ohos/common：
+ * - getAppEnvKind / getAppEnvBundle：与 common 多环境 BuildProfile 一致，随 DevEco Product 变化。
+ * - buildCommonQueryMapWithTimestamp：公共 query 时间戳，与 CommonQueryTimestamp 共用 app_settings。
+ *
+ * 使用：在发起请求前 await HttpHeaderUtil.getHttpHeaderDic()，与 axios/fetch 的 headers 合并。
+ */
 import { deviceInfo } from '@kit.BasicServicesKit';
 import { bundleManager } from '@kit.AbilityKit';
 import { preferences } from '@kit.ArkData';
-import { buildCommonQueryMapWithTimestamp, ConfigParams } from '@ohos/common'
+import { buildCommonQueryMapWithTimestamp, ConfigParams, getAppEnvBundle, getAppEnvKind } from '@ohos/common'
 
 
 
 export class HttpHeaderUtil {
-  private static readonly PREFERENCES_NAME = 'app_settings'; // 对应 NSUserDefaults 的存储文件名
+  /** 与 common 内 CommonQueryTimestamp 一致，保证时间偏移与时间戳工具读写同一库 */
+  private static readonly PREFERENCES_NAME = 'app_settings';
 
   /**
-   * 获取 HTTP 请求头字典
+   * 组装通用请求头：设备型号、系统、应用版本、环境/渠道（X-App-Env、X-Channel-Id 等）、偏好键等。
+   * 异常时打印日志并返回已填充部分字段的字典，不向上抛，避免阻断业务流程。
    */
   static async getHttpHeaderDic(): Promise<ConfigParams> {
     const headerDic: ConfigParams = {};
@@ -29,11 +40,12 @@ export class HttpHeaderUtil {
       headerDic['versionCode'] = String(bundleInfo.versionCode);
       headerDic['App-Version'] = bundleInfo.versionName;
 
-      // 3. 渠道名称 (需要在 module.json5 或 app.json5 的 metadata 中配置)
-      // 假设在 module.json5 中配置了 "com.example.channel": "Huawei"
-      const channel = ""
-      if (channel) {
-        headerDic['UMENG-CHANNEL'] = channel;
+      // 3. 运行环境 / 渠道（与 common/build-profile 中 buildProfileFields 一致，随 Product 切换）
+      headerDic['X-App-Env'] = getAppEnvKind()
+      const envBundle = getAppEnvBundle()
+      if (envBundle.channelId.length > 0) {
+        headerDic['X-Channel-Id'] = envBundle.channelId
+        headerDic['UMENG-CHANNEL'] = envBundle.channelId
       }
 
       // 4. 设备标识符 (IDFA/MAC 在鸿蒙中受限，通常使用 OAID 或 UUID)
@@ -111,7 +123,7 @@ export class HttpHeaderUtil {
 
 
   /**
-   * 为参数字典添加校准后的服务器时间戳（实现见 common buildCommonQueryMapWithTimestamp）
+   * 返回仅含公共字段的 query 映射（含 timestamp），用于签名或防重放等与 Header 分离的场景。
    */
   static async dictionaryWithTimestamp(): Promise<ConfigParams> {
     return buildCommonQueryMapWithTimestamp()

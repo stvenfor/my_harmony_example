@@ -18,6 +18,7 @@ import axios, {
   RawAxiosRequestHeaders
 } from '@ohos/axios';
 import { DialogHelper } from '@pura/harmony-dialog';
+import { getApiBaseUrl, getAppEnvBundle } from '../constants/AppEnvironment';
 
 /** 统一响应壳；玩 Android 接口时 code/message 对应 errorCode/errorMsg */
 export interface ApiResult<T> {
@@ -26,7 +27,10 @@ export interface ApiResult<T> {
   data?: T;
 }
 
-/** 玩 Android 默认网关（开放 API），见 https://www.wanandroid.com/ */
+/**
+ * 玩 Android 默认网关（开放 API），见 https://www.wanandroid.com/
+ * 多环境下若未配置 API_BASE_URL，则 {@link getApiBaseUrl} 会退回此地址。
+ */
 export const WAN_ANDROID_BASE_URL: string = 'https://www.wanandroid.com/';
 
 /** 创建独立客户端时的配置 */
@@ -69,9 +73,10 @@ let gPuraDialogContextBound: boolean = false;
 /** 全应用唯一 HTTP 客户端 */
 let gHttpClientSingleton: IsolatedHttpClient | null = null;
 
-/** 单例默认：玩 Android 域名 + 业务成功码与站点 errorCode === 0 对齐 */
+/** 单例默认：baseURL / 超时来自编译期环境（BuildProfile），未配置 API_BASE_URL 时退回玩 Android */
 const INTERNAL_HTTP_SINGLETON_OPTIONS: IsolatedHttpClientOptions = {
-  baseURL: WAN_ANDROID_BASE_URL,
+  baseURL: getApiBaseUrl(),
+  timeout: getAppEnvBundle().connectTimeoutMs,
   successCode: 0
 };
 

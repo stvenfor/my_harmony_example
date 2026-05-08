@@ -27,6 +27,12 @@
     "deliveryWithInstall": true,
     "installationFree": false,
     "pages": "$profile:main_pages",
+    "dependencies": [
+      {
+        "bundleName": "com.example.mixtrue_oh",
+        "moduleName": "common"
+      }
+    ],
     "abilities": [
       {
         "name": "EntryAbility",

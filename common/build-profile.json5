@@ -22,15 +22,77 @@
             "./consumer-rules.txt"
           ]
         }
-      },
-    },
+      }
+    }
   ],
   "targets": [
     {
-      "name": "default"
+      "name": "env_test",
+      "config": {
+        "buildOption": {
+          "arkOptions": {
+            "buildProfileFields": {
+              "APP_ENV": "test",
+              "API_BASE_URL": "https://www.wanandroid.com/",
+              "WEB_BASE_URL": "-",
+              "CHANNEL_ID": "test",
+              "HTTP_TIMEOUT_MS": 25000,
+              "LOG_VERBOSE": true
+            }
+          }
+        }
+      }
     },
     {
-      "name": "ohosTest"
+      "name": "env_preRelease",
+      "config": {
+        "buildOption": {
+          "arkOptions": {
+            "buildProfileFields": {
+              "APP_ENV": "preRelease",
+              "API_BASE_URL": "https://www.wanandroid.com/",
+              "WEB_BASE_URL": "-",
+              "CHANNEL_ID": "preRelease",
+              "HTTP_TIMEOUT_MS": 20000,
+              "LOG_VERBOSE": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "env_production",
+      "config": {
+        "buildOption": {
+          "arkOptions": {
+            "buildProfileFields": {
+              "APP_ENV": "production",
+              "API_BASE_URL": "https://www.wanandroid.com/",
+              "WEB_BASE_URL": "-",
+              "CHANNEL_ID": "production",
+              "HTTP_TIMEOUT_MS": 15000,
+              "LOG_VERBOSE": false
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "ohosTest",
+      "config": {
+        "buildOption": {
+          "arkOptions": {
+            "buildProfileFields": {
+              "APP_ENV": "test",
+              "API_BASE_URL": "https://www.wanandroid.com/",
+              "WEB_BASE_URL": "-",
+              "CHANNEL_ID": "ohosTest",
+              "HTTP_TIMEOUT_MS": 30000,
+              "LOG_VERBOSE": true
+            }
+          }
+        }
+      }
     }
   ]
 }
