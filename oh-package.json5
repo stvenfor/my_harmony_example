@@ -21,8 +21,7 @@
     "package_info_plus": "file:./har/package_info_plus.har",
     "@ohos/flutter_module": "file:./flutter_module",
     "@ohos/flutter_ohos": "file:./har/flutter.har",
-    "device_info_plus": "file:./har/device_info_plus.har",
-    "audioplayers_ohos": "../../../.pub-cache/git/flutter_audioplayers-e566d678531badc1437ada9fcca87c23d6355ba4/packages/audioplayers_ohos/ohos"
+    "device_info_plus": "file:./har/device_info_plus.har"
   },
   "dynamicDependencies": {}
 }

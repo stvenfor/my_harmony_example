@@ -1,9 +1,236 @@
 {
-  "float" : [ {
-    "name" : "font_size",
-    "value" : "14fp"
-  }, {
-    "name" : "page_text_font_size",
-    "value" : "50fp"
-  } ]
+  "float": [
+    {
+      "name": "font_size",
+      "value": "14fp"
+    },
+    {
+      "name": "page_text_font_size",
+      "value": "50fp"
+    },
+    {
+      "name": "title_font_size",
+      "value": "18fp"
+    },
+    {
+      "name": "top_image",
+      "value": "28vp"
+    },
+    {
+      "name": "common_font_size",
+      "value": "16fp"
+    },
+    {
+      "name": "text_margin_top",
+      "value": "8vp"
+    },
+    {
+      "name": "divider_width_top",
+      "value": "0.5vp"
+    },
+    {
+      "name": "divider_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "common_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "top_height",
+      "value": "50vp"
+    },
+    {
+      "name": "common_image",
+      "value": "24vp"
+    },
+    {
+      "name": "item_margin_bottom",
+      "value": "16vp"
+    },
+    {
+      "name": "item_margin_top",
+      "value": "3vp"
+    },
+    {
+      "name": "common_radius",
+      "value": "16vp"
+    },
+    {
+      "name": "item_font_size",
+      "value": "12fp"
+    },
+    {
+      "name": "image_size",
+      "value": "24vp"
+    },
+    {
+      "name": "image_margin_left",
+      "value": "24vp"
+    },
+    {
+      "name": "image_margin_right",
+      "value": "16vp"
+    },
+    {
+      "name": "text_title_height",
+      "value": "28vp"
+    },
+    {
+      "name": "top_title_font_size",
+      "value": "20vp"
+    },
+    {
+      "name": "title_height",
+      "value": "56vp"
+    },
+    {
+      "name": "common_line_height",
+      "value": "24vp"
+    },
+    {
+      "name": "common_margin_left",
+      "value": "8vp"
+    },
+    {
+      "name": "service_height",
+      "value": "160vp"
+    },
+    {
+      "name": "service_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "item_width",
+      "value": "70vp"
+    },
+    {
+      "name": "divider_margin_top",
+      "value": "7vp"
+    },
+    {
+      "name": "flex_item_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "list_padding",
+      "value": "24vp"
+    },
+    {
+      "name": "classify_line_height",
+      "value": "22vp"
+    },
+    {
+      "name": "nl_title_font_size",
+      "value": "18fp"
+    },
+    {
+      "name": "nl_top_image",
+      "value": "28vp"
+    },
+    {
+      "name": "nl_common_font_size",
+      "value": "16fp"
+    },
+    {
+      "name": "nl_text_margin_top",
+      "value": "8vp"
+    },
+    {
+      "name": "nl_divider_width_top",
+      "value": "0.5vp"
+    },
+    {
+      "name": "nl_divider_margin",
+      "value": "10vp"
+    },
+    {
+      "name": "nl_common_padding",
+      "value": "16vp"
+    },
+    {
+      "name": "nl_top_height",
+      "value": "50vp"
+    },
+    {
+      "name": "nl_common_image",
+      "value": "24vp"
+    },
+    {
+      "name": "nl_item_margin_bottom",
+      "value": "16vp"
+    },
+    {
+      "name": "nl_item_margin_top",
+      "value": "3vp"
+    },
+    {
+      "name": "nl_common_radius",
+      "value": "16vp"
+    },
+    {
+      "name": "nl_item_font_size",
+      "value": "12fp"
+    },
+    {
+      "name": "nl_image_size",
+      "value": "24vp"
+    },
+    {
+      "name": "nl_image_margin_left",
+      "value": "24vp"
+    },
+    {
+      "name": "nl_image_margin_right",
+      "value": "16vp"
+    },
+    {
+      "name": "nl_text_title_height",
+      "value": "28vp"
+    },
+    {
+      "name": "nl_top_title_font_size",
+      "value": "20vp"
+    },
+    {
+      "name": "nl_title_height",
+      "value": "56vp"
+    },
+    {
+      "name": "nl_common_line_height",
+      "value": "24vp"
+    },
+    {
+      "name": "nl_common_margin_left",
+      "value": "8vp"
+    },
+    {
+      "name": "nl_service_height",
+      "value": "160vp"
+    },
+    {
+      "name": "nl_service_padding",
+      "value": "12vp"
+    },
+    {
+      "name": "nl_item_width",
+      "value": "70vp"
+    },
+    {
+      "name": "nl_divider_margin_top",
+      "value": "7vp"
+    },
+    {
+      "name": "nl_flex_item_margin",
+      "value": "16vp"
+    },
+    {
+      "name": "nl_list_padding",
+      "value": "24vp"
+    },
+    {
+      "name": "nl_classify_line_height",
+      "value": "22vp"
+    }
+  ]
 }

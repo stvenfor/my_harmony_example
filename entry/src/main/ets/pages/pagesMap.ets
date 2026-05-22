@@ -4,6 +4,13 @@ import {
   FoodPage,
   Graphics,
   HarmonyUtilsReExportDocPage,
+  PageRedirectionOrderPage,
+  PageRedirectionPage,
+  MultiColumnsDemoPage,
+  MultiColumnsMailPage,
+  MultiColumnsPhotoPage,
+  MultiColumnsSettingsPage,
+  NestedListDemoPage,
   Home,
   NewsPage,
   PopupDialogQueueDemoPage,
@@ -94,6 +101,20 @@ function pagesMap(name: string) {
     PopupDialogQueueDemoPage()
   } else if (name === RouteConstants.HARMONY_UTILS_REEXPORT_DOC) {
     HarmonyUtilsReExportDocPage()
+  } else if (name === RouteConstants.PAGE_REDIRECTION) {
+    PageRedirectionPage()
+  } else if (name === RouteConstants.PAGE_REDIRECTION_ORDER) {
+    PageRedirectionOrderPage()
+  } else if (name === RouteConstants.MULTI_COLUMNS_DEMO) {
+    MultiColumnsDemoPage()
+  } else if (name === RouteConstants.MULTI_COLUMNS_MAIL) {
+    MultiColumnsMailPage()
+  } else if (name === RouteConstants.MULTI_COLUMNS_PHOTO) {
+    MultiColumnsPhotoPage()
+  } else if (name === RouteConstants.MULTI_COLUMNS_SETTINGS) {
+    MultiColumnsSettingsPage()
+  } else if (name === RouteConstants.NESTED_LIST_DEMO) {
+    NestedListDemoPage()
   }
 }
 

@@ -1,117 +1,724 @@
 {
-  "string" : [ {
-    "name" : "module_desc",
-    "value" : "module description"
-  }, {
-    "name" : "EntryAbility_desc",
-    "value" : "description"
-  }, {
-    "name" : "EntryAbility_label",
-    "value" : "富文本折叠展开"
-  }, {
-    "name" : "defaultForm_label",
-    "value" : "form_label"
-  }, {
-    "name" : "defaultForm_desc",
-    "value" : "form_description"
-  }, {
-    "name" : "EntryFormAbility_desc",
-    "value" : "form_description"
-  }, {
-    "name" : "EntryFormAbility_label",
-    "value" : "form_label"
-  }, {
-    "name" : "widget_desc",
-    "value" : "This is a service widget."
-  }, {
-    "name" : "widget_display_name",
-    "value" : "widget"
-  }, {
-    "name" : "widget1_desc",
-    "value" : "This is a service widget."
-  }, {
-    "name" : "widget1_display_name",
-    "value" : "widget1"
-  }, {
-    "name" : "page_show",
-    "value" : "page from package"
-  }, {
-    "name" : "home_Title",
-    "value" : "富文本折叠展开"
-  }, {
-    "name" : "home_Title_plain",
-    "value" : "纯文本折叠展开"
-  }, {
-    "name" : "topicName",
-    "value" : "#话题# "
-  }, {
-    "name" : "environmentName",
-    "value" : "#环境# "
-  }, {
-    "name" : "follow",
-    "value" : "关注"
-  }, {
-    "name" : "text_expand_show_button",
-    "value" : "展示用按钮"
-  }, {
-    "name" : "text_expand_search_placeholder",
-    "value" : "搜索输入"
-  }, {
-    "name" : "text_expand_text_name",
-    "value" : "山清水秀"
-  }, {
-    "name" : "text_expand_text_date",
-    "value" : "科技领域作者"
-  }, {
-    "name" : "text_expand_layout_100",
-    "value" : "100%"
-  }, {
-    "name" : "text_expand_layout_95",
-    "value" : "95%"
-  }, {
-    "name" : "text_expand_expand_title",
-    "value" : "展开"
-  }, {
-    "name" : "text_expand_collapse_title",
-    "value" : "收起"
-  }, {
-    "name" : "text_expand_long_title",
-    "value" : "亲近大海，领悟海，体会到了海的心声，海自然与你共鸣，无须刻意强求，也无须费力搜寻，海，始终都会以潮声与你相亲，以其海色伴你舒适。山腰盘旋的那曲折险峻的实木栈道，如缕缕飘带缠绕在绿水青山之中，成为一道独特的亮丽风景。"
-  }, {
-    "name" : "text_expand_url1",
-    "value" : "text_expand_img1"
-  }, {
-    "name" : "text_expand_url2",
-    "value" : "text_expand_img2"
-  }, {
-    "name" : "text_expand_url3",
-    "value" : "text_expand_img3"
-  }, {
-    "name" : "text_expand_url4",
-    "value" : "text_expand_img4"
-  }, {
-    "name" : "text_expand_measure_font_size",
-    "value" : "16fp"
-  }, {
-    "name" : "text_expand_tab_name_main_page",
-    "value" : "首页"
-  }, {
-    "name" : "text_expand_tab_name_hot",
-    "value" : "热点"
-  }, {
-    "name" : "text_expand_tab_name_same_city",
-    "value" : "视频"
-  }, {
-    "name" : "text_expand_tab_name_else",
-    "value" : "我的"
-  }, {
-    "name" : "text_expand_item_main_body_title_width",
-    "value" : "350vp"
-  }, {
-    "name" : "tip",
-    "value" : "仅供Tabs展示。"
-  }, {
-    "name" : "toast",
-    "value" : "暂不支持跳转功能"
-  } ]
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "module description"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "富文本折叠展开"
+    },
+    {
+      "name": "defaultForm_label",
+      "value": "form_label"
+    },
+    {
+      "name": "defaultForm_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_desc",
+      "value": "form_description"
+    },
+    {
+      "name": "EntryFormAbility_label",
+      "value": "form_label"
+    },
+    {
+      "name": "widget_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "widget_display_name",
+      "value": "widget"
+    },
+    {
+      "name": "widget1_desc",
+      "value": "This is a service widget."
+    },
+    {
+      "name": "widget1_display_name",
+      "value": "widget1"
+    },
+    {
+      "name": "page_show",
+      "value": "page from package"
+    },
+    {
+      "name": "home_Title",
+      "value": "富文本折叠展开"
+    },
+    {
+      "name": "home_Title_plain",
+      "value": "纯文本折叠展开"
+    },
+    {
+      "name": "topicName",
+      "value": "#话题# "
+    },
+    {
+      "name": "environmentName",
+      "value": "#环境# "
+    },
+    {
+      "name": "follow",
+      "value": "关注"
+    },
+    {
+      "name": "text_expand_show_button",
+      "value": "展示用按钮"
+    },
+    {
+      "name": "text_expand_search_placeholder",
+      "value": "搜索输入"
+    },
+    {
+      "name": "text_expand_text_name",
+      "value": "山清水秀"
+    },
+    {
+      "name": "text_expand_text_date",
+      "value": "科技领域作者"
+    },
+    {
+      "name": "text_expand_layout_100",
+      "value": "100%"
+    },
+    {
+      "name": "text_expand_layout_95",
+      "value": "95%"
+    },
+    {
+      "name": "text_expand_expand_title",
+      "value": "展开"
+    },
+    {
+      "name": "text_expand_collapse_title",
+      "value": "收起"
+    },
+    {
+      "name": "text_expand_long_title",
+      "value": "亲近大海，领悟海，体会到了海的心声，海自然与你共鸣，无须刻意强求，也无须费力搜寻，海，始终都会以潮声与你相亲，以其海色伴你舒适。山腰盘旋的那曲折险峻的实木栈道，如缕缕飘带缠绕在绿水青山之中，成为一道独特的亮丽风景。"
+    },
+    {
+      "name": "text_expand_url1",
+      "value": "text_expand_img1"
+    },
+    {
+      "name": "text_expand_url2",
+      "value": "text_expand_img2"
+    },
+    {
+      "name": "text_expand_url3",
+      "value": "text_expand_img3"
+    },
+    {
+      "name": "text_expand_url4",
+      "value": "text_expand_img4"
+    },
+    {
+      "name": "text_expand_measure_font_size",
+      "value": "16fp"
+    },
+    {
+      "name": "text_expand_tab_name_main_page",
+      "value": "首页"
+    },
+    {
+      "name": "text_expand_tab_name_hot",
+      "value": "热点"
+    },
+    {
+      "name": "text_expand_tab_name_same_city",
+      "value": "视频"
+    },
+    {
+      "name": "text_expand_tab_name_else",
+      "value": "我的"
+    },
+    {
+      "name": "text_expand_item_main_body_title_width",
+      "value": "350vp"
+    },
+    {
+      "name": "tip",
+      "value": "仅供Tabs展示。"
+    },
+    {
+      "name": "toast",
+      "value": "暂不支持跳转功能"
+    },
+    {
+      "name": "account",
+      "value": "Account"
+    },
+    {
+      "name": "addAccount",
+      "value": "Adding an Account"
+    },
+    {
+      "name": "allAccount",
+      "value": "All accounts"
+    },
+    {
+      "name": "recUser",
+      "value": "Recipient："
+    },
+    {
+      "name": "nonSense",
+      "value": "xxxx"
+    },
+    {
+      "name": "recvBox",
+      "value": "Inbox"
+    },
+    {
+      "name": "album",
+      "value": "Albums"
+    },
+    {
+      "name": "photo",
+      "value": "Photographs"
+    },
+    {
+      "name": "WLAN",
+      "value": "WLAN"
+    },
+    {
+      "name": "bluetooth",
+      "value": "Bluetooth"
+    },
+    {
+      "name": "mobileData",
+      "value": "Mobile Data"
+    },
+    {
+      "name": "moreConnections",
+      "value": "More Connections"
+    },
+    {
+      "name": "desktopAndWallpaper",
+      "value": "Desktop and wallpaper"
+    },
+    {
+      "name": "displayAndBrightness",
+      "value": "Display and brightness"
+    },
+    {
+      "name": "soundAndVibration",
+      "value": "Sound and vibration"
+    },
+    {
+      "name": "notice",
+      "value": "Notifications"
+    },
+    {
+      "name": "storage",
+      "value": "Storage"
+    },
+    {
+      "name": "safe",
+      "value": "Security"
+    },
+    {
+      "name": "privacy",
+      "value": "Privacy"
+    },
+    {
+      "name": "userAccounts",
+      "value": "Users and Accounts"
+    },
+    {
+      "name": "system",
+      "value": "System"
+    },
+    {
+      "name": "aboutDevice",
+      "value": "About the device"
+    },
+    {
+      "name": "settings",
+      "value": "Settings"
+    },
+    {
+      "name": "networkAcceleration",
+      "value": "Network acceleration"
+    },
+    {
+      "name": "moreWLANSettings",
+      "value": "More WLAN settings"
+    },
+    {
+      "name": "wifiName",
+      "value": "xxx-Employee"
+    },
+    {
+      "name": "addNetWork",
+      "value": "Add Other Networks"
+    },
+    {
+      "name": "unRead",
+      "value": "Unread Messages"
+    },
+    {
+      "name": "sended",
+      "value": "Sent"
+    },
+    {
+      "name": "allFolders",
+      "value": "Show All Folders"
+    },
+    {
+      "name": "textPartOne",
+      "value": "Welcome to your membership space"
+    },
+    {
+      "name": "textPartTwo",
+      "value": "Dear jiaozi, your xxxx membership space has been created..."
+    },
+    {
+      "name": "searchMail",
+      "value": "Searching for Messages"
+    },
+    {
+      "name": "textData",
+      "value": "Want to try xx mailbox now?"
+    },
+    {
+      "name": "bodyTextPartOne",
+      "value": "Let's log in to e-mail together. Add a personal email account: Open the email, select an email service provider or touch Other, enter the email address and password, touch Login, and follow the prompts to configure the account. The system will automatically connect to the server and check the server settings."
+    },
+    {
+      "name": "bodyTextPartTwo",
+      "value": "Add xxxxxx account: xxxxxx is developed by xx company and is used for the internal email exchange system of the enterprise. If your company mailbox uses the xxxxxx server, you can log in to the company mailbox on your mobile phone. Choose Email > [xxxxxx], enter the email address, user name, and password, click Login, and configure as prompted. The system automatically connects to the server and checks the server settings."
+    },
+    {
+      "name": "bodyTextPartThree",
+      "value": "After the configuration is successful, the Inbox page is displayed by default. During the login, some mailboxes require an authorization code. Follow the onscreen instructions to obtain and enter the authorization code. The xx mailbox can automatically obtain the authorization code and log in to the system with one click."
+    },
+    {
+      "name": "mailDesc",
+      "value": "Imjiaozi and 3 others"
+    },
+    {
+      "name": "reply",
+      "value": "Reply"
+    },
+    {
+      "name": "replyAll",
+      "value": "Reply to all"
+    },
+    {
+      "name": "send",
+      "value": "Forwarding"
+    },
+    {
+      "name": "delete",
+      "value": "Deletion"
+    },
+    {
+      "name": "more",
+      "value": "More"
+    },
+    {
+      "name": "picture",
+      "value": "Pictures"
+    },
+    {
+      "name": "video",
+      "value": "Video"
+    },
+    {
+      "name": "collect",
+      "value": "Collection"
+    },
+    {
+      "name": "newAlbum",
+      "value": "New Album"
+    },
+    {
+      "name": "avatar",
+      "value": "Portrait"
+    },
+    {
+      "name": "address",
+      "value": "Location"
+    },
+    {
+      "name": "category",
+      "value": "Classifieds"
+    },
+    {
+      "name": "pictureType",
+      "value": "Shooting mode"
+    },
+    {
+      "name": "hidden",
+      "value": "Has been hidden"
+    },
+    {
+      "name": "placeholderText",
+      "value": "Photos, people, locations..."
+    },
+    {
+      "name": "userInfo",
+      "value": "Angie"
+    },
+    {
+      "name": "aboutUserInfo",
+      "value": "xx account, payment and billing, cloud space, etc."
+    },
+    {
+      "name": "useful",
+      "value": "Saved (Internet access available)"
+    },
+    {
+      "name": "useless",
+      "value": "Encryption (no Internet access)"
+    },
+    {
+      "name": "connected",
+      "value": "Connected (good network quality)"
+    },
+    {
+      "name": "wlanUseful",
+      "value": "Available WLAN"
+    },
+    {
+      "name": "wlanConnected",
+      "value": "Connected to Wi-Fi"
+    },
+    {
+      "name": "closed",
+      "value": "Closed"
+    },
+    {
+      "name": "search",
+      "value": "Searching for..."
+    },
+    {
+      "name": "title",
+      "value": "Multi Columns"
+    },
+    {
+      "name": "common_service",
+      "value": "常用服务"
+    },
+    {
+      "name": "nl_title",
+      "value": "我的服务"
+    },
+    {
+      "name": "common_font_family",
+      "value": "HarmonyHeiTi"
+    },
+    {
+      "name": "check_in",
+      "value": "值机选座"
+    },
+    {
+      "name": "refund",
+      "value": "自助退票"
+    },
+    {
+      "name": "food",
+      "value": "餐食预订"
+    },
+    {
+      "name": "ticket",
+      "value": "机票兑换"
+    },
+    {
+      "name": "Travel",
+      "value": "出行商城"
+    },
+    {
+      "name": "itinerary",
+      "value": "我的行程"
+    },
+    {
+      "name": "order",
+      "value": "我的订单"
+    },
+    {
+      "name": "reservation",
+      "value": "Air ticket reservation"
+    },
+    {
+      "name": "Retrofit",
+      "value": "Retrofit service"
+    },
+    {
+      "name": "purchase",
+      "value": "Luggage purchase"
+    },
+    {
+      "name": "light",
+      "value": "Travel light"
+    },
+    {
+      "name": "lounge",
+      "value": "VIP lounge"
+    },
+    {
+      "name": "running",
+      "value": "Ground running"
+    },
+    {
+      "name": "gift",
+      "value": "Gift card"
+    },
+    {
+      "name": "fund",
+      "value": "Self-service refund"
+    },
+    {
+      "name": "invoice",
+      "value": "Electronic invoice"
+    },
+    {
+      "name": "pass",
+      "value": "Boarding pass"
+    },
+    {
+      "name": "Baggage",
+      "value": "Baggage inquiry"
+    },
+    {
+      "name": "feed",
+      "value": "Food reservation"
+    },
+    {
+      "name": "Subway",
+      "value": "Subway travel"
+    },
+    {
+      "name": "transfer",
+      "value": "Airport transfer"
+    },
+    {
+      "name": "tourism",
+      "value": "Transit tourism"
+    },
+    {
+      "name": "family",
+      "value": "My family"
+    },
+    {
+      "name": "redemption",
+      "value": "Air ticket redemption"
+    },
+    {
+      "name": "complement",
+      "value": "Integral complement"
+    },
+    {
+      "name": "paradise",
+      "value": "Integral paradise"
+    },
+    {
+      "name": "Points",
+      "value": "Points mall"
+    },
+    {
+      "name": "calculator",
+      "value": "Integrating calculator"
+    },
+    {
+      "name": "network",
+      "value": "Service network"
+    },
+    {
+      "name": "Corporate",
+      "value": "Corporate travel"
+    },
+    {
+      "name": "guide",
+      "value": "Travel guide"
+    },
+    {
+      "name": "ride",
+      "value": "First ride guide"
+    },
+    {
+      "name": "nl_more",
+      "value": "更多发现"
+    },
+    {
+      "name": "nl_account",
+      "value": "绿色账户"
+    },
+    {
+      "name": "trip",
+      "value": "安排行程"
+    },
+    {
+      "name": "Tourism",
+      "value": "旅游服务"
+    },
+    {
+      "name": "entertainment",
+      "value": "轻娱乐"
+    },
+    {
+      "name": "assistant",
+      "value": "出行助手"
+    },
+    {
+      "name": "nl_common_service",
+      "value": "常用服务"
+    },
+    {
+      "name": "nl_common_font_family",
+      "value": "HarmonyHeiTi"
+    },
+    {
+      "name": "nl_check_in",
+      "value": "值机选座"
+    },
+    {
+      "name": "nl_refund",
+      "value": "自助退票"
+    },
+    {
+      "name": "nl_food",
+      "value": "餐食预订"
+    },
+    {
+      "name": "nl_ticket",
+      "value": "机票兑换"
+    },
+    {
+      "name": "nl_Travel",
+      "value": "出行商城"
+    },
+    {
+      "name": "nl_itinerary",
+      "value": "我的行程"
+    },
+    {
+      "name": "nl_order",
+      "value": "我的订单"
+    },
+    {
+      "name": "nl_reservation",
+      "value": "机票预订"
+    },
+    {
+      "name": "nl_Retrofit",
+      "value": "退改服务"
+    },
+    {
+      "name": "nl_purchase",
+      "value": "行李购买"
+    },
+    {
+      "name": "nl_light",
+      "value": "轻装出行"
+    },
+    {
+      "name": "nl_lounge",
+      "value": "贵宾厅"
+    },
+    {
+      "name": "nl_running",
+      "value": "地面畅跑"
+    },
+    {
+      "name": "nl_gift",
+      "value": "礼品卡"
+    },
+    {
+      "name": "nl_fund",
+      "value": "自助退票"
+    },
+    {
+      "name": "nl_invoice",
+      "value": "电子发票"
+    },
+    {
+      "name": "nl_pass",
+      "value": "登机牌"
+    },
+    {
+      "name": "nl_Baggage",
+      "value": "行李查询"
+    },
+    {
+      "name": "nl_feed",
+      "value": "餐食预订"
+    },
+    {
+      "name": "nl_Subway",
+      "value": "地铁出行"
+    },
+    {
+      "name": "nl_transfer",
+      "value": "机场接送"
+    },
+    {
+      "name": "nl_tourism",
+      "value": "中转旅游"
+    },
+    {
+      "name": "nl_family",
+      "value": "我的家庭"
+    },
+    {
+      "name": "nl_redemption",
+      "value": "机票兑换"
+    },
+    {
+      "name": "nl_complement",
+      "value": "积分补登"
+    },
+    {
+      "name": "nl_paradise",
+      "value": "积分乐园"
+    },
+    {
+      "name": "nl_Points",
+      "value": "积分商城"
+    },
+    {
+      "name": "nl_calculator",
+      "value": "积分计算器"
+    },
+    {
+      "name": "nl_network",
+      "value": "服务网点"
+    },
+    {
+      "name": "nl_Corporate",
+      "value": "企业差旅"
+    },
+    {
+      "name": "nl_guide",
+      "value": "出行指南"
+    },
+    {
+      "name": "nl_ride",
+      "value": "首乘指南"
+    },
+    {
+      "name": "nl_trip",
+      "value": "安排行程"
+    },
+    {
+      "name": "nl_Tourism",
+      "value": "旅游服务"
+    },
+    {
+      "name": "nl_entertainment",
+      "value": "轻娱乐"
+    },
+    {
+      "name": "nl_assistant",
+      "value": "出行助手"
+    }
+  ]
 }

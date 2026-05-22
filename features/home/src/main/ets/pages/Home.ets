@@ -7,6 +7,7 @@ interface HomeMenuItem {
   readonly icon: Resource
 }
 
+@Preview
 @Component
 export struct Home {
   @StorageLink('breakPoint') breakPoint: string = BreakpointConstants.BREAKPOINT_MD
@@ -45,6 +46,21 @@ export struct Home {
       routeId: 'HarmonyUtils 说明',
       subtitle: 'common 再导出工具示例',
       icon: $r('sys.symbol.doc_text')
+    },
+    {
+      routeId: '页面跳转示例',
+      subtitle: 'H5 与 ArkTS 互跳（page-redirection）',
+      icon: $r('sys.symbol.arrow_left_arrow_right')
+    },
+    {
+      routeId: '分栏控件示例',
+      subtitle: '响应式 A+B+C / A+C / B+C',
+      icon: $r('sys.symbol.square_grid_2x2')
+    },
+    {
+      routeId: '嵌套列表示例',
+      subtitle: '双 List 联动滚动（nested-list）',
+      icon: $r('sys.symbol.repeat')
     }
   ]
 
@@ -98,6 +114,12 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.POPUP_DIALOG_QUEUE_DEMO, null)
     } else if (item === 'HarmonyUtils 说明') {
       this.pathStack.pushPathByName(RouteConstants.HARMONY_UTILS_REEXPORT_DOC, null)
+    } else if (item === '页面跳转示例') {
+      this.pathStack.pushPathByName(RouteConstants.PAGE_REDIRECTION, null)
+    } else if (item === '分栏控件示例') {
+      this.pathStack.pushPathByName(RouteConstants.MULTI_COLUMNS_DEMO, null)
+    } else if (item === '嵌套列表示例') {
+      this.pathStack.pushPathByName(RouteConstants.NESTED_LIST_DEMO, null)
     }
   }
 

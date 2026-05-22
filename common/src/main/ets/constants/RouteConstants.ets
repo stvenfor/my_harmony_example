@@ -124,4 +124,23 @@ export class RouteConstants {
    * @pura/harmony-utils 再导出项说明页（与 common/Index 再导出列表对照）
    */
   static readonly HARMONY_UTILS_REEXPORT_DOC: string = 'HarmonyUtilsReExportDocPage';
+  /**
+   * 页面跳转示例（H5 Web 与 ArkTS 互跳，参考 page-redirection 官方示例）
+   */
+  static readonly PAGE_REDIRECTION: string = 'PageRedirectionPage';
+  /**
+   * 页面跳转示例 - 订单确认页
+   */
+  static readonly PAGE_REDIRECTION_ORDER: string = 'PageRedirectionOrderPage';
+  /**
+   * 分栏控件示例入口（multi-columns）
+   */
+  static readonly MULTI_COLUMNS_DEMO: string = 'MultiColumnsDemoPage';
+  static readonly MULTI_COLUMNS_MAIL: string = 'MultiColumnsMailPage';
+  static readonly MULTI_COLUMNS_PHOTO: string = 'MultiColumnsPhotoPage';
+  static readonly MULTI_COLUMNS_SETTINGS: string = 'MultiColumnsSettingsPage';
+  /**
+   * List 嵌套滑动示例（nested-list）
+   */
+  static readonly NESTED_LIST_DEMO: string = 'NestedListDemoPage';
 }
