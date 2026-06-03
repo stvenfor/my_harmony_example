@@ -97,6 +97,15 @@ export {
   popupScopeForPage
 } from './src/main/ets/utils/PopupDialogQueueManager'
 
+export {
+  SupabaseClient,
+  SupabaseConfig,
+  SupabaseQueryParams,
+  SupabaseResult,
+  SupabaseError,
+  createSupabaseClient
+} from './src/main/ets/utils/SupabaseClient'
+
 export { AppUtil,
   WindowUtil,
   DeviceUtil,

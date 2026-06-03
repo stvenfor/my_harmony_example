@@ -1,29 +1,251 @@
-import { NavItem, StringConstants } from '@ohos/common'
+import { NavItem, StringConstants, createSupabaseClient, SupabaseClient } from '@ohos/common'
 
 const TAG: string = 'FinancialManagementPage'
 
 interface TransactionRecord {
-  readonly id: number
-  readonly type: 'income' | 'expense'
-  readonly category: string
-  readonly amount: number
-  readonly date: string
-  readonly note: string
-  readonly icon: Resource
+  id: number;
+  type: 'income' | 'expense';
+  category: string;
+  amount: number;
+  date: string;
+  note: string;
+  icon: Resource;
 }
 
 interface AssetItem {
-  readonly name: string
-  readonly balance: number
-  readonly type: string
-  readonly icon: Resource
+  name: string;
+  balance: number;
+  type: string;
+  icon: Resource;
 }
 
 interface BudgetPlan {
-  readonly category: string
-  readonly budget: number
-  readonly spent: number
-  readonly icon: Resource
+  category: string;
+  budget: number;
+  spent: number;
+  icon: Resource;
+}
+
+/** Supabase 排序参数类 */
+class OrderParams {
+  column: string = '';
+  ascending?: boolean;
+}
+
+/** Supabase 查询参数封装类 */
+class SupabaseQueryOptions {
+  order?: OrderParams;
+  limit?: number;
+}
+
+/** 交易数据插入类 */
+class TransactionInsertData {
+  type: string = '';
+  category: string = '';
+  amount: number = 0;
+  date: string = '';
+  note: string = '';
+}
+
+/** 交易数据更新类（包含主键 id） */
+class TransactionUpdateData {
+  id: number = 0;
+  type: string = '';
+  category: string = '';
+  amount: number = 0;
+  date: string = '';
+  note: string = '';
+}
+
+/** 删除过滤条件类 */
+class DeleteFilter {
+  id: number = 0;
+}
+
+/** 表单结果回调类 */
+class FormResult {
+  type: string = '';
+  amount: string = '';
+  category: string = '';
+  date: string = '';
+  note: string = '';
+}
+
+@CustomDialog
+struct TransactionDialog {
+  controller: CustomDialogController
+  isEdit: boolean = false
+  onConfirm: (result: FormResult) => void = () => {}
+  onCancel: () => void = () => {}
+
+  @State transactionType: string = 'expense'
+  @State formAmount: string = ''
+  @State formCategory: string = ''
+  @State formDate: string = ''
+  @State formNote: string = ''
+
+  private readonly expenseCategories: string[] = ['餐饮', '交通', '购物', '娱乐', '住房', '医疗', '教育', '其他']
+  private readonly incomeCategories: string[] = ['工资', '兼职', '投资', '奖金', '其他']
+  private readonly accent: string = '#0A59F7'
+  private readonly incomeColor: string = '#10B981'
+  private readonly expenseColor: string = '#EF4444'
+
+  aboutToAppear(): void {
+    if (!this.formDate) {
+      this.formDate = new Date().toISOString().split('T')[0]
+    }
+  }
+
+  build() {
+    Column({ space: 16 }) {
+      // 标题栏
+      Row() {
+        Text(this.isEdit ? '编辑交易' : '记一笔')
+          .fontSize(18)
+          .fontWeight(FontWeight.Bold)
+          .fontColor('#182431')
+          .layoutWeight(1)
+
+        Button('关闭')
+          .fontSize(14)
+          .fontColor(this.accent)
+          .backgroundColor(Color.Transparent)
+          .onClick(() => {
+            this.onCancel()
+            this.controller.close()
+          })
+      }
+      .width('100%')
+
+      // 类型切换
+      Row({ space: 10 }) {
+        Button('支出')
+          .layoutWeight(1)
+          .height(40)
+          .borderRadius(20)
+          .backgroundColor(this.transactionType === 'expense' ? this.expenseColor : '#F4F6F8')
+          .fontColor(this.transactionType === 'expense' ? Color.White : '#66182431')
+          .onClick(() => {
+            this.transactionType = 'expense'
+            this.formCategory = ''
+          })
+
+        Button('收入')
+          .layoutWeight(1)
+          .height(40)
+          .borderRadius(20)
+          .backgroundColor(this.transactionType === 'income' ? this.incomeColor : '#F4F6F8')
+          .fontColor(this.transactionType === 'income' ? Color.White : '#66182431')
+          .onClick(() => {
+            this.transactionType = 'income'
+            this.formCategory = ''
+          })
+      }
+      .width('100%')
+
+      // 金额输入
+      Column({ space: 4 }) {
+        Text('金额')
+          .fontSize(13)
+          .fontColor('#66182431')
+          .width('100%')
+        TextInput({ placeholder: '0.00', text: this.formAmount })
+          .height(48)
+          .fontSize(24)
+          .fontWeight(FontWeight.Bold)
+          .type(InputType.Number)
+          .backgroundColor('#F4F6F8')
+          .borderRadius(10)
+          .onChange((value: string) => {
+            this.formAmount = value
+          })
+      }
+      .width('100%')
+
+      // 分类选择
+      Column({ space: 4 }) {
+        Text('分类')
+          .fontSize(13)
+          .fontColor('#66182431')
+          .width('100%')
+        Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
+          ForEach(this.transactionType === 'expense' ? this.expenseCategories : this.incomeCategories,
+            (category: string) => {
+              Text(category)
+                .fontSize(13)
+                .fontColor(this.formCategory === category ? Color.White : '#66182431')
+                .padding({ left: 12, right: 12, top: 8, bottom: 8 })
+                .backgroundColor(this.formCategory === category ? this.accent : '#F4F6F8')
+                .borderRadius(16)
+                .margin({ right: 8, bottom: 8 })
+                .onClick(() => {
+                  this.formCategory = category
+                })
+            }, (category: string) => category)
+        }
+        .width('100%')
+      }
+      .width('100%')
+
+      // 日期选择
+      Column({ space: 4 }) {
+        Text('日期')
+          .fontSize(13)
+          .fontColor('#66182431')
+          .width('100%')
+        TextInput({ text: this.formDate })
+          .height(44)
+          .fontSize(14)
+          .backgroundColor('#F4F6F8')
+          .borderRadius(10)
+          .onChange((value: string) => {
+            this.formDate = value
+          })
+      }
+      .width('100%')
+
+      // 备注
+      Column({ space: 4 }) {
+        Text('备注（可选）')
+          .fontSize(13)
+          .fontColor('#66182431')
+          .width('100%')
+        TextArea({ text: this.formNote, placeholder: '添加备注...' })
+          .height(60)
+          .fontSize(14)
+          .backgroundColor('#F4F6F8')
+          .borderRadius(10)
+          .onChange((value: string) => {
+            this.formNote = value
+          })
+      }
+      .width('100%')
+
+      // 确认按钮
+      Button(this.isEdit ? '更新' : '保存')
+        .width('100%')
+        .height(48)
+        .borderRadius(24)
+        .backgroundColor(this.accent)
+        .fontColor(Color.White)
+        .fontSize(16)
+        .fontWeight(FontWeight.Medium)
+        .onClick(() => {
+          const result: FormResult = new FormResult();
+          result.type = this.transactionType;
+          result.amount = this.formAmount;
+          result.category = this.formCategory;
+          result.date = this.formDate;
+          result.note = this.formNote;
+          this.onConfirm(result)
+          this.controller.close()
+        })
+    }
+    .width('90%')
+    .padding(20)
+    .backgroundColor('#FFFFFF')
+    .borderRadius(20)
+  }
 }
 
 @Component
@@ -34,14 +256,39 @@ export struct FinancialManagementPage {
   
   @State activeTab: number = 0
   @State selectedMonth: string = '2026-05'
-  @State showAddDialog: boolean = false
   @State transactionType: 'income' | 'expense' = 'expense'
+  @State editingTransaction: TransactionRecord | null = null
+  @State isEditMode: boolean = false
   
-  // 表单数据
-  @State formAmount: string = ''
-  @State formCategory: string = ''
-  @State formDate: string = new Date().toISOString().split('T')[0]
-  @State formNote: string = ''
+  // CustomDialog 控制器
+  private dialogController: CustomDialogController = new CustomDialogController({
+    builder: TransactionDialog({
+      isEdit: this.isEditMode,
+      onConfirm: (result: FormResult) => {
+        if (this.isEditMode) {
+          this.handleUpdateResult(result)
+        } else {
+          this.handleAddResult(result)
+        }
+      },
+      onCancel: () => {
+        this.editingTransaction = null
+      }
+    }),
+    customStyle: true,
+    alignment: DialogAlignment.Center,
+    maskColor: '#4D000000'
+  })
+  
+  // Supabase 客户端
+  private supabase: SupabaseClient = createSupabaseClient({
+    projectUrl: 'https://uqznnzkugvhsrlcudrbj.supabase.co',
+    apiKey: 'sb_publishable_b6_-AnEAi19hTurNNu7ojA_sL4oHgf5'
+  })
+  
+  @State isLoading: boolean = false
+  
+  @State isSaving: boolean = false
   
   private readonly accent: string = '#0A59F7'
   private readonly cardBg: string = '#FFFFFF'
@@ -49,37 +296,275 @@ export struct FinancialManagementPage {
   private readonly incomeColor: string = '#10B981'
   private readonly expenseColor: string = '#EF4444'
   
-  // 模拟数据
-  @State transactions: TransactionRecord[] = [
-    { id: 1, type: 'expense', category: '餐饮', amount: 45.50, date: '2026-05-28', note: '午餐', icon: $r('sys.symbol.fork_knife') },
-    { id: 2, type: 'expense', category: '交通', amount: 30.00, date: '2026-05-28', note: '地铁充值', icon: $r('sys.symbol.car') },
-    { id: 3, type: 'income', category: '工资', amount: 8000.00, date: '2026-05-25', note: '5月工资', icon: $r('sys.symbol.briefcase') },
-    { id: 4, type: 'expense', category: '购物', amount: 299.00, date: '2026-05-27', note: '购买衣物', icon: $r('sys.symbol.bag') },
-    { id: 5, type: 'expense', category: '娱乐', amount: 128.00, date: '2026-05-26', note: '电影票', icon: $r('sys.symbol.film') },
-    { id: 6, type: 'income', category: '兼职', amount: 1500.00, date: '2026-05-20', note: '周末兼职', icon: $r('sys.symbol.clock') },
-    { id: 7, type: 'expense', category: '餐饮', amount: 89.00, date: '2026-05-25', note: '晚餐聚餐', icon: $r('sys.symbol.fork_knife') },
-  ]
+  // 数据（首次进入时从 Supabase 加载）
+  @State transactions: TransactionRecord[] = []
   
-  @State assets: AssetItem[] = [
-    { name: '微信钱包', balance: 3250.80, type: '电子钱包', icon: $r('sys.symbol.wechat') },
-    { name: '支付宝', balance: 5680.50, type: '电子钱包', icon: $r('sys.symbol.creditcard_fill') },
-    { name: '建设银行卡', balance: 12500.00, type: '银行卡', icon: $r('sys.symbol.creditcard') },
-    { name: '现金', balance: 800.00, type: '现金', icon: $r('sys.symbol.wallet') },
-  ]
+  @State assets: AssetItem[] = []
   
-  @State budgets: BudgetPlan[] = [
-    { category: '餐饮', budget: 1500, spent: 890, icon: $r('sys.symbol.fork_knife') },
-    { category: '交通', budget: 500, spent: 320, icon: $r('sys.symbol.car') },
-    { category: '购物', budget: 2000, spent: 1450, icon: $r('sys.symbol.bag') },
-    { category: '娱乐', budget: 800, spent: 560, icon: $r('sys.symbol.film') },
-    { category: '其他', budget: 1000, spent: 280, icon: $r('sys.symbol.ellipsis_circle') },
-  ]
+  @State budgets: BudgetPlan[] = []
   
   private readonly expenseCategories: string[] = ['餐饮', '交通', '购物', '娱乐', '住房', '医疗', '教育', '其他']
   private readonly incomeCategories: string[] = ['工资', '兼职', '投资', '奖金', '其他']
 
   aboutToAppear(): void {
     console.info(`${TAG}: Page appeared`)
+    this.loadData()
+  }
+
+  /**
+   * 从 Supabase 加载数据
+   */
+  async loadData(): Promise<void> {
+    this.isLoading = true
+    try {
+      // 加载交易记录
+      const queryOptions: SupabaseQueryOptions = new SupabaseQueryOptions();
+      const orderParam: OrderParams = new OrderParams();
+      orderParam.column = 'date';
+      orderParam.ascending = false;
+      queryOptions.order = orderParam;
+      queryOptions.limit = 100;
+      
+      const transactionsResult = 
+        await this.supabase.from<TransactionRecord>('transactions', queryOptions)
+      
+      if (transactionsResult.error) {
+        console.error(`${TAG}: Load transactions error:`, transactionsResult.error.message)
+      } else if (transactionsResult.data && transactionsResult.data.length > 0) {
+        this.transactions = transactionsResult.data
+      }
+      
+      // 加载资产数据
+      const assetsResult = 
+        await this.supabase.from<AssetItem>('assets')
+      
+      if (assetsResult.error) {
+        console.error(`${TAG}: Load assets error:`, assetsResult.error.message)
+      } else if (assetsResult.data && assetsResult.data.length > 0) {
+        this.assets = assetsResult.data
+      }
+      
+      // 加载预算数据
+      const budgetsResult = 
+        await this.supabase.from<BudgetPlan>('budgets')
+      
+      if (budgetsResult.error) {
+        console.error(`${TAG}: Load budgets error:`, budgetsResult.error.message)
+      } else if (budgetsResult.data && budgetsResult.data.length > 0) {
+        this.budgets = budgetsResult.data
+      }
+      
+      console.info(`${TAG}: Data loaded - transactions: ${this.transactions.length}, assets: ${this.assets.length}, budgets: ${this.budgets.length}`)
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Failed to load data. Code: ${err.code}, message: ${err.message}`)
+      this.showToast('数据加载失败，请检查网络')
+    } finally {
+      this.isLoading = false
+    }
+  }
+
+  /**
+   * 批量保存所有交易到 Supabase（自动建表）
+   */
+  async saveAllTransactions(): Promise<void> {
+    if (this.transactions.length === 0) {
+      this.showToast('没有数据可保存')
+      return
+    }
+
+    this.isSaving = true
+    let firstError: string = ''
+    
+    try {
+      // 首先检查表是否存在，如果不存在则提示用户
+      const checkResult = await this.checkTableExists('transactions')
+      
+      if (!checkResult) {
+        // 表不存在，显示创建表的指引
+        this.showCreateTableDialog()
+        this.isSaving = false
+        return
+      }
+      
+      let successCount = 0
+      let failCount = 0
+
+      for (const transaction of this.transactions) {
+        try {
+          // 构建要插入的数据对象（不包含 id 和 icon，因为它们是本地字段）
+          const transactionData: TransactionInsertData = new TransactionInsertData();
+          transactionData.type = transaction.type;
+          transactionData.category = transaction.category;
+          transactionData.amount = transaction.amount;
+          transactionData.date = transaction.date;
+          transactionData.note = transaction.note;
+
+          console.info(`${TAG}: Attempting to save transaction:`, JSON.stringify(transactionData))
+
+          // 尝试插入数据
+          const result = await this.supabase.insert<TransactionRecord>('transactions', transactionData)
+          
+          if (result.error) {
+            console.warn(`${TAG}: Failed to save transaction ${transaction.id}`, result.error)
+            console.warn(`${TAG}: Error details - Message: ${result.error.message}, Code: ${result.error.code}`)
+            
+            // 记录第一个错误用于显示
+            if (!firstError) {
+              firstError = result.error.message
+            }
+            
+            failCount++
+          } else {
+            successCount++
+            console.info(`${TAG}: Successfully saved transaction ${transaction.id}`)
+          }
+        } catch (err) {
+          const error = err as BusinessError
+          console.error(`${TAG}: Exception saving transaction ${transaction.id}. Code: ${error.code}, message: ${error.message}`)
+          
+          // 记录第一个错误用于显示
+          if (!firstError) {
+            firstError = error.message
+          }
+          
+          failCount++
+        }
+      }
+
+      // 显示结果
+      if (failCount === 0) {
+        this.showToast(`成功保存 ${successCount} 条记录`)
+      } else {
+        const message = `保存完成：成功 ${successCount} 条，失败 ${failCount} 条`
+        this.showToast(message)
+        
+        // 如果有错误，显示详细错误信息
+        if (firstError) {
+          setTimeout(() => {
+            AlertDialog.show({
+              title: '保存失败详情',
+              message: `第一条错误信息：\n${firstError}\n\n请检查：\n1. 表是否已正确创建\n2. 网络连接是否正常\n3. Supabase配置是否正确`,
+              primaryButton: {
+                value: '确定',
+                action: () => {}
+              }
+            })
+          }, 500)
+        }
+      }
+
+      console.info(`${TAG}: Save completed. Success: ${successCount}, Failed: ${failCount}`)
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Failed to save all transactions. Code: ${err.code}, message: ${err.message}`)
+      this.showToast('保存失败，请检查网络连接')
+    } finally {
+      this.isSaving = false
+    }
+  }
+
+  /**
+   * 检查表是否存在
+   */
+  async checkTableExists(tableName: string): Promise<boolean> {
+    try {
+      // 尝试查询一条数据,如果表不存在会返回错误
+      const queryOptions: SupabaseQueryOptions = new SupabaseQueryOptions();
+      queryOptions.limit = 1;
+        
+      const result = await this.supabase.from<TransactionRecord>(tableName, queryOptions)
+        
+      // 如果返回错误且错误信息包含表不存在的提示
+      if (result.error) {
+        const errorMsg = result.error.message.toLowerCase()
+        if (errorMsg.includes('relation') && errorMsg.includes('does not exist') ||
+            errorMsg.includes('table') && errorMsg.includes('not found') ||
+            result.error.code === '42P01') {
+          return false
+        }
+      }
+        
+      return true
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Check table failed. Code: ${err.code}, message: ${err.message}`)
+      return false
+    }
+  }
+
+  /**
+   * 显示创建表的对话框
+   */
+  private showCreateTableDialog(): void {
+    AlertDialog.show({
+      title: '需要先创建数据库表',
+      message: '检测到 Supabase 中还没有 transactions 表。\n\n请先在 Supabase Dashboard 中执行 SQL 脚本创建表：\n\n1. 登录 Supabase Dashboard\n2. 进入 SQL Editor\n3. 执行 supabase_schema.sql 文件中的内容\n\n或者点击"查看SQL"按钮复制SQL语句。',
+      primaryButton: {
+        value: '关闭',
+        action: () => {}
+      },
+      secondaryButton: {
+        value: '查看SQL',
+        action: () => {
+          this.showSQLContent()
+        }
+      }
+    })
+  }
+
+  /**
+   * 显示SQL内容
+   */
+  private showSQLContent(): void {
+    const sqlContent = `-- 创建交易记录表
+CREATE TABLE IF NOT EXISTS transactions (
+  id BIGINT PRIMARY KEY DEFAULT nextval('transactions_id_seq'),
+  type VARCHAR(10) NOT NULL CHECK (type IN ('income', 'expense')),
+  category VARCHAR(50) NOT NULL,
+  amount DECIMAL(10, 2) NOT NULL,
+  date DATE NOT NULL,
+  note TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- 创建序列
+CREATE SEQUENCE IF NOT EXISTS transactions_id_seq;
+
+-- 添加索引
+CREATE INDEX IF NOT EXISTS idx_transactions_date ON transactions(date DESC);
+CREATE INDEX IF NOT EXISTS idx_transactions_type ON transactions(type);
+CREATE INDEX IF NOT EXISTS idx_transactions_category ON transactions(category);
+
+-- 启用行级安全
+ALTER TABLE transactions ENABLE ROW LEVEL SECURITY;
+
+-- 允许公开访问（生产环境建议启用认证）
+CREATE POLICY "Allow public read access on transactions"
+  ON transactions FOR SELECT
+  USING (true);
+
+CREATE POLICY "Allow public insert on transactions"
+  ON transactions FOR INSERT
+  WITH CHECK (true);
+
+CREATE POLICY "Allow public update on transactions"
+  ON transactions FOR UPDATE
+  USING (true);
+
+CREATE POLICY "Allow public delete on transactions"
+  ON transactions FOR DELETE
+  USING (true);`
+
+    AlertDialog.show({
+      title: 'SQL 建表语句',
+      message: sqlContent,
+      primaryButton: {
+        value: '关闭',
+        action: () => {}
+      }
+    })
   }
 
   private getTotalIncome(): number {
@@ -115,43 +600,161 @@ export struct FinancialManagementPage {
     }
   }
 
-  private addTransaction(): void {
-    if (!this.formAmount || parseFloat(this.formAmount) <= 0) {
+  /**
+   * 打开新增对话框
+   */
+  private openAddDialog(): void {
+    this.isEditMode = false
+    this.editingTransaction = null
+    this.dialogController.open()
+  }
+
+  /**
+   * 打开编辑对话框
+   */
+  private openEditDialog(transaction: TransactionRecord): void {
+    this.editingTransaction = transaction
+    this.isEditMode = true
+    this.dialogController.open()
+  }
+
+  /**
+   * 处理新增结果
+   */
+  private async handleAddResult(result: FormResult): Promise<void> {
+    if (!result.amount || parseFloat(result.amount) <= 0) {
       this.showToast('请输入有效金额')
       return
     }
-
-    if (!this.formCategory) {
+    if (!result.category) {
       this.showToast('请选择分类')
       return
     }
 
-    const newTransaction: TransactionRecord = {
-      id: Date.now(),
-      type: this.transactionType,
-      category: this.formCategory,
-      amount: parseFloat(this.formAmount),
-      date: this.formDate,
-      note: this.formNote,
-      icon: this.transactionType === 'expense' ? $r('sys.symbol.minus_circle') : $r('sys.symbol.plus_circle')
+    const transactionData: TransactionInsertData = new TransactionInsertData();
+    transactionData.type = result.type;
+    transactionData.category = result.category;
+    transactionData.amount = parseFloat(result.amount);
+    transactionData.date = result.date;
+    transactionData.note = result.note;
+
+    try {
+      const supabaseResult = 
+        await this.supabase.insert<TransactionRecord>('transactions', transactionData)
+      
+      if (supabaseResult.error) {
+        console.error(`${TAG}: Failed to save transaction`, supabaseResult.error)
+        this.showToast('保存失败: ' + supabaseResult.error.message)
+        return
+      }
+      
+      const completeTransaction: TransactionRecord = {
+        id: Date.now(),
+        type: result.type as 'income' | 'expense',
+        category: result.category,
+        amount: parseFloat(result.amount),
+        date: result.date,
+        note: result.note,
+        icon: result.type === 'expense' ? $r('sys.symbol.minus_circle') : $r('sys.symbol.plus_circle')
+      }
+      
+      this.transactions = [completeTransaction, ...this.transactions]
+      this.showToast('记账成功')
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Failed to add transaction. Code: ${err.code}, message: ${err.message}`)
+      this.showToast('保存失败，请重试')
+    }
+  }
+
+  /**
+   * 处理更新结果
+   */
+  private async handleUpdateResult(result: FormResult): Promise<void> {
+    if (!this.editingTransaction) {
+      return
+    }
+    if (!result.amount || parseFloat(result.amount) <= 0) {
+      this.showToast('请输入有效金额')
+      return
+    }
+    if (!result.category) {
+      this.showToast('请选择分类')
+      return
     }
 
-    this.transactions = [newTransaction, ...this.transactions]
-    this.resetForm()
-    this.showAddDialog = false
-    this.showToast('记账成功')
+    const updateData: TransactionUpdateData = new TransactionUpdateData();
+    updateData.id = this.editingTransaction.id;
+    updateData.type = result.type;
+    updateData.category = result.category;
+    updateData.amount = parseFloat(result.amount);
+    updateData.date = result.date;
+    updateData.note = result.note;
+
+    try {
+      console.info(`${TAG}: Updating transaction ${this.editingTransaction.id}`, JSON.stringify(updateData))
+      
+      const filter: DeleteFilter = new DeleteFilter();
+      filter.id = this.editingTransaction.id;
+      
+      const supabaseResult = 
+        await this.supabase.update<TransactionRecord>('transactions', updateData, filter)
+      
+      if (supabaseResult.error) {
+        console.error(`${TAG}: Failed to update transaction`, supabaseResult.error)
+        this.showToast('更新失败: ' + supabaseResult.error.message)
+        return
+      }
+      
+      console.info(`${TAG}: Update successful`)
+      
+      const updatedTransaction: TransactionRecord = {
+        id: this.editingTransaction.id,
+        type: result.type as 'income' | 'expense',
+        category: result.category,
+        amount: parseFloat(result.amount),
+        date: result.date,
+        note: result.note,
+        icon: result.type === 'expense' ? $r('sys.symbol.minus_circle') : $r('sys.symbol.plus_circle')
+      }
+      
+      this.transactions = this.transactions.map(t => 
+        t.id === this.editingTransaction!.id ? updatedTransaction : t
+      )
+      
+      this.editingTransaction = null
+      this.showToast('更新成功')
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Exception updating transaction. Code: ${err.code}, message: ${err.message}`)
+      this.showToast('更新失败，请重试')
+    }
   }
 
-  private resetForm(): void {
-    this.formAmount = ''
-    this.formCategory = ''
-    this.formDate = new Date().toISOString().split('T')[0]
-    this.formNote = ''
-  }
-
-  private deleteTransaction(id: number): void {
-    this.transactions = this.transactions.filter(t => t.id !== id)
-    this.showToast('已删除')
+  private async deleteTransaction(id: number): Promise<void> {
+    try {
+      // 构建删除过滤条件
+      const deleteFilter: DeleteFilter = new DeleteFilter();
+      deleteFilter.id = id;
+      
+      // 从 Supabase 删除
+      const result = 
+        await this.supabase.delete('transactions', deleteFilter)
+      
+      if (result.error) {
+        console.error(`${TAG}: Failed to delete transaction`, result.error)
+        this.showToast('删除失败: ' + result.error.message)
+        return
+      }
+      
+      // 更新本地数据
+      this.transactions = this.transactions.filter(t => t.id !== id)
+      this.showToast('已删除')
+    } catch (error) {
+      const err = error as BusinessError
+      console.error(`${TAG}: Failed to delete transaction. Code: ${err.code}, message: ${err.message}`)
+      this.showToast('删除失败，请重试')
+    }
   }
 
   @Builder
@@ -255,6 +858,34 @@ export struct FinancialManagementPage {
     .padding(12)
     .backgroundColor(this.cardBg)
     .borderRadius(12)
+    .onClick(() => {
+      // 点击打开编辑对话框
+      this.openEditDialog(record)
+    })
+    .gesture(
+      GestureGroup(GestureMode.Exclusive,
+        // 左滑删除手势
+        SwipeGesture()
+          .onAction(() => {
+            // 左滑显示删除确认
+            AlertDialog.show({
+              title: '确认删除',
+              message: `确定要删除这条${record.type === 'income' ? '收入' : '支出'}记录吗？`,
+              primaryButton: {
+                value: '取消',
+                action: () => {}
+              },
+              secondaryButton: {
+                value: '删除',
+                fontColor: this.expenseColor,
+                action: () => {
+                  this.deleteTransaction(record.id)
+                }
+              }
+            })
+          })
+      )
+    )
   }
 
   @Builder
@@ -338,152 +969,6 @@ export struct FinancialManagementPage {
     .borderRadius(12)
   }
 
-  @Builder
-  private addTransactionDialog() {
-    Column() {
-      Column({ space: 16 }) {
-        Row() {
-          Text('记一笔')
-            .fontSize(18)
-            .fontWeight(FontWeight.Bold)
-            .fontColor('#182431')
-            .layoutWeight(1)
-
-          Button('关闭')
-            .fontSize(14)
-            .fontColor(this.accent)
-            .backgroundColor(Color.Transparent)
-            .onClick(() => {
-              this.showAddDialog = false
-              this.resetForm()
-            })
-        }
-        .width('100%')
-
-        // 类型切换
-        Row({ space: 10 }) {
-          Button('支出')
-            .layoutWeight(1)
-            .height(40)
-            .borderRadius(20)
-            .backgroundColor(this.transactionType === 'expense' ? this.expenseColor : '#F4F6F8')
-            .fontColor(this.transactionType === 'expense' ? Color.White : '#66182431')
-            .onClick(() => {
-              this.transactionType = 'expense'
-              this.formCategory = ''
-            })
-
-          Button('收入')
-            .layoutWeight(1)
-            .height(40)
-            .borderRadius(20)
-            .backgroundColor(this.transactionType === 'income' ? this.incomeColor : '#F4F6F8')
-            .fontColor(this.transactionType === 'income' ? Color.White : '#66182431')
-            .onClick(() => {
-              this.transactionType = 'income'
-              this.formCategory = ''
-            })
-        }
-        .width('100%')
-
-        // 金额输入
-        Column({ space: 4 }) {
-          Text('金额')
-            .fontSize(13)
-            .fontColor('#66182431')
-            .width('100%')
-          TextInput({ placeholder: '0.00', text: this.formAmount })
-            .height(48)
-            .fontSize(24)
-            .fontWeight(FontWeight.Bold)
-            .type(InputType.Number)
-            .backgroundColor('#F4F6F8')
-            .borderRadius(10)
-            .onChange((value: string) => {
-              this.formAmount = value
-            })
-        }
-        .width('100%')
-
-        // 分类选择
-        Column({ space: 4 }) {
-          Text('分类')
-            .fontSize(13)
-            .fontColor('#66182431')
-            .width('100%')
-          Flex({ wrap: FlexWrap.Wrap, justifyContent: FlexAlign.Start }) {
-            ForEach(this.transactionType === 'expense' ? this.expenseCategories : this.incomeCategories, 
-              (category: string) => {
-                Text(category)
-                  .fontSize(13)
-                  .fontColor(this.formCategory === category ? Color.White : '#66182431')
-                  .padding({ left: 12, right: 12, top: 8, bottom: 8 })
-                  .backgroundColor(this.formCategory === category ? this.accent : '#F4F6F8')
-                  .borderRadius(16)
-                  .margin({ right: 8, bottom: 8 })
-                  .onClick(() => {
-                    this.formCategory = category
-                  })
-              }, (category: string) => category)
-          }
-          .width('100%')
-        }
-        .width('100%')
-
-        // 日期选择
-        Column({ space: 4 }) {
-          Text('日期')
-            .fontSize(13)
-            .fontColor('#66182431')
-            .width('100%')
-          TextInput({ text: this.formDate })
-            .height(44)
-            .fontSize(14)
-            .backgroundColor('#F4F6F8')
-            .borderRadius(10)
-            .onChange((value: string) => {
-              this.formDate = value
-            })
-        }
-        .width('100%')
-
-        // 备注
-        Column({ space: 4 }) {
-          Text('备注（可选）')
-            .fontSize(13)
-            .fontColor('#66182431')
-            .width('100%')
-          TextArea({ text: this.formNote, placeholder: '添加备注...' })
-            .height(60)
-            .fontSize(14)
-            .backgroundColor('#F4F6F8')
-            .borderRadius(10)
-            .onChange((value: string) => {
-              this.formNote = value
-            })
-        }
-        .width('100%')
-
-        Button('保存')
-          .width('100%')
-          .height(48)
-          .borderRadius(24)
-          .backgroundColor(this.accent)
-          .fontColor(Color.White)
-          .fontSize(16)
-          .fontWeight(FontWeight.Medium)
-          .onClick(() => {
-            this.addTransaction()
-          })
-      }
-      .width('100%')
-      .padding(20)
-    }
-    .width('90%')
-    .backgroundColor(this.cardBg)
-    .borderRadius(20)
-  }
-
   build() {
     NavDestination() {
       Column() {
@@ -504,36 +989,85 @@ export struct FinancialManagementPage {
           // 内容区域
           Scroll() {
             Column({ space: 16 }) {
-              if (this.activeTab === 0) {
-                // 账单页面
-                this.summaryCard()
-
-                Column({ space: 12 }) {
-                  Row() {
-                    Text('交易记录')
-                      .fontSize(17)
-                      .fontWeight(FontWeight.Bold)
-                      .fontColor('#182431')
-                      .layoutWeight(1)
-
-                    Text(`${this.selectedMonth}`)
-                      .fontSize(13)
-                      .fontColor('#66182431')
-                  }
-                  .width('100%')
-
-                  List({ space: 8 }) {
-                    ForEach(this.transactions, (record: TransactionRecord) => {
-                      ListItem() {
-                        this.transactionItem(record)
-                      }
-                    }, (record: TransactionRecord) => record.id.toString())
-                  }
-                  .width('100%')
-                  .scrollBar(BarState.Auto)
+              // 加载状态
+              if (this.isLoading) {
+                Column() {
+                  Text('加载中...')
+                    .fontSize(14)
+                    .fontColor('#99182431')
                 }
                 .width('100%')
-              } else if (this.activeTab === 1) {
+                .height(200)
+                .justifyContent(FlexAlign.Center)
+              } else {
+                if (this.activeTab === 0) {
+                  // 账单页面
+                  this.summaryCard()
+
+                  Column({ space: 12 }) {
+                    Row() {
+                      Text('交易记录')
+                        .fontSize(17)
+                        .fontWeight(FontWeight.Bold)
+                        .fontColor('#182431')
+                        .layoutWeight(1)
+
+                      Text(`${this.selectedMonth}`)
+                        .fontSize(13)
+                        .fontColor('#66182431')
+                    }
+                    .width('100%')
+
+                    List({ space: 8 }) {
+                      ForEach(this.transactions, (record: TransactionRecord) => {
+                        ListItem() {
+                          this.transactionItem(record)
+                        }
+                      }, (record: TransactionRecord) => record.id.toString())
+                    }
+                    .width('100%')
+                    .scrollBar(BarState.Auto)
+
+                    // 按钮行：新增 + 保存
+                    Row({ space: 12 }) {
+                      // 新增按钮
+                      Button() {
+                        Row({ space: 4 }) {
+                          SymbolGlyph($r('sys.symbol.plus'))
+                            .fontSize(18)
+                            .fontColor([Color.White])
+                          Text('新增')
+                            .fontSize(15)
+                            .fontColor(Color.White)
+                        }
+                      }
+                      .layoutWeight(1)
+                      .height(48)
+                      .borderRadius(12)
+                      .backgroundColor('#10B981')
+                      .onClick(() => {
+                        this.openAddDialog()
+                      })
+
+                      // 保存到 Supabase 按钮
+                      Button(this.isSaving ? '保存中...' : `保存(${this.transactions.length})`)
+                        .layoutWeight(1)
+                        .height(48)
+                        .borderRadius(12)
+                        .backgroundColor(this.accent)
+                        .fontColor(Color.White)
+                        .fontSize(15)
+                        .fontWeight(FontWeight.Medium)
+                        .enabled(!this.isSaving && this.transactions.length > 0)
+                        .opacity(this.isSaving || this.transactions.length === 0 ? 0.6 : 1.0)
+                        .onClick(() => {
+                          this.saveAllTransactions()
+                        })
+                    }
+                    .width('100%')
+                  }
+                  .width('100%')
+                } else if (this.activeTab === 1) {
                 // 资产页面
                 Column({ space: 12 }) {
                   Column({ space: 8 }) {
@@ -589,6 +1123,7 @@ export struct FinancialManagementPage {
                 }
                 .width('100%')
               }
+              }
             }
             .width('100%')
             .padding({ left: 16, right: 16, top: 12, bottom: 100 })
@@ -601,33 +1136,9 @@ export struct FinancialManagementPage {
         .height('100%')
         .padding({ top: this.topArea, bottom: this.bottomArea })
         .backgroundColor(this.pageBg)
-
-        // 悬浮添加按钮
-        Stack({ alignContent: Alignment.BottomEnd }) {
-          Button() {
-            SymbolGlyph($r('sys.symbol.plus'))
-              .fontSize(28)
-              .fontColor([Color.White])
-          }
-          .width(56)
-          .height(56)
-          .borderRadius(28)
-          .backgroundColor(this.accent)
-          .shadow({
-            radius: 16,
-            color: '#400A59F7',
-            offsetX: 0,
-            offsetY: 4
-          })
-          .margin({ right: 20, bottom: 20 })
-          .onClick(() => {
-            this.showAddDialog = true
-          })
-        }
-        .width('100%')
-        .height('100%')
-        .bindContentCover($$this.showAddDialog, this.addTransactionDialog(), ModalTransition.DEFAULT)
       }
+      .width('100%')
+      .height('100%')
     }
     .hideTitleBar(true)
     .onReady((context: NavDestinationContext) => {
