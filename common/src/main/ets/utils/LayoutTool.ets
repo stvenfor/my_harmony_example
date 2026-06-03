@@ -2,6 +2,7 @@ import { display } from '@kit.ArkUI';
 import { deviceInfo } from '@kit.BasicServicesKit';
 import { BreakpointConstants } from '../constants/BreakpointConstants';
 import { BreakPointType } from './BreakpointSystem';
+import { syncAdaptiveProfile } from './AdaptiveProfile';
 
 const lpx2vpRate = 0.46;
 
@@ -70,6 +71,7 @@ export const updateBreakPoint = (windowWidth: number, windowHeight: number): str
     console.log('windowHeight/windowWidth', windowWidth, windowHeight, windowHeight / windowWidth > 1.5)
     if (type == '2in1') {
       AppStorage.setOrCreate('breakPoint', 'xl')
+      syncAdaptiveProfile(windowWidth, windowHeight, 'xl')
       return 'xl'
     }
     let windowWidthVp = windowWidth / display.getDefaultDisplaySync().densityPixels;
@@ -107,6 +109,7 @@ export const updateBreakPoint = (windowWidth: number, windowHeight: number): str
       }
     }
   }
+  syncAdaptiveProfile(windowWidth, windowHeight, AppStorage.get<string>('breakPoint') || curBp)
   console.log('设备类型', curBp)
   return curBp
 }

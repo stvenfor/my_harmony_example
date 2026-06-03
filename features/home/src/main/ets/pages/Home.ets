@@ -61,6 +61,36 @@ export struct Home {
       routeId: '嵌套列表示例',
       subtitle: '双 List 联动滚动（nested-list）',
       icon: $r('sys.symbol.repeat')
+    },
+    {
+      routeId: 'Scan Kit 示例',
+      subtitle: '默认扫码 / 图片识别 / 二维码生成',
+      icon: $r('sys.symbol.search_things')
+    },
+    {
+      routeId: '组件 UX 示例',
+      subtitle: 'HarmonyOS Design 组件集合',
+      icon: $r('sys.symbol.square_grid_2x2')
+    },
+    {
+      routeId: '多设备通信示例',
+      subtitle: '分布式软总线 / 星闪 NearLink',
+      icon: $r('sys.symbol.ohos_wifi')
+    },
+    {
+      routeId: '财务管理示例',
+      subtitle: '记账 / 统计 / 资产管理',
+      icon: $r('sys.symbol.creditcard')
+    },
+    {
+      routeId: '短视频播放示例',
+      subtitle: 'Video组件 / 上下滑动切换',
+      icon: $r('sys.symbol.play_arrow_triangle_2_circlepath')
+    },
+    {
+      routeId: 'SwipePlayer示例',
+      subtitle: '短视频滑动播放器（增强版）',
+      icon: $r('sys.symbol.play_fill')
     }
   ]
 
@@ -120,6 +150,18 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.MULTI_COLUMNS_DEMO, null)
     } else if (item === '嵌套列表示例') {
       this.pathStack.pushPathByName(RouteConstants.NESTED_LIST_DEMO, null)
+    } else if (item === 'Scan Kit 示例') {
+      this.pathStack.pushPathByName(RouteConstants.SCAN_KIT_DEMO, null)
+    } else if (item === '组件 UX 示例') {
+      this.pathStack.pushPathByName(RouteConstants.HARMONY_UX_EXAMPLES, null)
+    } else if (item === '多设备通信示例') {
+      this.pathStack.pushPathByName(RouteConstants.MULTI_DEVICE_COMMUNICATION, null)
+    } else if (item === '财务管理示例') {
+      this.pathStack.pushPathByName(RouteConstants.FINANCIAL_MANAGEMENT, null)
+    } else if (item === '短视频播放示例') {
+      this.pathStack.pushPathByName(RouteConstants.SHORT_VIDEO_PLAYBACK, null)
+    } else if (item === 'SwipePlayer示例') {
+      this.pathStack.pushPathByName(RouteConstants.SWIPE_PLAYER_DEMO, null)
     }
   }
 

@@ -28,6 +28,13 @@ export { GridModel } from './src/main/ets/model/GridModel'
 
 export { updateBreakPoint } from './src/main/ets/utils/LayoutTool'
 
+export {
+  AdaptiveProfile,
+  DeviceLayoutMode,
+  buildAdaptiveProfile,
+  syncAdaptiveProfile
+} from './src/main/ets/utils/AdaptiveProfile'
+
 export { NavItem, NAV_ITEM_BAR_HEIGHT } from './src/main/ets/components/NavItem'
 
 export { PageHeaderComp } from './src/main/ets/components/PageHeaderComp'

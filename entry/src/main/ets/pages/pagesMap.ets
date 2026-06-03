@@ -11,6 +11,12 @@ import {
   MultiColumnsPhotoPage,
   MultiColumnsSettingsPage,
   NestedListDemoPage,
+  ScanKitDemoPage,
+  HarmonyUxExamplesPage,
+  MultiDeviceCommunicationPage,
+  FinancialManagementPage,
+  ShortVideoPlaybackPage,
+  SwipePlayerDemoPage,
   Home,
   NewsPage,
   PopupDialogQueueDemoPage,
@@ -115,8 +121,19 @@ function pagesMap(name: string) {
     MultiColumnsSettingsPage()
   } else if (name === RouteConstants.NESTED_LIST_DEMO) {
     NestedListDemoPage()
+  } else if (name === RouteConstants.SCAN_KIT_DEMO) {
+    ScanKitDemoPage()
+  } else if (name === RouteConstants.HARMONY_UX_EXAMPLES) {
+    HarmonyUxExamplesPage()
+  } else if (name === RouteConstants.MULTI_DEVICE_COMMUNICATION) {
+    MultiDeviceCommunicationPage()
+  } else if (name === RouteConstants.FINANCIAL_MANAGEMENT) {
+    FinancialManagementPage()
+  } else if (name === RouteConstants.SHORT_VIDEO_PLAYBACK) {
+    ShortVideoPlaybackPage()
+  } else if (name === RouteConstants.SWIPE_PLAYER_DEMO) {
+    SwipePlayerDemoPage()
   }
 }
 
 export const pagesMapBuilder: WrappedBuilder<[string]> = wrapBuilder(pagesMap);
-

@@ -15,6 +15,10 @@
     {
       "name": "background_running_reason",
       "value": "需要允许后台播放音频"
+    },
+    {
+      "name": "permission_reason_camera",
+      "value": "用于 Scan Kit 示例进行扫码识别"
     }
   ]
 }

@@ -143,4 +143,28 @@ export class RouteConstants {
    * List 嵌套滑动示例（nested-list）
    */
   static readonly NESTED_LIST_DEMO: string = 'NestedListDemoPage';
+  /**
+   * Scan Kit 官方示例能力入口
+   */
+  static readonly SCAN_KIT_DEMO: string = 'ScanKitDemoPage';
+  /**
+   * HarmonyOS Component UX Examples 示例集合入口
+   */
+  static readonly HARMONY_UX_EXAMPLES: string = 'HarmonyUxExamplesPage';
+  /**
+   * 多设备通信示例：分布式软总线 / 星闪 NearLink
+   */
+  static readonly MULTI_DEVICE_COMMUNICATION: string = 'MultiDeviceCommunicationPage';
+  /**
+   * 财务管理示例：记账 / 统计 / 资产管理
+   */
+  static readonly FINANCIAL_MANAGEMENT: string = 'FinancialManagementPage';
+  /**
+   * 短视频播放示例：Video组件 / 上下滑动切换
+   */
+  static readonly SHORT_VIDEO_PLAYBACK: string = 'ShortVideoPlaybackPage';
+  /**
+   * SwipePlayer示例：短视频滑动播放器（增强版）
+   */
+  static readonly SWIPE_PLAYER_DEMO: string = 'SwipePlayerDemoPage';
 }
