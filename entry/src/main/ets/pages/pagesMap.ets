@@ -17,6 +17,7 @@ import {
   FinancialManagementPage,
   ShortVideoPlaybackPage,
   SwipePlayerDemoPage,
+  LottieExamplePage,
   Home,
   NewsPage,
   PopupDialogQueueDemoPage,
@@ -133,6 +134,8 @@ function pagesMap(name: string) {
     ShortVideoPlaybackPage()
   } else if (name === RouteConstants.SWIPE_PLAYER_DEMO) {
     SwipePlayerDemoPage()
+  } else if (name === RouteConstants.LOTTIE_EXAMPLE) {
+    LottieExamplePage()
   }
 }
 

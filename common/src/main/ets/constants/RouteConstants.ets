@@ -167,4 +167,8 @@ export class RouteConstants {
    * SwipePlayer示例：短视频滑动播放器（增强版）
    */
   static readonly SWIPE_PLAYER_DEMO: string = 'SwipePlayerDemoPage';
+  /**
+   * Lottie 动画示例（LottieView / LottieManager）
+   */
+  static readonly LOTTIE_EXAMPLE: string = 'LottieExamplePage';
 }

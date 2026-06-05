@@ -10,7 +10,7 @@
     "@ohos/axios": "^2.2.8",
     "@pura/harmony-dialog": "^1.1.8",
     "@pura/harmony-utils": "^1.4.0",
-    "dayjs": "1.11.13"
-
+    "dayjs": "1.11.13",
+    "@ohos/lottie": "^2.0.14"
   }
 }

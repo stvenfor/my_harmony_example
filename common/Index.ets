@@ -57,6 +57,19 @@ export {
 
 export { buildCommonQueryMapWithTimestamp, KEY_SERVER_TIME_OFFSET } from './src/main/ets/utils/CommonQueryTimestamp'
 
+export { LottieUtil, LottieController } from './src/main/ets/utils/LottieUtil'
+
+export { LottieView } from './src/main/ets/components/LottieView'
+
+export {
+  LottieManager,
+  LottiePlayConfig,
+  LottieResourceConfig,
+  LottieResourceSource,
+  LottieSizeConfig,
+  LottieViewConfig
+} from './src/main/ets/utils/LottieManager'
+
 export { SpineAnimationManager } from './src/main/ets/utils/SpineAnimationManager'
 
 export { SpineResourceConfig } from './src/main/ets/utils/SpineAnimationManager'

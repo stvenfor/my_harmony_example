@@ -91,6 +91,11 @@ export struct Home {
       routeId: 'SwipePlayer示例',
       subtitle: '短视频滑动播放器（增强版）',
       icon: $r('sys.symbol.play_fill')
+    },
+    {
+      routeId: 'Lottie 示例',
+      subtitle: 'LottieView / common rawfile',
+      icon: $r('sys.symbol.play_arrow_triangle_2_circlepath')
     }
   ]
 
@@ -162,6 +167,8 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.SHORT_VIDEO_PLAYBACK, null)
     } else if (item === 'SwipePlayer示例') {
       this.pathStack.pushPathByName(RouteConstants.SWIPE_PLAYER_DEMO, null)
+    } else if (item === 'Lottie 示例') {
+      this.pathStack.pushPathByName(RouteConstants.LOTTIE_EXAMPLE, null)
     }
   }
 
