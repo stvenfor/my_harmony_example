@@ -18,6 +18,7 @@ import {
   ShortVideoPlaybackPage,
   SwipePlayerDemoPage,
   LottieExamplePage,
+  CommonRefreshListPage,
   Home,
   NewsPage,
   PopupDialogQueueDemoPage,
@@ -136,6 +137,8 @@ function pagesMap(name: string) {
     SwipePlayerDemoPage()
   } else if (name === RouteConstants.LOTTIE_EXAMPLE) {
     LottieExamplePage()
+  } else if (name === RouteConstants.COMMON_REFRESH_LIST) {
+    CommonRefreshListPage()
   }
 }
 

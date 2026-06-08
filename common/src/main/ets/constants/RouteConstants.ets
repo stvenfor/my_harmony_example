@@ -171,4 +171,8 @@ export class RouteConstants {
    * Lottie 动画示例（LottieView / LottieManager）
    */
   static readonly LOTTIE_EXAMPLE: string = 'LottieExamplePage';
+  /**
+   * 分页列表示例（SnapPaginatedList 下拉刷新 / 上拉加载）
+   */
+  static readonly COMMON_REFRESH_LIST: string = 'CommonRefreshListPage';
 }

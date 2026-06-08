@@ -146,3 +146,7 @@ export { AppUtil,
   MD5,
   AES ,
   CryptoHelper} from '@pura/harmony-utils'
+
+
+export { SnapPaginatedList } from './src/main/ets/components/SnapPaginatedList'
+export { PaginatedListStatus, PaginatedListResult } from './src/main/ets/model/PaginatedListModel'

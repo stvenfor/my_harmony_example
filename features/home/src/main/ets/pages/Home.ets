@@ -96,6 +96,11 @@ export struct Home {
       routeId: 'Lottie 示例',
       subtitle: 'LottieView / common rawfile',
       icon: $r('sys.symbol.play_arrow_triangle_2_circlepath')
+    },
+    {
+      routeId: '分页列表示例',
+      subtitle: 'SnapPaginatedList 下拉刷新',
+      icon: $r('sys.symbol.repeat')
     }
   ]
 
@@ -169,6 +174,8 @@ export struct Home {
       this.pathStack.pushPathByName(RouteConstants.SWIPE_PLAYER_DEMO, null)
     } else if (item === 'Lottie 示例') {
       this.pathStack.pushPathByName(RouteConstants.LOTTIE_EXAMPLE, null)
+    } else if (item === '分页列表示例') {
+      this.pathStack.pushPathByName(RouteConstants.COMMON_REFRESH_LIST, null)
     }
   }
 

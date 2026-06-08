@@ -24,6 +24,7 @@ export { FinancialManagementPage } from './src/main/ets/pages/FinancialManagemen
 export { ShortVideoPlaybackPage } from './src/main/ets/pages/ShortVideoPlaybackPage'
 export { SwipePlayerDemoPage } from './src/main/ets/pages/SwipePlayerDemoPage'
 export { LottieExamplePage } from './src/main/ets/pages/LottieExample'
+export { CommonRefreshListPage } from './src/main/ets/pages/CommonRefreshList'
 export { FoodPage } from './src/main/ets/food/FoodPage'
 export { NewsPage } from './src/main/ets/news/NewsPage'
 export { TravelPage } from './src/main/ets/travel/TravelPage'
